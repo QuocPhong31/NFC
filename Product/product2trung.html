@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Tiết Sản Phẩm - Thanh Tâm Trà Quán</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alata&family=Calistoga&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script
+    src="https://kit.fontawesome.com/a076d05399.js"
+    crossorigin="anonymous"
+  ></script>
+  <!-- custom css -->
+  <link rel="stylesheet" href="../Style/styleProduct.css" />  
+</head>
+<body>
+
+  <!-- header từ trang index.html gốc -->
+  <header class="header">
+    <div class="banner">
+      <!-- Áp dụng font Calistoga cho "Thanh Tâm Trà Quán🍵" và giãn khoảng cách giữa các chữ -->
+      <h3 class="banner-subtitle" style="color: rgb(107, 235, 95); white-space: nowrap; font-family: 'Calistoga', cursive;">
+        Thanh Tâm Trà Quán🍵
+      </h3>
+      <!-- Thu nhỏ kích cỡ chữ của "Chi Tiết Sản Phẩm" -->
+      <h1 class="banner-title" style="font-family: 'Alata', sans-serif; font-size: 24px;">
+        Chi Tiết Sản Phẩm
+      </h1>
+    </div>
+  </header>
+  
+  
+  
+
+<!-- product detail -->
+<section class="product-detail">
+  <!-- Khối bên trái: ảnh chính + ảnh nhỏ -->
+  <div class="left-container">
+    <div class="image-container">
+      <img src="../images/product2trung.jpg" alt="product image" id="productImage">
+    </div>
+    <!-- Thumbnails (ảnh nhỏ dưới ảnh chính) -->
+    <div class="thumbnail-container">
+      <img src="../images/product2trung.jpg" class="thumbnail" onclick="changeImage('../images/product2trung.jpg')">
+      <img src="../images/2trung.jpg" class="thumbnail" onclick="changeImage('../images/2trung.jpg')">
+      <img src="../images/sinhthai.jpg" class="thumbnail" onclick="changeImage('../images/sinhthai.jpg')">
+      <img src="../images/ppphatra.jpg" class="thumbnail" onclick="changeImage('../images/ppphatra.jpg')">
+    </div>
+  </div>
+  
+  <!-- Thông tin sản phẩm bên phải -->
+  <div class="product-info">
+    <h2>Tên Sản Phẩm:<span style="color: #f39c12;"> Đơn Tùng Chi Lan Hương</span></h2>
+    <p class="price">875.000đ</p><span class="unit">/hộp (250g)</span> 
+    <!-- Thêm nút "Thêm vào giỏ hàng" -->
+<!-- <button id="addToCartBtn" class="main-btn" style="margin-top: 20px;">Thêm vào giỏ hàng</button>
+<button id="decreaseQtyBtn" class="main-btn" style="padding: 5px 10px;">-</button>
+  <span id="quantity" style="margin: 0 15px; font-size: 18px;">1</span>
+  <button id="increaseQtyBtn" class="main-btn" style="padding: 5px 10px;">+</button> -->
+    <p style="color: #f39c12;">Xuất xứ: <span style="color: #ecf0f1;">Núi Cao Sơn, Triều Châu, Trung Quốc</span><br><br>
+
+      <span style="color: #f39c12;">Mô tả sản phẩm:</span> 
+      <p style="color: #ecf0f1;">
+        <span style="color: #2ecc71;">Đơn Tùng Chi Lan Hương</span> là một loại trà Ô Long hảo hạng, được thu hoạch thủ công từ những cây trà đơn tùng cổ 
+      thụ trên đỉnh Cao Sơn. Tên gọi "Chi Lan Hương" bắt nguồn từ hương thơm hoa lan đặc trưng của loại trà này,
+       mang đến sự thanh thoát và quyến rũ như hương hoa lan giữa núi rừng. Với quy trình chế biến công phu 
+       và kỹ thuật ủ truyền thống, trà giữ nguyên được hương vị tinh túy và phong phú của lá trà.
+      </p>
+    </p>
+
+    <!-- Nội dung ẩn sẽ hiển thị khi bấm "Xem thêm" -->
+    <div id="moreContent" style="display: none; margin-top: 20px;">
+      <p style="color: #ecf0f1;">
+        <span style="color: #f39c12;">Hương vị:</span><br>
+         Khi nhấp một ngụm, <span style="color: #2ecc71;">Trà Chi Lan Hương</span> mang đến sự nhẹ nhàng,
+         thanh khiết, sau đó là vị ngọt dịu và hậu vị kéo dài, mang lại cảm giác dễ chịu và thư giãn. 
+         Trà có vị đắng nhẹ ở đầu lưỡi nhưng nhanh chóng chuyển sang ngọt ngào, đọng lại lâu dài 
+         trong khoang miệng.<br><br>
+        <span style="color: #f39c12;">Công dụng:</span><br>
+        <span style="color: #2ecc71;">Thư giãn tinh thần:</span> Với hương thơm dịu nhẹ và vị trà 
+        thanh tao, Chi Lan Hương giúp giải tỏa căng thẳng, mang lại cảm giác thư thái cho tâm trí.<br>
+        <span style="color: #2ecc71;">Tăng cường sức khỏe:</span> Chất chống oxy hóa có trong trà giúp thanh lọc cơ thể, bảo vệ sức khỏe tim mạch và cải thiện hệ miễn dịch.<br>
+        <span style="color: #2ecc71;">Tăng cường sự tỉnh táo:</span> Trà Ô Long có chứa lượng caffeine nhẹ, giúp duy trì sự tập trung và tỉnh táo trong suốt cả ngày.<br>
+        <span style="color: #2ecc71;">Hỗ trợ tiêu hóa:</span> Trà giúp kích thích tiêu hóa và hỗ trợ cân bằng cơ thể, tốt cho hệ tiêu hóa.<br><br>
+        <span style="color: #f39c12;">Cách pha trà:</span><br>
+        Dùng khoảng 5-7g trà cho mỗi ấm (khoảng 200ml nước).<br>
+        Đổ nước nóng (khoảng 90-95°C) vào ấm và hãm trà trong 30 giây - 1 phút.<br>
+        Với những lần pha sau, thêm nước và tăng thời gian hãm để tận hưởng hương vị phong phú hơn.
+      </p>
+    </div>
+
+    <!-- Nút "Xem chi tiết" sẽ di chuyển xuống dưới khi bấm -->
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="showMoreBtn" class="main-btn" style="padding: 10px 20px; cursor: pointer;">Xem chi tiết</button>
+    </div>
+
+    <a href="../index.html" class="main-btn" style="margin-top: 20px;">Trở về trang chủ</a> <!-- Nút đã được dịch xuống dưới -->
+  </div>
+</section>
+
+
+  <!-- Footer từ trang gốc -->
+  <footer class="footer">
+    <div class="section-center">
+      <p class="footer-text">&copy; 2024 Thanh Tâm Trà Quán 🍵</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript để điều khiển zoom -->
+  <script>
+// Hàm đổi ảnh chính khi bấm vào ảnh nhỏ
+function changeImage(imageSrc) {
+    const productImage = document.getElementById("productImage");
+    productImage.style.opacity = "0"; // Làm mờ ảnh trước khi đổi
+    setTimeout(() => {
+        productImage.src = imageSrc;
+        productImage.style.opacity = "1"; // Hiển thị ảnh mới
+    }, 300);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const productImage = document.getElementById("productImage");
+    let isZoomed = false;
+
+    // Tạo overlay để giúp thoát khỏi chế độ zoom
+    const overlay = document.createElement("div");
+    overlay.id = "zoomOverlay";
+    document.body.appendChild(overlay);
+
+    productImage.addEventListener("click", function () {
+        if (isZoomed) {
+            overlay.style.display = "none";
+            productImage.classList.remove("zoomed");
+            isZoomed = false;
+        } else {
+            overlay.style.display = "block";
+            productImage.classList.add("zoomed");
+            isZoomed = true;
+        }
+    });
+
+    // Khi click vào overlay thì thu nhỏ lại
+    overlay.addEventListener("click", function () {
+        productImage.classList.remove("zoomed");
+        this.style.display = "none";
+        isZoomed = false;
+    });
+
+     // JavaScript để điều khiển ẩn/hiện nội dung 
+    const showMoreBtn = document.getElementById('showMoreBtn');
+    const moreContent = document.getElementById('moreContent');
+    let isExpanded = false;
+
+    showMoreBtn.addEventListener('click', function () {
+        if (!isExpanded) {
+            moreContent.style.display = 'block'; // Hiển thị nội dung
+            showMoreBtn.innerText = 'Ẩn bớt'; // Đổi nút thành "Ẩn bớt"
+        } else {
+            moreContent.style.display = 'none'; // Ẩn nội dung
+            showMoreBtn.innerText = 'Xem chi tiết'; // Đổi lại thành "Xem chi tiết"
+        }
+        isExpanded = !isExpanded; // Đảo trạng thái
+    });
+});
+
+        // Biến để theo dõi số lượng sản phẩm
+let quantity = 1;
+
+// Nút tăng/giảm số lượng
+const decreaseQtyBtn = document.getElementById('decreaseQtyBtn');
+const increaseQtyBtn = document.getElementById('increaseQtyBtn');
+const quantityDisplay = document.getElementById('quantity');
+
+// Xử lý nút giảm số lượng
+decreaseQtyBtn.addEventListener('click', function() {
+  if (quantity > 1) {
+    quantity--;
+    quantityDisplay.innerText = quantity;
+  }
+});
+
+// Xử lý nút tăng số lượng
+increaseQtyBtn.addEventListener('click', function() {
+  quantity++;
+  quantityDisplay.innerText = quantity;
+});
+
+// Thêm vào giỏ hàng
+const addToCartBtn = document.getElementById('addToCartBtn');
+
+// Thông tin sản phẩm cần lưu
+const productInfo = {
+  name: 'Trà Đơn Tùng Chi Lan Hương (Núi Cao Sơn, Triều Châu)',
+  unit: '250g',
+  price: 875000, // Giá tiền dạng số để dễ tính toán
+  addedTime: new Date().toLocaleString('vi-VN'), // Thêm thời gian người dùng thêm vào giỏ hàng
+  quantity: quantity // Lưu số lượng sản phẩm
+};
+
+// Khi bấm vào nút thêm vào giỏ hàng
+addToCartBtn.addEventListener('click', function() {
+  // Cập nhật số lượng trước khi thêm vào giỏ hàng
+  productInfo.quantity = quantity;
+
+  // Lấy giỏ hàng hiện tại từ localStorage, nếu chưa có thì tạo mảng rỗng
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+  // Thêm sản phẩm vào giỏ hàng
+  cart.push(productInfo);
+  
+  // Lưu lại giỏ hàng vào localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+  // Thông báo cho người dùng biết đã thêm sản phẩm vào giỏ
+  alert(`Sản phẩm đã được thêm vào giỏ hàng! Số lượng: ${quantity}`);
+});
+
+
+
+    const productImage = document.getElementById('productImage');
+    let isZoomed = false;
+
+    productImage.addEventListener('click', function() {
+      if (isZoomed) {
+        productImage.classList.remove('zoomed'); // Thu nhỏ lại
+        isZoomed = false;
+      } else {
+        productImage.classList.add('zoomed'); // Phóng to
+        isZoomed = true;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2300 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Chỉnh sửa thẻ — NFC
+{% endblock %}
+
+{% block content %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/edit_card.css') }}"
+>
+
+<div class="edit-page">
+
+    <!-- TOP BAR -->
+    <div class="edit-topbar">
+
+        <div>
+            <a href="/admin/" class="back-link">
+                ← Quay lại Profile
+            </a>
+
+            <h1>Chỉnh sửa thẻ</h1>
+
+            <p>
+                Chỉnh sửa thông tin hiển thị trên profile NFC
+            </p>
+        </div>
+
+        <div class="edit-actions">
+
+            <button
+                type="button"
+                class="btn-delete"
+                onclick="deleteCurrentCard()">
+                🗑 Xóa
+            </button>
+
+            <button
+                type="button"
+                class="btn-save"
+                onclick="saveCard()">
+                ✓ Lưu thay đổi
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN LAYOUT -->
+    <div class="edit-layout">
+
+
+        <!-- ========================= -->
+        <!-- LEFT: CARD PREVIEW -->
+        <!-- ========================= -->
+
+        <aside class="preview-column">
+
+            <div class="preview-title">
+                Xem trước
+            </div>
+
+            <div
+                id="cardPreview"
+                class="profile-card-preview"
+                style="--theme: {{ card.theme or '#ff8a00' }};"
+            >
+
+                <!-- ẢNH BÌA -->
+                <div
+                    id="previewCover"
+                    class="preview-cover"
+                    {% if card.anhBia %}
+                    style="background-image: url('{{ card.anhBia }}');"
+                    {% endif %}
+                ></div>
+
+
+                <!-- AVATAR -->
+                <div id="previewAvatar" class="preview-avatar">
+
+                    {% if card.anhDaiDien %}
+
+                        <img
+                            src="{{ card.anhDaiDien }}"
+                            alt="Avatar"
+                        >
+
+                    {% else %}
+
+                        {{ (card.hoTen or "N")[0]|upper }}
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- LOGO -->
+
+                <img
+                    id="previewLogo"
+                    class="preview-logo"
+                    {% if card.logo %}
+                        src="{{ card.logo }}"
+                        style="display:block;"
+                    {% else %}
+                        style="display:none;"
+                    {% endif %}
+                    alt="Logo"
+                >
+
+
+                <!-- NỘI DUNG -->
+                <div class="preview-content">
+
+                    <h2 id="previewName">
+                        {{ card.hoTen or card.tenThe or "Tên của bạn" }}
+                    </h2>
+
+
+                    <div
+                        id="previewPosition"
+                        class="preview-position">
+                        {{ card.chucVu or "" }}
+                    </div>
+
+
+                    <div
+                        id="previewCompany"
+                        class="preview-company">
+                        {{ card.congTy or "" }}
+                    </div>
+
+
+                    <div
+                        id="previewEmail"
+                        class="preview-contact"
+                        {% if not card.email %}
+                        style="display:none"
+                        {% endif %}
+                    >
+
+                        <span class="contact-icon">✉</span>
+
+                        <span>
+                            {{ card.email or "" }}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="previewPhone"
+                        class="preview-contact"
+                        {% if not card.soDienThoai %}
+                        style="display:none"
+                        {% endif %}
+                    >
+
+                        <span class="contact-icon">☎</span>
+
+                        <span>
+                            {{ card.soDienThoai or "" }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PUBLIC URL -->
+
+            <div class="public-url-box">
+
+                <div class="public-url-title">
+                    Link public
+                </div>
+
+                <div class="public-url">
+                    {{ public_url }}
+                </div>
+
+                {% if card.qrUrl %}
+
+                <div class="qr-wrapper">
+
+                    <img
+                        src="{{ card.qrUrl }}"
+                        alt="QR Code"
+                        class="qr-image"
+                    >
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </aside>
+
+
+        <!-- ========================= -->
+        <!-- RIGHT: EDITOR -->
+        <!-- ========================= -->
+
+        <main class="editor-column">
+
+            <!-- THEME -->
+
+            <section class="editor-section">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>Giao diện</h2>
+                        <p>Chọn màu chủ đạo cho profile</p>
+                    </div>
+
+                </div>
+
+
+                <div class="theme-list">
+
+                    <button
+                        type="button"
+                        class="theme-color orange"
+                        data-color="#ff8a00"
+                        onclick="selectTheme('#ff8a00')">
+                    </button>
+
+                    <button
+                        type="button"
+                        class="theme-color red"
+                        data-color="#ff5252"
+                        onclick="selectTheme('#ff5252')">
+                    </button>
+
+                    <button
+                        type="button"
+                        class="theme-color blue"
+                        data-color="#3b82f6"
+                        onclick="selectTheme('#3b82f6')">
+                    </button>
+
+                    <button
+                        type="button"
+                        class="theme-color green"
+                        data-color="#10b981"
+                        onclick="selectTheme('#10b981')">
+                    </button>
+
+                    <button
+                        type="button"
+                        class="theme-color purple"
+                        data-color="#8b5cf6"
+                        onclick="selectTheme('#8b5cf6')">
+                    </button>
+
+                    <button
+                        type="button"
+                        class="theme-color pink"
+                        data-color="#ec4899"
+                        onclick="selectTheme('#ec4899')">
+                    </button>
+
+                    <button
+                        type="button"
+                        class="theme-color dark"
+                        data-color="#374151"
+                        onclick="selectTheme('#374151')">
+                    </button>
+
+                </div>
+
+                <input
+                    type="hidden"
+                    id="theme"
+                    value="{{ card.theme or '#ff8a00' }}"
+                >
+
+            </section>
+
+
+
+            <!-- IMAGES -->
+
+            <section class="editor-section">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>Hình ảnh</h2>
+
+                        <p>
+                            Ảnh bìa, ảnh đại diện và logo
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="image-grid">
+
+
+                    <!-- COVER -->
+
+                    <div class="image-upload-card">
+
+                        <div class="upload-title">
+                            Ảnh bìa
+                        </div>
+
+                        <div
+                            id="coverPreview"
+                            class="upload-preview cover-upload">
+
+                            {% if card.anhBia %}
+
+                            <img src="{{ card.anhBia }}">
+
+                            {% else %}
+
+                            <span>+</span>
+                            <small>Ảnh bìa</small>
+
+                            {% endif %}
+
+                        </div>
+
+                        <input
+                            type="file"
+                            id="coverFile"
+                            accept="image/png,image/jpeg,image/webp"
+                            onchange="previewImage(this, 'coverPreview')"
+                        >
+
+                    </div>
+
+
+
+                    <!-- AVATAR -->
+
+                    <div class="image-upload-card">
+
+                        <div class="upload-title">
+                            Ảnh đại diện
+                        </div>
+
+                        <div
+                            id="avatarPreview"
+                            class="upload-preview avatar-upload">
+
+                            {% if card.anhDaiDien %}
+
+                            <img src="{{ card.anhDaiDien }}">
+
+                            {% else %}
+
+                            <span>+</span>
+                            <small>Avatar</small>
+
+                            {% endif %}
+
+                        </div>
+
+                        <input
+                            type="file"
+                            id="avatarFile"
+                            accept="image/png,image/jpeg,image/webp"
+                            onchange="previewImage(this, 'avatarPreview')"
+                        >
+
+                    </div>
+
+
+
+                    <!-- LOGO -->
+
+                    <div class="image-upload-card">
+
+                        <div class="upload-title">
+                            Logo thương hiệu
+                        </div>
+
+                        <div
+                            id="logoPreview"
+                            class="upload-preview logo-upload">
+
+                            {% if card.logo %}
+
+                            <img src="{{ card.logo }}">
+
+                            {% else %}
+
+                            <span>+</span>
+                            <small>Logo</small>
+
+                            {% endif %}
+
+                        </div>
+
+                        <input
+                            type="file"
+                            id="logoFile"
+                            accept="image/png,image/jpeg,image/webp"
+                            onchange="previewImage(this, 'logoPreview')"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- PERSONAL INFORMATION -->
+
+            <section class="editor-section">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>Thông tin cá nhân</h2>
+
+                        <p>
+                            Những thông tin xuất hiện trên profile
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Họ và tên
+                        </label>
+
+                        <input
+                            id="hoTen"
+                            type="text"
+                            value="{{ card.hoTen or '' }}"
+                            placeholder="Trần Quốc Phong"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Chức vụ
+                        </label>
+
+                        <input
+                            id="chucVu"
+                            type="text"
+                            value="{{ card.chucVu or '' }}"
+                            placeholder="Key Account Manager"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Công ty
+                        </label>
+
+                        <input
+                            id="congTy"
+                            type="text"
+                            value="{{ card.congTy or '' }}"
+                            placeholder="Huawei"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Phòng ban
+                        </label>
+
+                        <input
+                            id="phongBan"
+                            type="text"
+                            value="{{ card.phongBan or '' }}"
+                            placeholder="Digital Power"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Giới thiệu
+                        </label>
+
+                        <textarea
+                            id="gioiThieu"
+                            rows="5"
+                            placeholder="Giới thiệu về bản thân..."
+                        >{{ card.gioiThieu or '' }}</textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- GENERAL INFORMATION -->
+
+            <section class="editor-section">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>Thông tin chung</h2>
+
+                        <p>
+                            Thêm thông tin liên hệ của bạn
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="item-grid">
+
+
+                    <!-- EMAIL -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'GENERAL',
+                            'email',
+                            'Email',
+                            'Email,Work Email,Personal Email,Business Email,Contact Email'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/email-outline.svg?color=%23000000"
+                            alt="Email"
+                        >
+
+                        <span>Email</span>
+
+                    </button>
+
+
+
+                    <!-- PHONE -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'GENERAL',
+                            'phone',
+                            'Số điện thoại',
+                            'Phone,Mobile Phone,Work Phone,Personal Phone'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/phone-outline.svg?color=%23000000"
+                            alt="Phone"
+                        >
+
+                        <span>Số điện thoại</span>
+
+                    </button>
+
+
+
+                    <!-- COMPANY WEBSITE -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'GENERAL',
+                            'company_url',
+                            'URL công ty',
+                            'Website,Company Website,Corporate Website'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/web.svg?color=%23000000"
+                            alt="Website"
+                        >
+
+                        <span>URL công ty</span>
+
+                    </button>
+
+
+
+                    <!-- LINK -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'GENERAL',
+                            'link',
+                            'Link',
+                            'Link,Website,Portfolio,Personal Website'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/link-variant.svg?color=%23000000"
+                            alt="Link"
+                        >
+
+                        <span>Link</span>
+
+                    </button>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'GENERAL',
+                            'address',
+                            'Địa chỉ',
+                            'Địa chỉ,Văn phòng,Office,Company Address'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/map-marker-outline.svg?color=%23000000"
+                            alt="Address"
+                        >
+
+                        <span>Địa chỉ</span>
+
+                    </button>
+
+
+
+                    <!-- TAX -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'GENERAL',
+                            'tax',
+                            'Mã số thuế',
+                            'Mã số thuế,Tax ID,VAT Number'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/file-document-outline.svg?color=%23000000"
+                            alt="Tax"
+                        >
+
+                        <span>Mã số thuế</span>
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- SAVED ITEMS -->
+
+                <div
+                    id="generalItems"
+                    class="saved-items-grid"
+                ></div>
+
+
+            </section>
+
+
+
+            <!-- SOCIAL MEDIA -->
+
+            <section class="editor-section">
+
+                <div class="section-title">
+                    <div>
+                        <h2>Mạng xã hội</h2>
+                        <p>Thêm các mạng xã hội của bạn</p>
+                    </div>
+                </div>
+
+                <div class="item-grid">
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'SOCIAL',
+                            'x',
+                            'X (Twitter)',
+                            'X,Twitter'
+                        )"
+                    >
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/x/000000"
+                            alt="X"
+                        >
+                        <span>X (Twitter)</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'SOCIAL',
+                            'instagram',
+                            'Instagram',
+                            'Instagram'
+                        )"
+                    >
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/instagram/000000"
+                            alt="Instagram"
+                        >
+                        <span>Instagram</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'SOCIAL',
+                            'threads',
+                            'Threads',
+                            'Threads'
+                        )"
+                    >
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/threads/000000"
+                            alt="Threads"
+                        >
+                        <span>Threads</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'SOCIAL',
+                            'facebook',
+                            'Facebook',
+                            'Facebook,Facebook Profile,Facebook Page'
+                        )"
+                    >
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/facebook/000000"
+                            alt="Facebook"
+                        >
+                        <span>Facebook</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'SOCIAL',
+                            'youtube',
+                            'YouTube',
+                            'YouTube,YouTube Channel'
+                        )"
+                    >
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/youtube/000000"
+                            alt="YouTube"
+                        >
+                        <span>YouTube</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'SOCIAL',
+                            'tiktok',
+                            'TikTok',
+                            'TikTok'
+                        )"
+                    >
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/tiktok/000000"
+                            alt="TikTok"
+                        >
+                        <span>TikTok</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'SOCIAL',
+                            'linkedin',
+                            'LinkedIn',
+                            'LinkedIn,LinkedIn Profile'
+                        )"
+                    >
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/linkedin.svg?color=%23000000"
+                            alt="LinkedIn"
+                        >
+                        <span>LinkedIn</span>
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="socialItems"
+                    class="saved-items-grid"
+                ></div>
+
+            </section>
+
+
+
+            <!-- MESSAGING -->
+
+            <section class="editor-section">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>Messaging</h2>
+
+                        <p>
+                            Các ứng dụng nhắn tin
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="item-grid">
+
+
+                    <!-- WHATSAPP -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'MESSAGING',
+                            'whatsapp',
+                            'WhatsApp',
+                            'WhatsApp,WhatsApp Business'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/whatsapp/000000"
+                            alt="WhatsApp"
+                        >
+
+                        <span>WhatsApp</span>
+
+                    </button>
+
+
+
+                    <!-- DISCORD -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'MESSAGING',
+                            'discord',
+                            'Discord',
+                            'Discord'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/discord/000000"
+                            alt="Discord"
+                        >
+
+                        <span>Discord</span>
+
+                    </button>
+
+
+
+                    <!-- SKYPE -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'MESSAGING',
+                            'skype',
+                            'Skype',
+                            'Skype'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://api.iconify.design/mdi/skype.svg?color=%23000000"
+                            alt="Skype"
+                        >
+
+                        <span>Skype</span>
+
+                    </button>
+
+
+
+                    <!-- TELEGRAM -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'MESSAGING',
+                            'telegram',
+                            'Telegram',
+                            'Telegram'
+                        )"
+                    >
+
+                        <img
+                            class="external-icon"
+                            src="https://cdn.simpleicons.org/telegram/000000"
+                            alt="Telegram"
+                        >
+
+                        <span>Telegram</span>
+
+                    </button>
+
+
+
+                    <!-- ZALO -->
+
+                    <button
+                        type="button"
+                        class="item-add-card"
+                        onclick="openItemModal(
+                            'MESSAGING',
+                            'zalo',
+                            'Zalo',
+                            'Zalo'
+                        )"
+                    >
+
+                        <div class="external-icon zalo-icon">
+                            Z
+                        </div>
+
+                        <span>Zalo</span>
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="messagingItems"
+                    class="saved-items-grid"
+                ></div>
+
+            </section>
+
+
+
+            <!-- SAVE -->
+
+            <div class="bottom-save">
+
+                <button
+                    type="button"
+                    class="btn-delete"
+                    onclick="deleteCurrentCard()">
+                    🗑 Xóa thẻ
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-save"
+                    onclick="saveCard()">
+                    ✓ Lưu thay đổi
+                </button>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     ITEM MODAL
+===================================================== -->
+
+<div
+    id="itemModal"
+    class="item-modal-overlay"
+    style="display:none;"
+>
+
+    <div class="item-modal">
+
+        <div class="item-modal-header">
+
+            <h2 id="itemModalTitle">
+                Email
+            </h2>
+
+            <button
+                type="button"
+                class="item-modal-close"
+                onclick="closeItemModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="item-modal-body">
+
+            <label>
+                Tiêu đề hiển thị
+            </label>
+
+            <input
+                type="text"
+                id="itemDisplayTitle"
+                placeholder="Email"
+            >
+
+
+            <div class="suggestion-title">
+                Gợi ý:
+            </div>
+
+            <div
+                id="itemSuggestions"
+                class="item-suggestions"
+            ></div>
+
+
+            <label>
+                Giá trị
+            </label>
+
+            <input
+                type="text"
+                id="itemValue"
+                placeholder="Nhập thông tin..."
+            >
+
+        </div>
+
+
+        <div class="item-modal-footer">
+
+            <button
+                type="button"
+                id="itemDeleteButton"
+                class="item-delete-button"
+                onclick="deleteCurrentItem()"
+                style="display:none;"
+            >
+                🗑
+            </button>
+
+
+            <div class="item-modal-actions">
+
+                <button
+                    type="button"
+                    class="item-cancel-button"
+                    onclick="closeItemModal()"
+                >
+                    Hủy
+                </button>
+
+
+                <button
+                    type="button"
+                    class="item-save-button"
+                    onclick="saveItem()"
+                >
+                    Lưu
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ========================== -->
+<!-- JAVASCRIPT -->
+<!-- ========================== -->
+
+<script>
+
+const CARD_ID = {{ card.id }};
+
+/* =========================================================
+   CARD ITEMS
+========================================================= */
+
+let cardItems = [];
+
+let editingItemId = null;
+
+let currentItemCategory = "";
+
+let currentItemPlatform = "";
+
+let currentSuggestions = [];
+
+
+
+/* =========================================================
+   LOAD ITEMS
+========================================================= */
+
+async function loadCardItems() {
+
+    try {
+
+        const response = await fetch(
+            `/api/cards/${CARD_ID}/items`,
+            {
+                credentials: "same-origin"
+            }
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Không thể tải card items"
+            );
+
+        }
+
+
+        cardItems =
+            await response.json();
+
+
+        renderCardItems();
+
+
+    } catch (error) {
+
+        console.error(
+            "LOAD CARD ITEMS ERROR:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RENDER ITEMS
+========================================================= */
+
+function renderCardItems() {
+
+    const general =
+        document.getElementById(
+            "generalItems"
+        );
+
+    const social =
+        document.getElementById(
+            "socialItems"
+        );
+
+    const messaging =
+        document.getElementById(
+            "messagingItems"
+        );
+
+
+    if (general) {
+
+        general.innerHTML = "";
+
+    }
+
+
+    if (social) {
+
+        social.innerHTML = "";
+
+    }
+
+
+    if (messaging) {
+
+        messaging.innerHTML = "";
+
+    }
+
+
+    cardItems.forEach(item => {
+
+
+        let container;
+
+
+        if (
+            item.category ===
+            "GENERAL"
+        ) {
+
+            container = general;
+
+        }
+
+        else if (
+            item.category ===
+            "SOCIAL"
+        ) {
+
+            container = social;
+
+        }
+
+        else if (
+            item.category ===
+            "MESSAGING"
+        ) {
+
+            container = messaging;
+
+        }
+
+
+        if (!container) return;
+
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.className =
+            "saved-item";
+
+
+        div.onclick = () => {
+
+            openEditItem(item);
+
+        };
+
+
+        div.innerHTML = `
+
+            <div class="saved-item-icon">
+
+                ${getExternalIcon(
+                    item.platform
+                )}
+
+            </div>
+
+
+            <div
+                class="saved-item-content"
+            >
+
+                <div
+                    class="saved-item-title"
+                >
+                    ${escapeHtml(
+                        item.display_title || ""
+                    )}
+                </div>
+
+
+                <div
+                    class="saved-item-value"
+                >
+                    ${escapeHtml(
+                        item.value || ""
+                    )}
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(
+            div
+        );
+
+    });
+
+}
+
+
+
+/* =========================================================
+   EXTERNAL ICON
+========================================================= */
+
+function getExternalIcon(
+    platform
+) {
+
+    const icons = {
+
+        x:
+            "https://cdn.simpleicons.org/x/000000",
+
+        instagram:
+            "https://cdn.simpleicons.org/instagram/000000",
+
+        threads:
+            "https://cdn.simpleicons.org/threads/000000",
+
+        facebook:
+            "https://cdn.simpleicons.org/facebook/000000",
+
+        youtube:
+            "https://cdn.simpleicons.org/youtube/000000",
+
+        tiktok:
+            "https://cdn.simpleicons.org/tiktok/000000",
+
+        linkedin:
+            "https://api.iconify.design/mdi/linkedin.svg?color=%23000000",
+
+        whatsapp:
+            "https://cdn.simpleicons.org/whatsapp/000000",
+
+        discord:
+            "https://cdn.simpleicons.org/discord/000000",
+
+        skype:
+            "https://api.iconify.design/mdi/skype.svg?color=%23000000",
+
+        telegram:
+            "https://cdn.simpleicons.org/telegram/000000"
+
+    };
+
+
+    if (platform === "zalo") {
+
+        return `
+            <div class="zalo-icon">
+                Z
+            </div>
+        `;
+
+    }
+
+
+    if (!icons[platform]) {
+
+        return "🔗";
+
+    }
+
+
+    return `
+        <img
+            src="${icons[platform]}"
+            class="external-icon"
+            alt="${platform}"
+        >
+    `;
+
+}
+
+
+
+/* =========================================================
+   OPEN NEW ITEM
+========================================================= */
+
+function openItemModal(
+    category,
+    platform,
+    defaultTitle,
+    suggestions
+) {
+
+    editingItemId = null;
+
+    currentItemCategory =
+        category;
+
+    currentItemPlatform =
+        platform;
+
+
+    currentSuggestions =
+        suggestions
+            .split(",")
+            .map(
+                x => x.trim()
+            )
+            .filter(Boolean);
+
+
+    document.getElementById(
+        "itemModalTitle"
+    ).innerText =
+        defaultTitle;
+
+
+    document.getElementById(
+        "itemDisplayTitle"
+    ).value =
+        defaultTitle;
+
+
+    document.getElementById(
+        "itemValue"
+    ).value =
+        "";
+
+
+    renderSuggestions();
+
+
+    document.getElementById(
+        "itemDeleteButton"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "itemModal"
+    ).style.display =
+        "flex";
+
+
+    setTimeout(() => {
+
+        document.getElementById(
+            "itemValue"
+        ).focus();
+
+    }, 50);
+
+}
+
+
+
+/* =========================================================
+   OPEN EXISTING ITEM
+========================================================= */
+
+function openEditItem(item) {
+
+    editingItemId =
+        item.id;
+
+
+    currentItemCategory =
+        item.category;
+
+
+    currentItemPlatform =
+        item.platform;
+
+
+    document.getElementById(
+        "itemModalTitle"
+    ).innerText =
+        item.display_title ||
+        item.platform;
+
+
+    document.getElementById(
+        "itemDisplayTitle"
+    ).value =
+        item.display_title ||
+        "";
+
+
+    document.getElementById(
+        "itemValue"
+    ).value =
+        item.value ||
+        "";
+
+
+    currentSuggestions = [];
+
+
+    renderSuggestions();
+
+
+    document.getElementById(
+        "itemDeleteButton"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "itemModal"
+    ).style.display =
+        "flex";
+
+}
+
+
+
+/* =========================================================
+   SUGGESTIONS
+========================================================= */
+
+function renderSuggestions() {
+
+    const box =
+        document.getElementById(
+            "itemSuggestions"
+        );
+
+
+    box.innerHTML = "";
+
+
+    currentSuggestions
+        .forEach(
+            suggestion => {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.type =
+                    "button";
+
+
+                button.className =
+                    "item-suggestion";
+
+
+                button.innerText =
+                    suggestion;
+
+
+                button.onclick =
+                    () => {
+
+                        document.getElementById(
+                            "itemDisplayTitle"
+                        ).value =
+                            suggestion;
+
+                    };
+
+
+                box.appendChild(
+                    button
+                );
+
+            }
+        );
+
+}
+
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+function closeItemModal() {
+
+    document.getElementById(
+        "itemModal"
+    ).style.display =
+        "none";
+
+}
+
+
+
+/* =========================================================
+   SAVE ITEM
+========================================================= */
+
+async function saveItem() {
+
+    const displayTitle =
+        document.getElementById(
+            "itemDisplayTitle"
+        ).value.trim();
+
+
+    const value =
+        document.getElementById(
+            "itemValue"
+        ).value.trim();
+
+
+    if (!displayTitle) {
+
+        alert(
+            "Vui lòng nhập tiêu đề"
+        );
+
+        return;
+
+    }
+
+
+    if (!value) {
+
+        alert(
+            "Vui lòng nhập giá trị"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        let response;
+
+
+        if (!editingItemId) {
+
+            response =
+                await fetch(
+                    `/api/cards/${CARD_ID}/items`,
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        credentials:
+                            "same-origin",
+
+                        body:
+                            JSON.stringify({
+
+                                category:
+                                    currentItemCategory,
+
+                                platform:
+                                    currentItemPlatform,
+
+                                item_type:
+                                    currentItemPlatform,
+
+                                display_title:
+                                    displayTitle,
+
+                                value:
+                                    value
+
+                            })
+
+                    }
+                );
+
+        }
+
+
+        else {
+
+            response =
+                await fetch(
+                    `/api/cards/${CARD_ID}/items/${editingItemId}`,
+                    {
+
+                        method:
+                            "PUT",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        credentials:
+                            "same-origin",
+
+                        body:
+                            JSON.stringify({
+
+                                display_title:
+                                    displayTitle,
+
+                                value:
+                                    value
+
+                            })
+
+                    }
+                );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.msg ||
+                "Không thể lưu"
+            );
+
+        }
+
+
+        closeItemModal();
+
+
+        await loadCardItems();
+
+
+    } catch (error) {
+
+        console.error(
+            "SAVE ITEM ERROR:",
+            error
+        );
+
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   DELETE ITEM
+========================================================= */
+
+async function deleteCurrentItem() {
+
+    if (!editingItemId) {
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            "Bạn có chắc muốn xóa mục này?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/cards/${CARD_ID}/items/${editingItemId}`,
+                {
+
+                    method:
+                        "DELETE",
+
+                    credentials:
+                        "same-origin"
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.msg ||
+                "Không thể xóa"
+            );
+
+        }
+
+
+        closeItemModal();
+
+
+        await loadCardItems();
+
+
+    } catch (error) {
+
+        console.error(
+            "DELETE ITEM ERROR:",
+            error
+        );
+
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value;
+
+
+    return div.innerHTML;
+
+}
+
+let selectedTheme =
+    "{{ card.theme or '#ff8a00' }}";
+
+
+/* =========================
+   THEME
+========================= */
+
+function selectTheme(color) {
+
+    selectedTheme = color;
+
+    document.getElementById("theme").value =
+        color;
+
+    document.documentElement
+        .style.setProperty(
+            "--selected-theme",
+            color
+        );
+
+    document.querySelectorAll(
+        ".theme-color"
+    ).forEach(btn => {
+
+        btn.classList.toggle(
+            "selected",
+            btn.dataset.color === color
+        );
+
+    });
+
+    document
+        .getElementById("cardPreview")
+        .style.setProperty(
+            "--theme",
+            color
+        );
+}
+
+
+/* =========================
+   PREVIEW
+========================= */
+
+function updatePreview() {
+
+    const name =
+        document.getElementById("hoTen").value;
+
+    const position =
+        document.getElementById("chucVu").value;
+
+    const company =
+        document.getElementById("congTy").value;
+
+
+    document.getElementById(
+        "previewName"
+    ).innerText =
+        name || "Tên của bạn";
+
+
+    document.getElementById(
+        "previewPosition"
+    ).innerText =
+        position || "";
+
+
+    document.getElementById(
+        "previewCompany"
+    ).innerText =
+        company || "";
+
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+function previewImage(
+    input,
+    targetId
+) {
+
+    const file =
+        input.files[0];
+
+    if (!file) return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e) {
+
+            const box =
+                document.getElementById(
+                    targetId
+                );
+
+            box.innerHTML = `
+                <img src="${e.target.result}">
+            `;
+
+            if (targetId === "avatarPreview") {
+
+                document.getElementById(
+                    "previewAvatar"
+                ).innerHTML = `
+                    <img src="${e.target.result}">
+                `;
+
+            }
+
+            if (targetId === "coverPreview") {
+
+                document.getElementById(
+                    "previewCover"
+                ).style.backgroundImage =
+                    `url("${e.target.result}")`;
+
+            }
+
+            if (targetId === "logoPreview") {
+
+                const logo =
+                    document.getElementById(
+                        "previewLogo"
+                    );
+
+                logo.src =
+                    e.target.result;
+
+                logo.style.display =
+                    "block";
+
+            }
+
+        };
+
+
+    reader.readAsDataURL(file);
+}
+
+
+/* =========================
+   SAVE
+========================= */
+
+async function saveCard() {
+
+    const formData = new FormData();
+
+    // =========================
+    // TEXT DATA
+    // =========================
+
+    formData.append(
+        "hoTen",
+        document.getElementById("hoTen").value.trim()
+    );
+
+    formData.append(
+        "chucVu",
+        document.getElementById("chucVu").value.trim()
+    );
+
+    formData.append(
+        "congTy",
+        document.getElementById("congTy").value.trim()
+    );
+
+    formData.append(
+        "phongBan",
+        document.getElementById("phongBan").value.trim()
+    );
+
+    formData.append(
+        "gioiThieu",
+        document.getElementById("gioiThieu").value.trim()
+    );
+
+    formData.append(
+        "theme",
+        selectedTheme
+    );
+
+
+    // =========================
+    // IMAGE FILES
+    // =========================
+
+    const coverFile =
+        document.getElementById("coverFile").files[0];
+
+    const avatarFile =
+        document.getElementById("avatarFile").files[0];
+
+    const logoFile =
+        document.getElementById("logoFile").files[0];
+
+
+    if (coverFile) {
+
+        formData.append(
+            "anhBia",
+            coverFile
+        );
+
+    }
+
+
+    if (avatarFile) {
+
+        formData.append(
+            "anhDaiDien",
+            avatarFile
+        );
+
+    }
+
+
+    if (logoFile) {
+
+        formData.append(
+            "logo",
+            logoFile
+        );
+
+    }
+
+
+    // =========================
+    // SEND TO FLASK
+    // =========================
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/cards/${CARD_ID}`,
+                {
+                    method: "PUT",
+                    credentials: "same-origin",
+                    body: formData
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.msg ||
+                "Không thể lưu thay đổi"
+            );
+
+        }
+
+
+        alert("Đã lưu thay đổi!");
+
+
+        // Reload để lấy ảnh mới từ Cloudinary
+        window.location.reload();
+
+
+    } catch (error) {
+
+        console.error(
+            "SAVE CARD ERROR:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "Có lỗi xảy ra khi lưu"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   DELETE
+========================= */
+
+async function deleteCurrentCard() {
+
+    const ok =
+        confirm(
+            "Bạn có chắc muốn xóa thẻ này?"
+        );
+
+
+    if (!ok) return;
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/cards/${CARD_ID}`,
+                {
+
+                    method: "DELETE",
+
+                    credentials:
+                        "same-origin"
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.msg ||
+                "Không thể xóa thẻ"
+            );
+
+        }
+
+
+        window.location.href =
+            "/admin/";
+
+
+    } catch(error) {
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        selectTheme(
+            selectedTheme
+        );
+
+        updatePreview();
+
+        await loadCardItems();
+
+    }
+);
+
+
+
+</script>
+
+{% endblock %}

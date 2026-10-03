@@ -1,0 +1,858 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Tổng quan — NFC
+{% endblock %}
+
+
+{% block content %}
+
+<div class="nfc-dashboard">
+
+
+    <!-- ================================================= -->
+    <!-- SIDEBAR TRÁI -->
+    <!-- ================================================= -->
+
+    <aside class="nfc-sidebar">
+
+        <!-- LOGO -->
+
+        <div class="nfc-brand">
+
+            <div class="nfc-logo">
+                N
+            </div>
+
+            <span>
+                NFC
+            </span>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="nfc-account">
+
+            <div class="account-avatar">
+
+                {{ (admin.hoTen or admin.taiKhoan or "A")[0]|upper }}
+
+            </div>
+
+
+            <div class="account-info">
+
+                <strong>
+                    {{ admin.hoTen or admin.taiKhoan }}
+                </strong>
+
+                <small>
+                    {{ admin.taiKhoan }}
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <div class="nfc-sidebar-menu">
+
+            <a
+                href="/admin/"
+                class="nfc-menu-item active">
+
+                <span class="menu-icon">
+                    ▣
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================================================= -->
+    <!-- KHU VỰC CARD -->
+    <!-- ================================================= -->
+
+    <main class="nfc-main">
+
+
+        <!-- HEADER -->
+
+        <div class="nfc-main-header">
+
+            <div>
+
+                <h1>
+                    Profile
+                </h1>
+
+                <p>
+                    Quản lý các thẻ NFC của bạn
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="nfc-create-button"
+                onclick="createCard()">
+
+                <span>＋</span>
+
+                Tạo thẻ
+
+            </button>
+
+        </div>
+
+
+
+        <!-- CARD LIST -->
+
+        <div
+            id="cardsGrid"
+            class="nfc-cards-grid">
+
+            <div class="nfc-loading">
+
+                Đang tải thẻ...
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ================================================= -->
+    <!-- SIDEBAR PHẢI -->
+    <!-- ================================================= -->
+
+    <aside class="nfc-right-sidebar">
+
+
+        <button
+            type="button"
+            class="nfc-share-button"
+            disabled>
+
+            <span>↗</span>
+
+            Chia sẻ thẻ
+
+        </button>
+
+
+        <h2>
+            Hoàn thiện setup
+        </h2>
+
+
+        <div class="setup-list">
+
+
+            <div class="setup-row done">
+
+                <span class="setup-circle">
+                    ✓
+                </span>
+
+                <span>
+                    Tạo tài khoản
+                </span>
+
+            </div>
+
+
+            <div class="setup-row done">
+
+                <span class="setup-circle">
+                    ✓
+                </span>
+
+                <span>
+                    Tạo profile
+                </span>
+
+            </div>
+
+
+            <div class="setup-row">
+
+                <span class="setup-circle empty">
+                </span>
+
+                <span>
+                    Tạo thẻ NFC
+                </span>
+
+            </div>
+
+
+            <div class="setup-row">
+
+                <span class="setup-circle empty">
+                </span>
+
+                <span>
+                    Ghép thẻ với profile
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </aside>
+
+
+</div>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+<script>
+function getCardItems(card) {
+
+    return Array.isArray(card.items)
+        ? card.items
+        : [];
+
+}
+
+function getGeneralItems(card) {
+
+    return getCardItems(card).filter(
+        item => item.category === "GENERAL"
+    );
+
+}
+
+function getSocialItems(card) {
+
+    return getCardItems(card).filter(
+        item => item.category === "SOCIAL"
+    );
+
+}
+
+function getMessagingItems(card) {
+
+    return getCardItems(card).filter(
+        item => item.category === "MESSAGING"
+    );
+
+}
+
+function renderCardContacts(card) {
+
+    const items = getCardItems(card);
+
+    if (!items.length) {
+        return "";
+    }
+
+    return items.map(item => {
+
+        let icon = "●";
+
+        if (item.category === "GENERAL") {
+            icon = "✉";
+        }
+
+        if (item.category === "SOCIAL") {
+            icon = "◉";
+        }
+
+        if (item.category === "MESSAGING") {
+            icon = "💬";
+        }
+
+        return `
+            <div class="nfc-card-contact">
+
+                <span class="contact-icon">
+                    ${icon}
+                </span>
+
+                <div>
+
+                    <small>
+                        ${escapeHtml(
+                            item.display_title ||
+                            item.platform ||
+                            ""
+                        )}
+                    </small>
+
+                    <strong>
+                        ${escapeHtml(
+                            item.value || ""
+                        )}
+                    </strong>
+
+                </div>
+
+            </div>
+        `;
+
+    }).join("");
+
+}
+
+async function loadCards() {
+
+    const box =
+        document.getElementById("cardsGrid");
+
+    try {
+
+        const res = await fetch(
+            "/api/cards",
+            {
+                credentials: "same-origin"
+            }
+        );
+
+
+        /*
+         * Không parse JSON ngay.
+         * Nếu Flask trả HTML lỗi thì sẽ không bị
+         * Unexpected token '<'
+         */
+
+        const text = await res.text();
+
+        let data;
+
+        try {
+
+            data = JSON.parse(text);
+
+        } catch (e) {
+
+            console.error(
+                "API trả về không phải JSON:",
+                text
+            );
+
+            throw new Error(
+                "API /api/cards không trả về JSON. Kiểm tra card.py."
+            );
+
+        }
+
+
+        if (!res.ok) {
+
+            throw new Error(
+                data.msg ||
+                "Không tải được danh sách thẻ"
+            );
+
+        }
+
+
+        /*
+         * KHÔNG CÓ CARD
+         */
+
+        if (!data.length) {
+
+            box.innerHTML = `
+
+                <div
+                    class="nfc-create-card"
+                    onclick="createCard()">
+
+                    <div class="create-card-icon">
+                        ＋
+                    </div>
+
+                    <h3>
+                        Tạo thẻ mới
+                    </h3>
+
+                    <p>
+                        Tạo thẻ NFC đầu tiên
+                        để bắt đầu.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /*
+         * HIỂN THỊ CARD
+         */
+
+        box.innerHTML = data.map(card => {
+
+            const theme =
+                card.theme ||
+                "#ff8a00";
+
+
+            return `
+
+                <article class="nfc-card">
+
+
+                    <!-- PREVIEW -->
+
+                    <div
+                        class="nfc-card-preview"
+                        style="
+                            --card-theme:
+                            ${escapeHtml(theme)}
+                        ">
+
+
+                        <!-- COVER -->
+
+                        <div
+                            class="nfc-card-cover"
+                            ${
+                                card.anhBia
+                                ?
+                                `style="background-image:url('${escapeHtml(card.anhBia)}')"`
+                                :
+                                ""
+                            }>
+
+                            <!-- AVATAR -->
+
+                            <div class="nfc-card-avatar">
+
+                                ${
+                                    card.anhDaiDien
+                                    ?
+                                    `
+                                    <img
+                                        src="${escapeHtml(card.anhDaiDien)}"
+                                        alt="Ảnh đại diện"
+                                    >
+                                    `
+                                    :
+                                    `
+                                    <span>
+                                        ${escapeHtml(
+                                            (card.hoTen || "N")
+                                            .charAt(0)
+                                            .toUpperCase()
+                                        )}
+                                    </span>
+                                    `
+                                }
+
+                            </div>
+
+
+                            <!-- LOGO -->
+
+                            ${
+                                card.logo
+                                ?
+                                `
+                                <div class="nfc-card-logo">
+
+                                    <img
+                                        src="${escapeHtml(card.logo)}"
+                                        alt="Logo"
+                                    >
+
+                                </div>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+
+                        <!-- BODY -->
+
+                        <div class="nfc-card-body">
+
+                            <h3>
+                                ${escapeHtml(
+                                    card.hoTen ||
+                                    card.tenThe ||
+                                    "Chưa có tên"
+                                )}
+                            </h3>
+
+                            ${
+                                card.chucVu
+                                ?
+                                `
+                                <div class="nfc-card-job">
+                                    ${escapeHtml(
+                                        card.chucVu
+                                    )}
+                                </div>
+                                `
+                                :
+                                ""
+                            }
+
+                            <!-- =====================================
+                                 CARD ITEMS
+                            ====================================== -->
+
+                            ${renderCardContacts(card)}
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- INFO -->
+
+                    <div class="nfc-card-meta">
+
+                        <strong>
+                            ${escapeHtml(
+                                card.tenThe ||
+                                "Untitled"
+                            )}
+                        </strong>
+
+
+                        <span>
+                            ${escapeHtml(
+                                card.slug ||
+                                ""
+                            )}
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- BUTTON -->
+
+                    <div class="nfc-card-actions">
+
+
+                        <a
+                            href="/admin/cards/${card.id}/edit"
+                            class="nfc-edit-button">
+
+                            ✎
+                            Chỉnh sửa
+
+                        </a>
+
+
+                        <button
+                            type="button"
+                            class="nfc-delete-button"
+                            onclick="deleteCard(${card.id})">
+
+                            🗑
+                            Xóa
+
+                        </button>
+
+
+                    </div>
+
+
+                </article>
+
+            `;
+
+        }).join("");
+
+
+        /*
+         * CARD TẠO THÊM
+         */
+
+        box.innerHTML += `
+
+            <div
+                class="nfc-create-card"
+                onclick="createCard()">
+
+                <div class="create-card-icon">
+                    ＋
+                </div>
+
+                <h3>
+                    Tạo thẻ mới
+                </h3>
+
+                <p>
+                    Tạo thêm một profile NFC
+                </p>
+
+            </div>
+
+        `;
+
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+
+        box.innerHTML = `
+
+            <div class="nfc-error">
+
+                <strong>
+                    Không thể tải danh sách thẻ
+                </strong>
+
+                <p>
+                    ${escapeHtml(error.message)}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+/* ========================================================
+   CREATE CARD
+======================================================== */
+
+async function createCard() {
+
+    const name =
+        prompt("Nhập tên thẻ:");
+
+    if (
+        !name ||
+        !name.trim()
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const res =
+            await fetch(
+                "/api/cards",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    credentials:
+                        "same-origin",
+
+                    body:
+                        JSON.stringify({
+
+                            tenThe:
+                                name.trim(),
+
+                            hoTen:
+                                name.trim(),
+
+                            theme:
+                                "#ff8a00"
+
+                        })
+
+                }
+            );
+
+
+        const text =
+            await res.text();
+
+
+        let data;
+
+
+        try {
+
+            data =
+                JSON.parse(text);
+
+        }
+        catch(e) {
+
+            console.error(
+                text
+            );
+
+            alert(
+                "Server không trả JSON. Kiểm tra card.py."
+            );
+
+            return;
+
+        }
+
+
+        if (!res.ok) {
+
+            alert(
+                data.msg ||
+                "Tạo thẻ thất bại"
+            );
+
+            return;
+
+        }
+
+
+        window.location.href =
+            `/admin/cards/${data.cardId}/edit`;
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Không thể kết nối server"
+        );
+
+    }
+
+}
+
+
+
+/* ========================================================
+   DELETE CARD
+======================================================== */
+
+async function deleteCard(id) {
+
+    if (
+        !confirm(
+            "Bạn chắc chắn muốn xóa thẻ này?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const res =
+            await fetch(
+                `/api/cards/${id}`,
+                {
+
+                    method:
+                        "DELETE",
+
+                    credentials:
+                        "same-origin"
+
+                }
+            );
+
+
+        const data =
+            await res.json();
+
+
+        if (!res.ok) {
+
+            alert(
+                data.msg ||
+                "Xóa thất bại"
+            );
+
+            return;
+
+        }
+
+
+        await loadCards();
+
+    }
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Không thể kết nối server"
+        );
+
+    }
+
+}
+
+
+
+/* ========================================================
+   ESCAPE HTML
+======================================================== */
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ""
+    ).replace(
+        /[&<>"']/g,
+        c => ({
+
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+
+        }[c])
+    );
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadCards
+);
+
+</script>
+
+{% endblock %}

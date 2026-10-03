@@ -1,0 +1,298 @@
+/* ensure consistent sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* variables */
+:root{
+  --bg1: #2f5e44;
+  --bg2: #476b4b;
+  --card-bg: #ffffff;
+  --muted:#6b6b6b;
+  --accent:#ff7a59; /* cam nổi bật */
+  --accent-2:#2bb673; /* xanh lá tươi */
+  --section:#0ea5a4; /* teal for headings */
+  --glass: rgba(255,255,255,0.85);
+  --radius: 14px;
+  --text-dark: #0b1a12;
+}
+
+/* PAGE */
+html,body{
+  height:100%;
+  margin:0;
+  font-family: "Inter", system-ui, Arial, sans-serif;
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text-dark);
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:1180px;
+  margin:34px auto;
+  padding:26px;
+}
+
+/* CARD */
+.card{
+  background: var(--card-bg);
+  border-radius:var(--radius);
+  box-shadow: 0 10px 40px rgba(10,10,10,0.18);
+  overflow:hidden;
+  display:flex;
+  gap:28px;
+  padding:28px;
+  align-items:flex-start;
+}
+
+/* LEFT: IMAGE */
+.left{
+  width:420px;
+  min-width:260px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+.prod-img{
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  background: linear-gradient(180deg,#f7f7f7,#efefef);
+}
+.prod-img img{ width:100%; height:auto; display:block; object-fit:cover; }
+
+/* RIGHT: INFO */
+.right{ flex:1; min-width:260px; }
+.title-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+h1.product-title{ font-family: "Poppins", "Inter", sans-serif; font-weight:700; font-size:30px; margin:0; color:var(--text-dark); letter-spacing:0.2px; }
+.price-badge{
+  margin-left:auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.95));
+  border: 3px solid var(--accent);
+  color: var(--accent);
+  font-weight:800;
+  font-size:26px;
+  padding:14px 20px;
+  border-radius:14px;
+  box-shadow: 0 8px 18px rgba(255,122,89,0.12), inset 0 -6px 12px rgba(255,122,89,0.04);
+  white-space:nowrap;
+}
+
+/* small attributes row */
+.attrs{ display:flex; gap:12px; margin:18px 0; flex-wrap:wrap; }
+.attr{
+  background: linear-gradient(180deg,#f7f7f7,#fafafa);
+  padding:10px 14px;
+  border-radius:10px;
+  min-width:120px;
+  box-shadow: 0 6px 16px rgba(11,26,18,0.04);
+  color:#333;
+  font-weight:600;
+}
+.attr .label{ display:block; font-size:12px; color:var(--muted); margin-bottom:6px; font-weight:600;}
+.attr .value{ font-size:15px; font-weight:700; color:#0c2a1f; }
+
+/* section blocks */
+.section{
+  margin-bottom:18px;
+  padding:14px 16px;
+  border-radius:10px;
+  background: linear-gradient(180deg, rgba(235,245,240,0.7), rgba(250,250,250,0.6));
+}
+.section h4{
+  margin:0 0 8px 0; font-size:15px; color:var(--section); font-weight:700; letter-spacing:0.4px;
+  display:flex; align-items:center; gap:8px;
+}
+.section p, .section .desc{
+  margin:0; color:#2a2a2a; line-height:1.8; white-space:pre-wrap; font-size:15px;
+}
+
+/* tag-like label for origin */
+.origin-pill{
+  display:inline-block; margin-top:8px; padding:10px 14px; background:rgba(11,26,18,0.04); border-radius:10px; color:#123; font-weight:600;
+}
+
+.back{ display:inline-block; margin-top:14px; padding:8px 14px; background:var(--accent-2); color:white; border-radius:10px; text-decoration:none; font-weight:700; }
+
+/* MOBILE */
+@media(max-width:980px){
+  .card{ padding:18px; gap:18px; flex-direction:column; align-items:center; }
+  .left{ width:100%; max-width:420px; }
+  .prod-img img{ height:480px; object-fit:cover; }
+  .price-badge{ font-size:22px; padding:12px 16px; }
+  h1.product-title{ font-size:24px; text-align:center; }
+  .right{ width:100%; }
+  .attrs{ justify-content:center; }
+}
+
+@media(max-width:480px){
+  .prod-img img{ height:360px; }
+  .price-badge{ font-size:18px; padding:10px 12px; }
+  h1.product-title{ font-size:20px; }
+}
+
+/* ---------------------------
+   Additional optional styles from earlier (thumbnail, zoom, animations)
+   You can keep or remove these if you already have thumbnail behavior elsewhere
+   --------------------------- */
+
+body {
+  background-size: 200% 200%;
+  animation: backgroundMove 10s ease infinite;
+}
+@keyframes backgroundMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* thumbnails and zoom helpers (if used) */
+.left .thumbnail-container{ display:flex; gap:8px; margin-top:10px; justify-content:center; }
+.left .thumbnail{ width:60px; height:60px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent; transition: border-color .25s; }
+.left .thumbnail:hover{ border-color: var(--accent); }
+
+.zoomed { transform: scale(1.5); cursor:zoom-out; transition: transform .25s; }
+
+/* Ẩn các section phụ lúc đầu */
+.hidden-section {
+  display: none !important;
+}
+
+/* giới hạn mô tả ban đầu */
+.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* khi mở rộng thì hiện toàn bộ */
+.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+  overflow: visible;
+}
+
+/* nút xem thêm */
+.expand-btn {
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 10px;
+  background: transparent;
+  border: 1px solid rgba(11,26,18,0.06);
+  color: var(--section);
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  transition: all .18s ease;
+}
+
+/* ================== QUANTITY + ADD TO CART ================== */
+.qty-cart-row{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 0 10px;
+}
+
+.qty-line{
+  display: flex;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.qty-line button{
+  width: 42px;
+  height: 42px;
+  border: none;
+  outline: none;
+  background: #f3f3f3;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.qty-line button:hover{
+  background: #e2e2e2;
+}
+
+.qty-line input{
+  width: 56px;
+  height: 42px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* nút thêm vào giỏ */
+.add-cart-btn{
+  background: #ff4b4b;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  transition: 0.25s;
+  white-space: nowrap;
+}
+
+.add-cart-btn:hover{
+  background: #e03636;
+  transform: translateY(-1px);
+}
+
+/* ===== TOAST ADD TO CART ===== */
+.cart-toast{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2bb673;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all .3s ease;
+}
+
+.cart-toast.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cart-toast.hidden{
+  display: none;
+}
+
+.add-cart-btn.disabled {
+  background: #bdbdbd !important;
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+  opacity: 0.8;
+}
+
+.qty-line.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}

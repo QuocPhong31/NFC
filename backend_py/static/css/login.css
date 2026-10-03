@@ -1,0 +1,103 @@
+:root{
+  --bg: #f6fff6;
+  --panel: #ffffff;
+  --accent: #34d399;
+  --accent-2: #bbf7d0;
+  --muted: #6b7280;
+  --shadow: 0 16px 40px rgba(18,25,40,0.06);
+  font-family: "Poppins", Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+}
+
+/* reset */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(900px 420px at 8% 12%, rgba(220,255,235,0.95), transparent),
+    linear-gradient(180deg,#ffffff,var(--bg));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#05222a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* center single card */
+.login-center{
+  width: min(600px, 94%);
+  padding: 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* card */
+.card-login{
+  width:100%;
+  background: linear-gradient(180deg,#ffffff,#f3fff7);
+  border-radius:18px;
+  padding:28px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(50,200,140,0.06);
+}
+
+/* header */
+.login-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:12px;
+}
+.login-icon{
+  width:64px;height:64px;border-radius:14px;
+  background: linear-gradient(90deg,#f6fff9,#ecfff2);
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  box-shadow: 0 10px 22px rgba(3,30,23,0.04);
+}
+.login-title{ font-size:22px; font-weight:800; margin:0; color:#05222a; }
+.login-sub{ display:block; font-size:13px; color:var(--muted); }
+
+/* form fields bigger */
+label.small{ font-size:13px; color:var(--muted); margin-bottom:8px; display:block; }
+input.form-control{
+  border-radius:14px;
+  padding:14px 16px;
+  border:1px solid rgba(10,16,24,0.04);
+  box-shadow:none;
+  font-size:16px;
+  background: #fbfffb;
+}
+input.form-control::placeholder{ color:#9aa9a0; font-size:15px; }
+input.form-control:focus{
+  outline:none;
+  box-shadow: 0 12px 26px rgba(52,211,153,0.10);
+  border-color: rgba(52,211,153,0.45);
+}
+
+/* checkbox & links */
+.form-row{ display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:10px; }
+.form-check-label{ font-size:14px; color:var(--muted); }
+
+/* big primary button */
+.btn-primary-custom{
+  background: linear-gradient(90deg,var(--accent), #2ecc71);
+  color:white;border:none;border-radius:14px;padding:14px 18px;font-weight:800;
+  box-shadow: 0 14px 34px rgba(46,204,113,0.14);
+  font-size:17px;
+  width:100%;
+}
+.btn-primary-custom:active{ transform: translateY(1px); }
+
+/* helper text */
+.note{ font-size:13px; color:var(--muted); text-align:center; margin-top:12px; }
+
+/* responsive */
+@media (max-width:520px){
+  .login-center{ padding:14px; width:96%; }
+  .login-title{ font-size:20px; }
+  input.form-control{ font-size:15px; padding:12px; }
+  .btn-primary-custom{ font-size:16px; padding:12px; }
+}

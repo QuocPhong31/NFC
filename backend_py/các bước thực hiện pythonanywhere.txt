@@ -1,0 +1,115 @@
+1_:
+git clone https://github.com/QuocPhong31/thanhtamtraquan_CaiTien.git
+
+
+2_:
+ls
+cd thanhtamtraquan_CaiTien/backend_py
+ls
+
+3_:
+cd ~
+python3.10 -m venv venv
+source venv/bin/activate
+
+4_:
+pip install cloudinary
+pip install flask flask-cors mysql-connector-python
+pip install qrcode[pil]
+pip install python-dotenv
+
+5_:
+sau đó vào web (nếu chưa có thì phải tạo)
+nhấn vào var/www/thanhtamtraquanp_pythonanywhere_com_wsgi.py
+xóa hết và dán đoạn này vào:
+
+############################################################
+import sys
+import os
+
+project_home = '/home/thanhtamtraquanp/thanhtamtraquan_CaiTien/backend_py'
+if project_home not in sys.path:
+    sys.path.append(project_home)
+
+os.environ['FLASK_ENV'] = 'production'
+
+from app import app as application
+
+############################################################
+
+Sau đó nhấn Save
+rồi Kéo xuống mục Virtualenv
+điền "/home/thanhtamtraquanp/venv" rồi tick V
+
+Sau đó kéo lên đầu trang rồi Reload - bấm nút xanh
+
+6_: tạo Database
+tạo database 
+tạo password
+sau đó quay lại console
+(lúc này phải ở venv và phải đã tạo database tên thanhtamtraquan)
+sau đó dán nguyên đoạn này vào:
+"
+
+mysql -u thanhtamtraquanp -h thanhtamtraquanp.mysql.pythonanywhere-services.com -p thanhtamtraquanp\$thanhtamtraquan < /home/thanhtamtraquanp/thanhtamtraquan_CaiTien/mysql/thanhtamtraquan.sql
+
+"
+
+(Khúc này quan trọng, nếu mà đến cái bước trên dán vào mà bị lỗi
+"
+ERROR 1045 (28000): Access denied for user 'thanhtamtraquanp'@'10.0.4.104' (using password: YES)
+"
+
+thì vào console để xóa đi 1 console nào đó không có dùng đến, sau đó vào database, vào cái thanhtamtraquanp$thanhtamtraquan
+
+sau đó dán cái này vào: SOURCE /home/thanhtamtraquanp/thanhtamtraquan_CaiTien/mysql/thanhtamtraquan.sql;
+là được )
+
+7_:
+kiểm tra database
+trong console thì dán: (ở venv)
+"
+
+mysql -u thanhtamtraquanp -h thanhtamtraquanp.mysql.pythonanywhere-services.com -p
+
+"
+sau đó dán 
+SHOW DATABASES;
+
+USE `thanhtamtraquanp$thanhtamtraquan`;
+SHOW TABLES;
+SELECT * FROM truycap_logs;
+exit;  
+
+8_: Cấu hình lại config
+vào config.py trong pythonanywhere
+dán cái này vào 
+"
+
+import mysql.connector
+import os
+import cloudinary.uploader
+
+def get_connection():
+    return mysql.connector.connect(
+        host="thanhtamtraquanp.mysql.pythonanywhere-services.com",
+        user="thanhtamtraquanp",
+        password="MẬT_KHẨU_MYSQL_BẠN_ĐÃ_SET_TRÊN_PYTHONANYWHERE",
+        database="thanhtamtraquanp$thanhtamtraquan",
+        autocommit=True
+    )
+
+"
+
+9_: cách để xóa database trên pythonanywhere
+Đầu tiền vào console rồi nhấn dấu x cái tên database đó
+sau đó quay lại cái Database r nhấn vào tên database đó
+sau đó nó xuất hiện cosole 
+lúc này xóa nó bằng cách
+
+DROP DATABASE thanhtamtraquanp$thanhtamtraquan;
+exit;
+
+10_: xóa File (python) để update cái mới
+vào File sau đó bên dưới Directories hãy xóa toàn bộ là xong
+sau đó muốn update mới thì quay lại bước 1 ở trên

@@ -1,0 +1,2934 @@
+html {
+  scroll-behavior: smooth;
+}
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Ngăn cuộn ngang */
+    width: 100%;
+  }
+
+  .page {
+    display: none;
+  }
+  .active {
+    display: block;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --slantedText: "Pacifico", cursive;
+    --primaryColor: #12941f;
+    --secondayColor: #fca311;
+    --mainDark: #3a3e3b;
+    --mainWhite: #fff;
+    --mainGrey: #e5e5e5;
+    --mainTransition: all 0.3s ease-in-out;
+    --letterSpacing: 0.5rem;
+  }
+  
+  body {
+    padding-top: 70px;
+  }
+  
+  /* helper/utility classes */
+  
+  a {
+    text-decoration: none;
+  }
+  .text-white {
+    color: var(--mainWhite);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-primary {
+    color: var(--primaryColor);
+  }
+  
+  /* clearfix */
+  /* .clearfix::after,
+  .clearfix::before {
+    content: "";
+    clear: both;
+    display: table;
+  } */
+  
+  /* globals */
+  .section-center {
+    padding: 4rem 0;
+    width: 80vw;
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
+
+
+.contact-image img {
+width: 100%; /* Đảm bảo hình ảnh không bị vỡ */
+height: auto;
+}
+
+/* ===== HEADER ===== */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #ffffff; /* đen đồng nhất */
+  z-index: 1000;
+  border-bottom: 1px solid #e5e5e5;/* viền nhẹ cho sang */
+}
+
+/* container full width */
+.header-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 0 32px;
+}
+
+/* LOGO sát trái */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #1f8f3a; /* xanh lá đậm */
+}
+
+/* logo image */
+.logo img {
+  height: 70px;
+  /* margin-top: 30px; */
+  width: auto;
+  object-fit: contain;
+}
+
+/* MENU căn giữa */
+.main-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 30px;
+}
+
+/* MENU ITEM */
+.main-nav a {
+  font-family: 'Lora', serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #2b2b2b;
+  text-transform: capitalize;
+}
+
+.main-nav a:hover {
+  color: #46fc6d;
+}
+
+/* Đẩy nội dung xuống để không bị header che */
+body {
+  padding-top: 70px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none; /* có thể làm menu mobile sau */
+  }
+}
+
+.cart-badge{
+  background:red;
+  color:white;
+  padding:2px 7px;
+  border-radius:50%;
+  margin-left:5px;
+}
+
+/* CART DROPDOWN (top-right) */
+.cart-icon {
+  display: inline-flex;      /* QUAN TRỌNG */
+  align-items: center;       /* canh giữa icon & chữ */
+  gap: 6px;                  /* khoảng cách icon – chữ */
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;       /* tránh xuống dòng */
+}
+
+/* dropdown container */
+.cart-dropdown {
+  position: absolute;
+  top: 120%;        /* nằm dưới icon */
+  right: 0;
+  width: 360px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  z-index: 9999;
+}
+
+/* ẩn */
+.cart-dropdown.hidden {
+  display: none;
+}
+
+/* hộp bên trong */
+.cart-box {
+  padding: 14px;
+}
+
+/* header */
+.cart-header h3 {
+  margin: 0;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+/* item */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item img {
+  width: 50px;
+  border-radius: 6px;
+}
+
+/* footer */
+.cart-footer {
+  text-align: right;
+  margin-top: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.cart-footer button {
+  background: #12941f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* tổng tiền */
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.cart-total strong {
+  color: red;
+  font-size: 22px;
+}
+
+/* 2 nút hành động */
+.cart-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cart-actions a {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 6px;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+/* xem giỏ hàng */
+.btn-view-cart {
+  background: #a3a0a0;
+  color: #f8f6f6;
+}
+
+/* thanh toán */
+.btn-checkout {
+  background: #12941f;
+  color: #ffffff;
+}
+
+
+.product-img {
+width: 100%;
+height: auto;
+}
+
+.product img {
+width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều rộng của phần tử sản phẩm */
+height: auto;
+object-fit: cover; /* Tránh hình bị méo khi zoom */
+}
+
+.main-btn {
+width: 100%; /* Các nút có kích thước phù hợp với màn hình */
+text-align: center;
+}
+
+
+@media (max-width: 800px) {
+.section-title, .contact-text {
+font-size: 35px;
+}
+
+.banner-btn {
+padding: 10px 15px; /* Giảm padding cho các nút để phù hợp hơn với màn hình nhỏ */
+}
+}
+  /* end of navbar */
+  
+  /* header */
+  .header {
+    min-width: 100vw; /* Đảm bảo chiếm toàn bộ chiều rộng màn hình */
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+      url("./images/checkout.jpg") center/cover no-repeat fixed;
+    position: relative;
+    transition: background-image 0.5s ease-in-out, filter 0.5s ease-in-out;/* Hiệu ứng chuyển đổi mượt */
+  }
+  
+  /* banner */
+  .banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    padding: 0 20px; /* Thêm padding để tránh cắt ở hai bên */
+    transform: translate(-50%, -50%);
+    letter-spacing: var(--letterSpacing);
+  }
+  @media (max-width: 768px) {
+    .banner {
+        padding: 0 20px; /* Giảm padding ở màn hình nhỏ */
+    }
+}
+  
+  .banner-subtitle {
+    font-size: 3.2rem;
+    color: var(--primaryColor);
+    animation: none; 
+    font-family: 'Calistoga', cursive; 
+  }
+  @media (max-width: 768px) {
+    .banner-subtitle {
+        font-size: 1.5rem; /* Giảm kích thước phông chữ trên thiết bị di động */
+    }
+}
+@media (max-width: 480px) {
+  .banner-subtitle {
+      font-size: 1.3rem; /* Giảm thêm cho màn hình nhỏ hơn */
+  }
+}
+  
+  .banner-title {
+    text-transform: uppercase;
+    font-size: 3.2rem;
+    color: var(--mainWhite);
+    margin-top: 2.5rem;
+    line-height: 1.3;
+    animation: none;
+    font-family: 'Alata', cursive;
+  }
+  
+  
+  .main-btn,
+  .banner-btn {
+    display: inline-block;
+    background: var(--primaryColor);
+    text-transform: uppercase;
+    padding: 0.8rem 1.2rem;
+    color: var(--mainDark);
+    font-weight: bold;
+    outline: 0.2rem solid var(--primaryColor);
+    outline-offset: 4px;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: none;
+  }
+  
+  .main-btn:hover,
+  .banner-btn:hover {
+    color: var(--mainWhite);
+    opacity: 1;
+  }
+  
+  .banner-btn {
+    padding: 1.2rem 1.5rem;
+    animation: none;
+  }
+  
+  /* end of header */
+  
+  /* animations */
+  
+  @keyframes show {
+    0% {
+      transform: scale(2);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideFromRight {
+    0% {
+      transform: translate(1000px);
+    }
+    50% {
+      transform: translate(-200px);
+    }
+    75% {
+      transform: translate(50px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+  
+  @keyframes slideFromLeft {
+    0% {
+      transform: translate(-1000px);
+    }
+    50% {
+      transform: translate(200px);
+    }
+    75% {
+      transform: translate(-50px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+  
+  /* end of animations */
+  
+  /* content divider  */
+  .content-divider {
+    height: 0.5rem;
+    background: linear-gradient(
+      to left,
+      var(--primaryColor),
+      var(--secondayColor),
+      var(--primaryColor)
+    );
+  }
+  /* end of content divider  */
+  
+  /* skills */
+  .skills {
+    background: var(--mainGrey);
+  }
+  .skill {
+    padding: 2.5rem 0;
+    text-align: center;
+    transition: var(--mainTransition);
+  }
+  .skill-icon {
+    font-size: 2.5rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+  .skill-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: var(--letterSpacing);
+    margin-bottom: 1.5rem;
+    color: var(--primaryColor);
+    transition: var(--mainTransition);
+  }
+  .skill-text {
+    max-width: 13rem;
+    margin: 0 auto;
+  }
+  .skill:hover {
+    background: var(--primaryColor);
+  }
+  .skill:hover .skill-title {
+    color: var(--mainWhite);
+  }
+  .skill:hover .skill-icon {
+    transform: translateY(-5px);
+  }
+  @media screen and (min-width: 576px) {
+    .skill {
+      float: left;
+      width: 50%;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .skill {
+      width: 25%;
+    }
+  }
+  /* end of skills */
+  
+  /* about */
+  .about-img,
+  .about-info {
+    padding: 2rem 0;
+  }
+  .about-pic-container {
+    background: var(--primaryColor);
+    border: 0.5rem solid var(--primaryColor);
+    border-radius: 1rem;
+    /* overflow */
+    overflow: hidden;
+  }
+  .about-pic {
+    width: 100%;
+    display: block;
+    transition: var(--mainTransition);
+  }
+  .about-pic-container:hover .about-pic {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+  .about-text {
+    margin: 1rem 0;
+    max-width: 26rem;
+  }
+  @media screen and (min-width: 992px) {
+    .about-img,
+    .about-info {
+      float: left;
+      width: 50%;
+      padding: 2rem;
+    }
+  }
+  /* end of about */
+  
+  /* products */
+  .products {
+    background: var(--mainDark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .products-layout {
+    width: 80vw;
+    max-width: 1170px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 48px;
+    position: relative;
+    z-index: 2;
+  }
+  /* .products-info,
+  .products-inventory {
+    padding: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;  
+    
+  } */
+  .product-text {
+    color: var(--mainWhite);
+    margin: 1rem 0;
+    max-width: 26rem;
+  }
+
+  @media (max-width: 768px) {
+    .product {
+      width: 100%; /* Đảm bảo sản phẩm hiển thị đủ trên màn hình nhỏ hơn */
+    }
+  }
+  .teapot-products .products-inventory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .teapot-products .product {
+    flex: 1 1 calc(33.333% - 20px);
+    padding: 2rem 1rem;
+  }
+  
+  .product-img {
+    width: 100%;
+    display: block;
+    border-radius: 0.4rem;
+    margin-bottom: 2rem;
+    height: auto;
+  }
+  .product-title {
+    font-family: 'Merriweather', serif;
+    color: var(--mainWhite);
+    text-transform: uppercase;
+    letter-spacing: var(--letterSpacing);
+    margin-bottom: 1rem;
+    font-size: 14px; /* Kích thước chữ của tiêu đề sản phẩm */
+    color: rgb(248, 248, 248);
+    font-weight: bold;
+    transition: text-decoration 0.3s ease, transform 0.3s ease, font-weight 0.3s ease; /* Hiệu ứng chuyển đổi cho gạch chân, phóng to và độ đậm chữ */
+  }
+  .product-title:hover {
+    color: #e1f33f; /* Màu chữ khi di chuột qua (xanh dương sáng) */
+    text-decoration: underline; /* Thêm gạch chân khi di chuột qua */
+    transform: scale(1.1); /* Phóng to một chút khi di chuột qua */
+    font-weight: bold; 
+  }
+  .product-price {
+    font-size: 18px; /* Làm nổi bật giá sản phẩm với kích thước lớn hơn */
+    letter-spacing: var(--letterSpacing);
+    font-family: 'Roboto', sans-serif;
+    color: #d35400; /* Màu sắc nổi bật cho giá sản phẩm */
+  }
+
+  .details-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    padding: 5px 10px;
+    display: none;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+  .product:hover .details-overlay {
+    
+    display: flex;
+  }
+
+  .product-link {
+    position: relative;
+    display: flex;
+  }
+  /* Styling for product price */
+  .product-price {
+    color: var(--mainWhite); /* Màu trắng */
+    letter-spacing: var(--letterSpacing);
+    font-family: var(--slantedText);
+  }
+
+  .product-card.out-of-stock {
+    opacity: 0.45;
+    pointer-events: auto;
+  }
+
+  .product-card.out-of-stock img {
+    filter: grayscale(100%);
+  }
+
+  .out-stock-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    z-index: 2;
+  }
+
+  .add-btn.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  /* ===== MODERN PRODUCT CARD ===== */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all .3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+}
+
+/* .products .section-center {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  gap: 40px;
+  align-items: start;
+} */
+
+/* ảnh */
+.product-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  background: #f6f6f6;
+}
+
+/* body */
+.product-body {
+  padding: 16px;
+}
+
+.product-brand {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #999;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  min-height: 42px;
+}
+
+/* .products-inventory {
+  display: block !important;
+} */
+
+/* footer */
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* giá */
+.product-price-red {
+  font-size: 18px;
+  font-weight: 700;
+  color: #e60000;
+}
+
+/* nút + */
+.add-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #ff6b6b;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .25s ease, transform .25s ease;
+}
+
+.add-btn:hover {
+  background: #ff3b3b;
+  transform: scale(1.1);
+}
+
+.cart-items {
+  max-height: 260px;     /* chiều cao tối đa */
+  overflow-y: auto;     /* bật scroll */
+  padding-right: 6px;
+}
+
+/* đẹp hơn */
+.cart-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.cart-items::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.product-link:hover .product-name,
+.product-card:hover .product-name {
+  color: #1e88e5;
+}
+
+/* tablet */
+@media (max-width: 1024px) {
+  .products-layout {
+    grid-template-columns: 1fr;
+  }
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  /* end of products */
+
+
+  /*video */
+  .tea-brewing {
+    background: linear-gradient(135deg, #4caf50, #a5d6a7, #81c784); /* Màu nền gradient */
+    padding: 50px 0;
+    color: white; /* Màu chữ */
+  }
+  
+  .video-container {
+    float: left;
+    width: 50%;
+    padding-right: 20px; /* Khoảng cách giữa video và mô tả */
+  }
+  
+  .video-description {
+    float: right;
+    width: 50%;
+    padding-left: 20px; /* Đệm cho phần mô tả */
+  }
+  
+  @media (max-width: 768px) {
+    .video-container, .video-description {
+      float: none;
+      width: 100%;
+      padding: 0 10px; /* Điều chỉnh padding trên màn hình nhỏ */
+      text-align: center; /* Căn giữa nội dung trên màn hình nhỏ */
+    }
+  }
+  
+  
+  /* services */
+  .services {
+    background-color: #9e9c9c; 
+    padding: 50px 0; 
+  }
+  .services-title {
+    padding-top: 4rem;
+    margin-bottom: 30px; /* Khoảng cách dưới tiêu đề */
+  }
+  .service-card {
+    border: 0.3rem solid var(--primaryColor);
+    padding: 0.2rem;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    /* box-shadow */
+    box-shadow: 7px 7px 3px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 7px 7px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 7px 7px 3px 0px rgba(0, 0, 0, 0.75);
+    transition: var(--mainTransition);
+  }
+  .service-card:hover {
+    box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.5); /* Điều chỉnh box-shadow */
+    -webkit-box-shadow: 10px 12px 6px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 12px 6px 0px rgba(0, 0, 0, 0.75);
+  }
+  .service-img {
+    width: 100%;
+    display: block;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+  .service-info {
+    background: var(--mainDark);
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+    letter-spacing: var(--letterSpacing);
+    color: var(--mainWhite);
+    text-transform: capitalize;
+    padding: 2.5rem 0 1rem 0;
+  }
+  .service-btn {
+    color: var(--primaryColor);
+    display: inline-block;
+    background: var(--mainWhite);
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: 0.8rem 2rem;
+    font-weight: bold;
+    border: 0.2rem solid var(--primaryColor);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: var(--mainTransition);
+  }
+  .service-btn:hover {
+    background: var(--primaryColor);
+    color: var(--mainWhite);
+    border: 0.2rem solid var(--mainWhite);
+  }
+  .service-img-container {
+    position: relative;
+  }
+  .service-icon {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-size: 2rem;
+    background-color: var(--primaryColor);
+    padding: 0.25rem 0.6rem;
+    border-radius: 50%;
+    border: 0.2rem solid var(--mainDark);
+    color: var(--mainDark);
+    /* element contains its own width and height,
+    when we use positon prop it will not show it in center
+    --> to fix it we use transform prop accoring to position prop ex:- transform: translateX(-50%);
+    to move -50% of its own width and height(same for banner title also) */
+    transform: translate(-50%, 50%);
+    /* box-shadow: */
+    box-shadow: 8px 9px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 8px 9px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 8px 9px 5px 0px rgba(0, 0, 0, 0.75);
+  }
+  
+  @media screen and (min-width: 768px) {
+    .service-card {
+      float: left;
+      width: 45%;
+      margin-right: 5%;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    .service-card {
+      width: 30%;
+      margin-right: 3.33%;
+    }
+  }
+  /* end of services */
+  
+  /* contact */
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Căn giữa các thành phần */
+    align-items: center; /* Giữ cho các mục ở tâm thẳng hàng */
+    padding: 20px;
+  }
+  .contact-image {
+    flex: 1 1 300px; /* Cho phép ảnh chiếm không gian nhưng không nhỏ hơn 300px */
+    margin-right: 20px; /* Khoảng cách giữa hình ảnh và thông tin */
+    margin-left: auto; /* Đảm bảo không dính lề bên trái */
+    max-width: 430px;
+    width: 100%; /* Giúp ảnh co giãn phù hợp với bố cục */
+  }
+.contact-info {
+  flex: 1 1 300px;
+  margin-right: auto; /* Đảm bảo không dính lề bên phải */
+  max-width: 600px;
+  }
+  .contact-item {
+    margin-bottom: 10px;
+  }
+  .contact-title {
+    color: #1f8f3a;
+    font-family: var(--slantedText);
+    text-transform: uppercase;
+    letter-spacing: var(--letterSpacing);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  .contact-icon i {
+    margin-right: 1rem;
+    color: #24bd45;
+  }
+  .contact-text {
+    text-transform: uppercase;
+    font-size: 18px; /* Kích thước chữ mặc định */
+    color: #333; /* Màu chữ mặc định */
+    white-space: nowrap;
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển đổi cho phóng to */
+  }
+  /* Hiệu ứng khi di chuột qua thông tin liên hệ */
+  .contact-text:hover {
+    transform: scale(1.1); /* Phóng to thông tin khi di chuột qua */
+    color: #007bff; /* Thay đổi màu sắc khi di chuột qua */
+  }
+  .main-btn {
+    padding: 10px 20px; /* Điều chỉnh kích thước nút */
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--primaryColor);
+    margin: 2rem 0;
+    padding: 1.3rem 0;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+  .form-control::placeholder {
+    font-family: "Catamaran", sans-serif;
+    color: var(--primaryColor);
+    text-transform: uppercase;
+    letter-spacing: var(--letterSpacing);
+  }
+  @media screen and (min-width: 992px) {
+    .contact-info,
+    .contact-form {
+      float: left;
+      width: 50%;
+      padding: 0 1rem;
+    }
+    .contact-info {
+      flex: 1 1 300px; /* Cho phép thông tin chiếm không gian nhưng không nhỏ hơn 300px */
+      text-align: left; /* Căn lề trái cho văn bản */
+      max-width: 600px;
+    }
+  }
+  /* .section-center {
+    padding: 0;
+    max-width: 1170px; 
+    margin: 0 auto; 
+  } */
+
+  /* Thiết lập kiểu chữ chung */
+.contact-title, .contact-text {
+  font-size: 16px; /* Kích thước phông chữ mặc định */
+  line-height: 1.5; /* Tạo khoảng cách hợp lý giữa các dòng */
+}
+
+  @media (max-width: 768px) {
+    
+    .contact {
+        flex-direction: column; /* Chuyển thành bố cục dọc khi màn hình nhỏ */
+    }
+    
+    /* Thu nhỏ kích thước phông chữ */
+    .contact-title {
+      font-size: 18px; /* Giảm kích thước phông chữ của tiêu đề */
+    }
+    .contact-text {
+      font-size: 12px; /* Giảm kích thước phông chữ của nội dung */
+    }
+
+    .contact-image {
+      margin-right: 0; /* Xóa khoảng cách bên phải */
+      margin-bottom: 20px; /* Thêm khoảng cách dưới ảnh */
+      
+    }
+  
+
+    .contact-info {
+        text-align: center; /* Căn giữa văn bản trên màn hình nhỏ */
+        max-width: 100%; /* Đảm bảo thông tin chiếm toàn bộ chiều rộng container */
+    }
+
+    .order-button {
+        text-align: center; /* Căn giữa nút đặt hàng */
+    }
+  }
+  /* end of contact */
+  
+  /* footer */
+  .footer {
+    background: var(--mainDark);
+    color: var(--mainWhite);
+    padding: 20px 0;
+    margin-top: 20px; /* Điều chỉnh nếu cần */
+    width: 100%; /* Đảm bảo footer chiếm 100% chiều rộng */
+    text-align: center;
+  }
+  .social-icon {
+    color: var(--mainWhite);
+    font-size: 1.3rem;
+    margin-right: 1rem;
+    transition: var(--mainTransition);
+  }
+  .social-icon:hover {
+    color: var(--primaryColor);
+  }
+  .footer-text {
+    color: var(--mainWhite);
+    text-transform: uppercase;
+    letter-spacing: var(--letterSpacing);
+    margin-top: 1rem;
+    font-size: 00.85rem;
+  }
+  /* end of footer */
+
+
+  /*after explore*/
+  .story {
+    padding: 5rem 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--mainWhite);
+    text-align: center;
+    min-height: 100vh;
+    display: none; /* Ẩn ban đầu */
+  }
+  .story-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 1.2rem;
+  }/* end of explore */
+  
+
+  /* Đảm bảo ảnh nền luôn giữ nguyên */
+  .about-img {
+    position: relative;
+    width: 50%;
+    float: left;
+  }
+  
+  .about-info {
+    width: 50%;
+    float: left;
+  }
+  
+  .page {
+    display: none; /* Mặc định ẩn */
+  }
+  
+  .page.active {
+    display: block; /* Hiển thị khi trang đang được chọn */
+  }
+  
+  .about-pic-container {
+    position: relative;
+  }
+  
+  .about-pic {
+    width: 100%;
+    height: auto;
+  }
+  
+  .main-btn {
+    background-color: #6b705c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;
+  }         
+
+
+  /* Hide non-active story pages */
+  .story-content {
+    display: none;
+  }
+  
+  .story-content.active {
+    display: block;
+  }
+
+
+  /* Styling for the products section */
+  .products {
+    position: relative;
+    padding: 50px 0;
+    background: linear-gradient(135deg, #4caf50, #a5d6a7, #81c784); /* Màu gradient chuyển đổi từ xanh lá đến xanh nhạt */
+    background-size: 300% 300%; /* Tăng kích thước để tạo hiệu ứng sóng rộng hơn */
+    animation: gradientWave 8s ease infinite; /* Giảm tốc độ animation để sóng chậm hơn */
+    color: white;
+  }
+
+  .productsTeapot {
+    background: linear-gradient(
+      135deg,
+      #6d543c,   /* nâu đậm */
+      #6b4f2a,   /* nâu trà */
+      #ba8452    /* nâu đất */
+    );
+    padding: 80px 0;
+    color: #f5f5f5;
+    position: relative;
+  }
+
+  /* làm chữ nổi hơn trên nền nâu */
+  .productsTeapot .product-text,
+  .productsTeapot .banner-subtitle {
+    color: #e8f5e9;
+  }
+
+  .productsTeapot .products-info {
+    float: left;
+    width: 30%;
+  }
+
+  .productsTeapot .products-inventory {
+    float: left;
+    width: 70%;
+  }
+  
+  /* Overlay effect to darken the background for better readability */
+  .products::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Nền đen trong suốt */
+    z-index: 1;
+  }
+  
+  /* Content inside the products section */
+  .section-center {
+    position: relative;
+    z-index: 2; /* Đảm bảo nội dung luôn nằm trên ảnh nền */
+  }
+  
+  .products-info {
+    margin-bottom: 20px;
+  }
+  
+  .product-text {
+    color: white; /* Text màu trắng để hiển thị tốt trên nền tối */
+  }
+  
+  /* Additional styles for buttons and text */
+  .main-btn {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .main-btn:hover {
+    background-color: #f0c040; /* Màu khi hover */
+    color: white;
+  }
+  #addToCartBtn {
+    background-color: rgb(250, 246, 246); /* Màu nền ban đầu là đỏ */
+    color: rgb(34, 32, 32); /* Chữ màu trắng */
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển màu mượt */
+  }
+  
+  #addToCartBtn:hover {
+    background-color: rgb(27, 226, 183); /* Màu nền chuyển sang xanh lá cây khi hover */
+    color: white; /* Chữ màu trắng khi hover */
+  }
+  
+  
+  /* .products-inventory .product {
+    margin-bottom: 20px;
+  } */
+
+  
+  .social-icons {
+   display: flex;
+   justify-content: center;
+   gap: 15px; /* Khoảng cách giữa các biểu tượng */
+  }
+
+  .social-icon {
+    font-size: 24px; /* Kích thước biểu tượng mặc định */
+    color: #cab7b7; /* Màu sắc mặc định của biểu tượng */
+    transition: transform 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi cho phóng to và thay đổi màu */
+  }
+
+  .social-icon:hover {
+    transform: scale(1.2); /* Phóng to biểu tượng khi di chuột qua */
+    color: #007bff; /* Thay đổi màu sắc của biểu tượng khi di chuột qua */
+  }
+
+  .floating-icons {
+    position: fixed;
+    right: 15px; /* Đặt sát bên phải */
+    bottom: 80px; /* Khoảng cách từ dưới lên */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+}
+
+.floating-icons .icon {
+    width: 55px;
+    height: 55px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.floating-icons .icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.floating-icons .icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+img {
+  display: block;  /* Đảm bảo ảnh là một khối */
+  margin: 0 auto;  /* Căn giữa theo chiều ngang */
+  max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước màn hình */
+  height: auto;    /* Giữ tỉ lệ ảnh */
+}
+
+@media screen and (max-width: 768px) {
+  .contact-image {
+      text-align: center; /* Căn giữa ảnh */
+      display: flex;
+      justify-content: center;
+  }
+  
+  .contact-image img {
+      max-width: 90%; /* Đảm bảo ảnh vừa với màn hình điện thoại */
+      height: auto;
+  }
+}
+
+/* Định dạng màu nền riêng cho từng icon */
+.floating-icons .messenger {
+    background-color: #0084ff;
+}
+
+.floating-icons .zalo {
+    background-color: #008fe5;
+}
+
+#bank-info {
+  display: none; 
+  margin-top: 10px; padding: 10px; 
+  background: #fff3cd; 
+  border-radius: 5px; display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
+#momo-info {
+  display: none; 
+  margin-top: 10px; 
+  padding: 10px; 
+  background: #d1e7dd; 
+  border-radius: 5px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.view-more-btn {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* nút chính */
+.view-all-btn {
+  background: transparent;
+  border: 2px solid #1db954;
+  color: #1db954;
+  padding: 12px 34px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* mũi tên */
+.view-all-btn .arrow {
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+/* hover */
+.view-all-btn:hover {
+  background: #1db954;
+  color: #fff;
+}
+
+.view-all-btn:hover .arrow {
+  transform: translateX(6px);
+}
+
+/* trạng thái thu gọn */
+.view-all-btn.collapse .arrow {
+  transform: rotate(180deg);
+}
+
+/* ============================================================
+   NFC PROFILE
+============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background: #f3f4f6;
+}
+
+
+.nfc-page {
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    position: relative;
+    padding-bottom: 110px;
+}
+
+
+/* ============================================================
+   COVER
+============================================================ */
+
+.nfc-cover {
+    width: 100%;
+    height: 270px;
+    position: relative;
+    overflow: visible;
+    background: #f1f1f1;
+}
+
+
+.nfc-cover > img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* ============================================================
+   SHARE BUTTON
+============================================================ */
+
+.nfc-share-top-button {
+    position: absolute;
+
+    top: 24px;
+    right: 24px;
+
+    z-index: 20;
+
+    border: none;
+
+    background: #ff8a00;
+
+    color: white;
+
+    padding: 14px 24px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, .18);
+
+    transition:
+        transform .15s ease,
+        opacity .15s ease;
+}
+
+
+.nfc-share-top-button:hover {
+    transform: translateY(-2px);
+}
+
+
+.nfc-share-top-button:active {
+    transform: scale(.97);
+}
+
+
+/* ============================================================
+   CONTAINER
+============================================================ */
+
+.nfc-container {
+    width: min(
+        100%,
+        520px
+    );
+
+    margin: 0 auto;
+
+    padding:
+        0
+        28px
+        40px;
+
+    position: relative;
+}
+
+
+/* ============================================================
+   AVATAR
+============================================================ */
+
+.nfc-avatar {
+    width: 120px;
+    height: 120px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 5px solid white;
+
+    position: relative;
+
+    margin-top: -60px;
+
+    display: block;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, .22);
+
+    background: white;
+
+    z-index: 5;
+}
+
+
+/* ============================================================
+   LOGO
+============================================================ */
+
+.nfc-logo {
+    max-width: 120px;
+    max-height: 70px;
+
+    object-fit: contain;
+
+    margin-top: 18px;
+
+    display: block;
+}
+
+
+/* ============================================================
+   NAME
+============================================================ */
+
+.nfc-name {
+    margin:
+        18px
+        0
+        8px;
+
+    font-size: 30px;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    color: #111827;
+}
+
+
+/* ============================================================
+   POSITION
+============================================================ */
+
+.nfc-position {
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #111827;
+
+    margin-top: 4px;
+}
+
+
+/* ============================================================
+   COMPANY
+============================================================ */
+
+.nfc-company {
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #111827;
+
+    margin-top: 6px;
+}
+
+
+/* ============================================================
+   DEPARTMENT
+============================================================ */
+
+.nfc-department {
+    font-size: 15px;
+
+    color: #6b7280;
+
+    margin-top: 5px;
+}
+
+
+/* ============================================================
+   INTRO
+============================================================ */
+
+.nfc-intro {
+    margin-top: 20px;
+
+    padding: 16px;
+
+    background: #f7f7f7;
+
+    border-radius: 12px;
+
+    color: #444;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   ITEMS
+============================================================ */
+
+.nfc-items {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 26px;
+}
+
+
+/* ============================================================
+   ITEM
+============================================================ */
+
+.nfc-item {
+    width: 100%;
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        12px
+        14px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, .06);
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+
+.nfc-item:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, .10);
+}
+
+
+.nfc-item:active {
+    transform: scale(.985);
+}
+
+
+/* ============================================================
+   ITEM ICON
+============================================================ */
+
+.nfc-item-icon {
+    width: 46px;
+    height: 46px;
+
+    min-width: 46px;
+
+    border-radius: 50%;
+
+    background: #ff8a00;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+
+.nfc-item-icon-image {
+    width: 22px;
+    height: 22px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* ============================================================
+   ITEM CONTENT
+============================================================ */
+
+.nfc-item-content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.nfc-item-title {
+    font-size: 14px;
+
+    color: #777;
+
+    margin-bottom: 3px;
+}
+
+.nfc-item-title-strong {
+    font-size: 17px;
+    color: #111111;
+    font-weight: 600;
+}
+
+.nfc-item-value {
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #111827;
+
+    word-break: break-word;
+
+    overflow-wrap: anywhere;
+
+    line-height: 1.4;
+}
+
+
+/* ============================================================
+   ITEM ARROW
+============================================================ */
+
+.nfc-item-arrow {
+    font-size: 26px;
+
+    color: #999;
+
+    flex-shrink: 0;
+}
+
+
+/* ============================================================
+   EMPTY
+============================================================ */
+
+.nfc-empty-items {
+    margin-top: 30px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: #777;
+
+    background: #f7f7f7;
+
+    border-radius: 14px;
+}
+
+
+/* ============================================================
+   BOTTOM BAR
+============================================================ */
+
+.nfc-bottom-bar {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    justify-content: center;
+
+    padding:
+        14px
+        20px
+        calc(
+            14px + env(safe-area-inset-bottom)
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .92
+        );
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    border-top:
+        1px solid #eeeeee;
+}
+
+
+/* ============================================================
+   SAVE CONTACT BUTTON
+============================================================ */
+
+.nfc-save-contact-button {
+    width: min(
+        100%,
+        390px
+    );
+
+    border: none;
+
+    background: #ff8a00;
+
+    color: white;
+
+    border-radius: 40px;
+
+    padding:
+        16px
+        28px;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            255,
+            138,
+            0,
+            .30
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+}
+
+
+.nfc-save-contact-button:active {
+    transform: scale(.98);
+}
+
+
+/* ============================================================
+   SHARE OVERLAY
+============================================================ */
+
+.nfc-share-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(
+            20,
+            25,
+            35,
+            .48
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    backdrop-filter:
+        blur(3px);
+
+    -webkit-backdrop-filter:
+        blur(3px);
+}
+
+
+/* ============================================================
+   SHARE MODAL
+============================================================ */
+
+.nfc-share-modal {
+    width: min(
+        100%,
+        550px
+    );
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, .25);
+
+    animation:
+        nfcModalIn .18s ease;
+}
+
+
+@keyframes nfcModalIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* ============================================================
+   SHARE HEADER
+============================================================ */
+
+.nfc-share-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+
+.nfc-share-header h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #111827;
+}
+
+
+.nfc-share-close {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    color: #111827;
+}
+
+
+/* ============================================================
+   SHARE LINK
+============================================================ */
+
+.nfc-share-link-box {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding:
+        12px
+        14px;
+
+    margin-bottom: 14px;
+}
+
+
+.nfc-share-link-icon {
+    font-size: 20px;
+}
+
+
+.nfc-share-link-text {
+    flex: 1;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+    font-size: 14px;
+
+    color: #374151;
+}
+
+
+.nfc-copy-button {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 21px;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   QR
+============================================================ */
+
+.nfc-qr-box {
+    min-height: 100px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.nfc-qr-image {
+    width: 82px;
+    height: 82px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+
+.nfc-qr-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    flex: 1;
+}
+
+
+.nfc-qr-text strong {
+    font-size: 16px;
+}
+
+
+.nfc-qr-text span {
+    color: #8b8b8b;
+
+    font-size: 14px;
+}
+
+
+.nfc-qr-download {
+    color: #111827;
+
+    text-decoration: none;
+
+    font-size: 28px;
+
+    padding: 10px;
+}
+
+
+.nfc-qr-missing {
+    color: #888;
+
+    padding: 20px;
+}
+
+
+/* ============================================================
+   NATIVE SHARE
+============================================================ */
+
+.nfc-native-share {
+    display: block;
+
+    margin:
+        25px
+        auto
+        0;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   ERROR
+============================================================ */
+
+.nfc-error-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f5f5f5;
+
+    padding: 20px;
+}
+
+
+.nfc-error-box {
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, .1);
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 600px) {
+
+    .nfc-cover {
+        height: 235px;
+    }
+
+
+    .nfc-share-top-button {
+
+        top: 18px;
+
+        right: 16px;
+
+        padding:
+            11px
+            17px;
+
+        font-size: 14px;
+
+        border-radius: 10px;
+    }
+
+
+    .nfc-container {
+
+        padding:
+            0
+            18px
+            35px;
+    }
+
+
+    .nfc-avatar {
+
+        width: 105px;
+
+        height: 105px;
+
+        margin-top: -52px;
+    }
+
+
+    .nfc-name {
+
+        font-size: 27px;
+
+        margin-top: 16px;
+    }
+
+
+    .nfc-position {
+
+        font-size: 16px;
+    }
+
+
+    .nfc-company {
+
+        font-size: 15px;
+    }
+
+
+    .nfc-item {
+
+        min-height: 66px;
+
+        padding:
+            10px
+            12px;
+    }
+
+
+    .nfc-item-icon {
+
+        width: 44px;
+
+        height: 44px;
+
+        min-width: 44px;
+    }
+
+
+    .nfc-item-value {
+
+        font-size: 15px;
+    }
+
+
+    .nfc-share-modal {
+
+        padding: 20px;
+
+        border-radius: 16px;
+    }
+
+}
+
+
+/* ============================================================
+   VERY SMALL PHONE
+============================================================ */
+
+@media (max-width: 380px) {
+
+    .nfc-cover {
+        height: 210px;
+    }
+
+
+    .nfc-name {
+        font-size: 24px;
+    }
+
+
+    .nfc-item-value {
+        font-size: 14px;
+    }
+
+
+    .nfc-share-top-button {
+        padding:
+            9px
+            13px;
+    }
+
+}
+
+
+/* ============================================================
+   BODY MODAL LOCK
+============================================================ */
+
+body.nfc-modal-open {
+    overflow: hidden;
+}
+
+/* ============================================================
+   TAPLA STYLE SHARE MODAL
+============================================================ */
+
+
+/* OVERLAY */
+
+.nfc-share-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 16px;
+
+    background: rgba(17, 24, 39, 0.48);
+
+    backdrop-filter: blur(2px);
+
+}
+
+
+/* MODAL */
+
+.nfc-share-modal {
+
+    width: 100%;
+
+    max-width: 495px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.18);
+
+    overflow: hidden;
+
+    animation:
+        nfcModalIn
+        0.18s
+        ease-out;
+
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.nfc-share-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+
+    padding:
+        20px 24px 0 24px;
+
+}
+
+
+.nfc-share-header h2 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 500;
+
+    color: #111827;
+
+}
+
+
+.nfc-share-close {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 36px;
+
+    height: 36px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #111827;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+
+}
+
+
+.nfc-share-close:hover {
+
+    background: #f3f4f6;
+
+    color: #4b5563;
+
+}
+
+
+/* ============================================================
+   LINK BOX
+============================================================ */
+
+.nfc-share-link-box {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin:
+        0 24px 16px 24px;
+
+    padding: 14px 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+}
+
+
+.nfc-share-link-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.nfc-share-link-icon-svg {
+
+    flex-shrink: 0;
+
+    color: #4b5563;
+
+}
+
+
+.nfc-share-link-text {
+
+    display: block;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #111827;
+
+}
+
+
+.nfc-copy-button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 34px;
+
+    height: 34px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #111827;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+
+}
+
+
+.nfc-copy-button:hover {
+
+    color: #2563eb;
+
+    background: #f3f4f6;
+
+}
+
+
+/* ============================================================
+   QR AREA
+============================================================ */
+
+.nfc-qr-area {
+
+    padding:
+        0 24px 16px 24px;
+
+}
+
+
+.nfc-qr-card {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 112px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    padding: 10px 14px 10px 10px;
+
+}
+
+
+.nfc-qr-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    min-width: 0;
+
+}
+
+
+.nfc-qr-container {
+
+    width: 80px;
+
+    height: 80px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f3f4f6;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+}
+
+
+.nfc-qr-image {
+
+    display: block;
+
+    width: 80px;
+
+    height: 80px;
+
+    object-fit: contain;
+
+}
+
+
+.nfc-qr-missing {
+
+    font-size: 12px;
+
+    color: #6b7280;
+
+}
+
+
+.nfc-qr-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+}
+
+
+.nfc-qr-title {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    color: #111827;
+
+}
+
+
+.nfc-qr-subtitle {
+
+    margin-top: 3px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #727987;
+
+}
+
+
+/* ============================================================
+   DOWNLOAD
+============================================================ */
+
+.nfc-qr-download {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 40px;
+
+    height: 40px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #111827;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+
+}
+
+
+.nfc-qr-download:hover {
+
+    color: #2563eb;
+
+    background: #f3f4f6;
+
+}
+
+
+/* ============================================================
+   SHARE
+============================================================ */
+
+.nfc-native-share-area {
+
+    display: flex;
+
+    justify-content: center;
+
+    padding:
+        4px 0 18px 0;
+
+}
+
+
+.nfc-native-share {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 52px;
+
+    height: 48px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #111827;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+
+}
+
+
+.nfc-native-share:hover {
+
+    background: #f3f4f6;
+
+    color: #2563eb;
+
+}
+
+
+/* ============================================================
+   ANIMATION
+============================================================ */
+
+@keyframes nfcModalIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 520px) {
+
+    .nfc-share-overlay {
+
+        align-items: center;
+
+        padding: 16px;
+
+    }
+
+
+    .nfc-share-modal {
+
+        max-width: 100%;
+
+        border-radius: 12px;
+
+    }
+
+
+    .nfc-share-header {
+
+        padding:
+            18px 16px 0 16px;
+
+    }
+
+
+    .nfc-share-link-box {
+
+        margin-left: 16px;
+
+        margin-right: 16px;
+
+    }
+
+
+    .nfc-qr-area {
+
+        padding-left: 16px;
+
+        padding-right: 16px;
+
+    }
+
+}

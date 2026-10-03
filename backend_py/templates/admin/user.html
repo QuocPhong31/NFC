@@ -1,0 +1,156 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <strong>Quản lý Người dùng</strong>
+    <button class="btn btn-sm btn-success" id="btn-show-add-user">Thêm user</button>
+  </div>
+
+  <div class="card-body">
+
+    <!-- FORM ADD USER -->
+    <div id="user-form" class="mb-3 hide">
+      <div class="row g-2">
+        <div class="col-md-6">
+          <input id="u-hoTen" class="form-control" placeholder="Họ tên">
+        </div>
+        <div class="col-md-3">
+          <select id="u-gioiTinh" class="form-select">
+            <option value="1">Nam</option>
+            <option value="0">Nữ</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <input id="u-ngaySinh" type="date" class="form-control">
+        </div>
+        <div class="col-12">
+          <input id="u-diaChi" class="form-control" placeholder="Địa chỉ">
+        </div>
+        <div class="col-md-6">
+          <input id="u-SDT" class="form-control" placeholder="SĐT">
+        </div>
+        <div class="col-md-6">
+          <input id="u-email" class="form-control" placeholder="Email">
+        </div>
+        <div class="col-md-6">
+          <select id="u-role" class="form-select">
+            <option value="ADMIN">ADMIN</option>
+            <option value="USER">USER</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <input id="u-taiKhoan" class="form-control" placeholder="Tài khoản">
+        </div>
+        <div class="col-md-6">
+          <input id="u-matKhau" type="password" class="form-control" placeholder="Mật khẩu">
+        </div>
+        <div class="col-12 text-end">
+          <button id="btn-create-user" class="btn btn-primary mt-2">Tạo user</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-responsive">
+      <table class="table table-striped" id="tbl-users">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Họ tên</th>
+            <th>SĐT</th>
+            <th>Email</th>
+            <th>Tài khoản</th>
+            <th>Role</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+const el = s => document.querySelector(s);
+const els = s => Array.from(document.querySelectorAll(s));
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadUsers();
+});
+
+// toggle form
+el("#btn-show-add-user").onclick = () => {
+  el("#user-form").classList.toggle("hide");
+};
+
+// load users
+async function loadUsers() {
+  const res = await fetch("/admin/users", { credentials: "same-origin" });
+  const data = await res.json();
+
+  const tbody = el("#tbl-users tbody");
+  tbody.innerHTML = "";
+
+  data.forEach((u, i) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${u.hoTen || ""}</td>
+        <td>${u.SDT || ""}</td>
+        <td>${u.email || ""}</td>
+        <td>${u.taiKhoan || ""}</td>
+        <td>${u.role || "USER"}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" onclick="deleteUser(${u.id})">Xóa</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+// create user
+el("#btn-create-user").onclick = async () => {
+  const payload = {
+    hoTen: el("#u-hoTen").value,
+    gioiTinh: el("#u-gioiTinh").value,
+    ngaySinh: el("#u-ngaySinh").value,
+    diaChi: el("#u-diaChi").value,
+    SDT: el("#u-SDT").value,
+    email: el("#u-email").value,
+    taiKhoan: el("#u-taiKhoan").value,
+    matKhau: el("#u-matKhau").value,
+    role: el("#u-role").value
+  };
+
+  const res = await fetch("/admin/users", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+    body: JSON.stringify(payload)
+  });
+
+  if (res.ok) {
+    alert("Tạo user thành công");
+    el("#user-form").classList.add("hide");
+    loadUsers();
+  } else {
+    alert("Lỗi tạo user");
+  }
+};
+
+// delete user
+async function deleteUser(id) {
+  if (!confirm("Xóa user này?")) return;
+
+  await fetch("/admin/users/" + id, {
+    method: "DELETE",
+    credentials: "same-origin"
+  });
+
+  loadUsers();
+}
+</script>
+{% endblock %}

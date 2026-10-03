@@ -1,0 +1,4 @@
+Cài package python:
+pip install cloudinary
+pip install qrcode[pil]
+pip install python-dotenv

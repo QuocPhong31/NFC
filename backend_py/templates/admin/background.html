@@ -1,0 +1,160 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <strong>Quản lý Ảnh nền</strong>
+    <button id="btn-show-add-bg" class="btn btn-sm btn-success">
+      Thêm ảnh nền
+    </button>
+  </div>
+
+  <div class="card-body">
+
+    <!-- FORM UPLOAD -->
+    <div id="bg-form" class="mb-3 hide">
+      <div class="d-flex gap-3 align-items-center">
+        <input id="bg-file" type="file" accept="image/*" class="form-control" />
+        <button id="btn-upload-bg" class="btn btn-primary">
+          Upload
+        </button>
+      </div>
+      <div id="bg-upload-msg" class="small text-muted mt-2"></div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-responsive">
+      <table class="table table-hover" id="tbl-backgrounds">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Ảnh</th>
+            <th>Đường dẫn</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const el = s => document.querySelector(s);
+
+// toggle form
+el("#btn-show-add-bg").onclick = () => {
+  el("#bg-form").classList.toggle("hide");
+};
+
+// load backgrounds
+async function loadBackgrounds() {
+  const tbody = el("#tbl-backgrounds tbody");
+  tbody.innerHTML = "";
+
+  const res = await fetch("/admin/api/backgrounds", { credentials: "same-origin" });
+  const data = await res.json();
+
+  data.forEach((b, idx) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>
+          <img src="${b.duongDan}"
+            style="width:80px;height:50px;object-fit:cover;border-radius:6px">
+        </td>
+        <td>${b.duongDan}</td>
+        <td>${b.trangThai}</td>
+        <td class="d-flex gap-1">
+          <button
+            class="btn btn-sm btn-warning"
+            onclick="toggleBackground(${b.id}, '${b.trangThai}')">
+            ${b.trangThai === "ACTIVE" ? "Ẩn" : "Hiện"}
+          </button>
+
+          <button
+            class="btn btn-sm btn-danger"
+            onclick="deleteBackground(${b.id})">
+            Xóa
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+async function toggleBackground(id, trangThai) {
+  const newStatus = trangThai === "ACTIVE" ? "HIDE" : "ACTIVE";
+
+  const res = await fetch(`/admin/backgrounds/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+    body: JSON.stringify({ trangThai: newStatus })
+  });
+
+  if (!res.ok) {
+    alert("Đổi trạng thái ảnh nền thất bại");
+    return;
+  }
+
+  loadBackgrounds();
+}
+
+async function deleteBackground(id) {
+  if (!confirm("Xóa ảnh nền này?")) return;
+
+  const res = await fetch(`/admin/backgrounds/${id}`, {
+    method: "DELETE",
+    credentials: "same-origin"
+  });
+
+  if (!res.ok) {
+    alert("Xóa thất bại");
+    return;
+  }
+
+  loadBackgrounds();
+}
+
+
+// upload background
+el("#btn-upload-bg").onclick = async () => {
+  const fileInput = el("#bg-file");
+  const msg = el("#bg-upload-msg");
+
+  if (!fileInput.files.length) {
+    alert("Vui lòng chọn ảnh");
+    return;
+  }
+
+  const fd = new FormData();
+  fd.append("image", fileInput.files[0]);
+
+  msg.innerText = "Đang upload...";
+
+  const res = await fetch("/admin/upload-background", {
+    method: "POST",
+    body: fd,
+    credentials: "same-origin"
+  });
+
+  const data = await res.json();
+
+  if (!res.ok || !data.ok) {
+    msg.innerText = "Upload thất bại";
+    return;
+  }
+
+  msg.innerText = "Upload thành công ✔";
+  fileInput.value = "";
+  loadBackgrounds();
+};
+
+document.addEventListener("DOMContentLoaded", loadBackgrounds);
+</script>
+{% endblock %}

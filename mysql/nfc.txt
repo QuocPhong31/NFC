@@ -1,0 +1,107 @@
+use nfc;
+CREATE TABLE nguoidungs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  hoTen VARCHAR(255),
+  gioiTinh TINYINT,
+  ngaySinh DATE, 
+  diaChi VARCHAR(255),
+  SDT VARCHAR(20),
+  email VARCHAR(255) UNIQUE,
+  taiKhoan VARCHAR(100) UNIQUE,
+  matKhau VARCHAR(255),
+  role ENUM('ADMIN','USER') DEFAULT 'USER',
+  ngayTao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE the_nfc (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    tenThe VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    hoTen VARCHAR(255),
+    chucVu VARCHAR(255),
+    congTy VARCHAR(255),
+    phongBan VARCHAR(255),
+
+    gioiThieu TEXT,
+    email VARCHAR(255),
+    soDienThoai VARCHAR(50),
+    urlCongTy VARCHAR(500),
+    diaChi TEXT,
+    maSoThue VARCHAR(100),
+
+    anhBia VARCHAR(1000),
+    anhDaiDien VARCHAR(1000),
+    logo VARCHAR(1000),
+
+    theme VARCHAR(50) DEFAULT 'orange',
+
+    qrUrl VARCHAR(1000),
+    trangThai ENUM('ACTIVE', 'HIDDEN') DEFAULT 'ACTIVE',
+    ngayTao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ngayCapNhat TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_the_user
+        FOREIGN KEY (user_id)
+        REFERENCES nguoidungs(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE card_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    card_id INT NOT NULL,
+
+    -- Nhóm thông tin
+    category ENUM(
+        'GENERAL',
+        'SOCIAL',
+        'MESSAGING',
+        'LINK'
+    ) NOT NULL,
+
+    -- Loại nền tảng
+    platform VARCHAR(50),
+
+    -- Kiểu dữ liệu
+    item_type VARCHAR(50) NOT NULL,
+
+    -- Tiêu đề hiển thị
+    display_title VARCHAR(255),
+
+    -- Nội dung người dùng nhập
+    value TEXT,
+
+    -- Thứ tự hiển thị
+    sort_order INT DEFAULT 0,
+
+    -- Bật / tắt
+    is_active BOOLEAN DEFAULT TRUE,
+
+    ngayTao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    ngayCapNhat TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_card_items
+        FOREIGN KEY (card_id)
+        REFERENCES the_nfc(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE card_certificates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    card_id INT NOT NULL,
+    tenChungChi VARCHAR(255) NOT NULL,
+    donViCap VARCHAR(255),
+    moTa TEXT,
+    url VARCHAR(1000),
+    ngayCap DATE,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT TRUE,
+
+    FOREIGN KEY (card_id)
+        REFERENCES the_nfc(id)
+        ON DELETE CASCADE
+);

@@ -1,0 +1,38 @@
+.banner-subtitle {
+    font-size: 3.2rem;
+    color: rgb(107, 235, 95);
+    white-space: nowrap;
+    font-family: 'Calistoga', cursive;
+  }
+  
+  .banner-title {
+    text-transform: uppercase;
+    font-size: 3.2rem;
+    color: var(--mainWhite);
+    margin-top: 2.5rem;
+    line-height: 1.3;
+    font-family: 'Alata', sans-serif;
+  }
+  
+  .back-to-home {
+    position: fixed; /* Giữ nút ở vị trí cố định */
+    top: 20px; /* Khoảng cách từ đỉnh */
+    right: 20px; /* Khoảng cách từ bên phải */
+    padding: 10px 20px;
+    background-color: rgb(87, 109, 231);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+    z-index: 1000; /* Đặt z-index cao hơn để nút nằm trên các phần khác */
+  }
+
+  .back-to-home:hover {
+    background-color: rgb(130, 245, 115);
+  }
+  
+  .header {
+    position: relative; /* Đặt header ở vị trí tương đối để nút có thể nằm trên nó */
+  }
