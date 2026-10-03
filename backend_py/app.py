@@ -17,6 +17,7 @@ CORS(
     resources={
         r"/api/*": {
             "origins": [
+                "https://nfc.thanhtamtraquan.com",
                 "https://quocphong31.github.io",
                 "https://shop.thanhtamtraquan.com",
                 "http://127.0.0.1:5500",

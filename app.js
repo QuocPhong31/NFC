@@ -1,14 +1,14 @@
-fetch("http://127.0.0.1:5000/api/track-view", {
-    method: "POST",
-    credentials: "include"
-  });
-const API_BASE = "http://127.0.0.1:5000/";
-
-// fetch("https://thanhtamtraquanp.pythonanywhere.com/api/track-view", {
+// fetch("http://127.0.0.1:5000/api/track-view", {
 //     method: "POST",
 //     credentials: "include"
 //   });
-// const API_BASE = "https://thanhtamtraquanp.pythonanywhere.com/";
+// const API_BASE = "http://127.0.0.1:5000/";
+
+fetch("https://thanhtamtraquanp.pythonanywhere.com/api/track-view", {
+    method: "POST",
+    credentials: "include"
+  });
+const API_BASE = "https://thanhtamtraquanp.pythonanywhere.com/";
 
 
 

@@ -2,3 +2,5 @@ Cài package python:
 pip install cloudinary
 pip install qrcode[pil]
 pip install python-dotenv
+
+http://127.0.0.1:5500
