@@ -1,10 +1,10 @@
 1_:
-git clone https://github.com/QuocPhong31/thanhtamtraquan_CaiTien.git
+git clone https://github.com/QuocPhong31/NFC.git
 
 
 2_:
 ls
-cd thanhtamtraquan_CaiTien/backend_py
+cd NFC/backend_py
 ls
 
 3_:
@@ -51,7 +51,7 @@ sau đó quay lại console
 sau đó dán nguyên đoạn này vào:
 "
 
-mysql -u thanhtamtraquanp -h thanhtamtraquanp.mysql.pythonanywhere-services.com -p thanhtamtraquanp\$thanhtamtraquan < /home/thanhtamtraquanp/thanhtamtraquan_CaiTien/mysql/thanhtamtraquan.sql
+mysql -u thanhtamtraquanp -h thanhtamtraquanp.mysql.pythonanywhere-services.com -p thanhtamtraquanp\$nfc < /home/thanhtamtraquanp/NFC/mysql/nfc.sql
 
 "
 
@@ -62,7 +62,7 @@ ERROR 1045 (28000): Access denied for user 'thanhtamtraquanp'@'10.0.4.104' (usin
 
 thì vào console để xóa đi 1 console nào đó không có dùng đến, sau đó vào database, vào cái thanhtamtraquanp$thanhtamtraquan
 
-sau đó dán cái này vào: SOURCE /home/thanhtamtraquanp/thanhtamtraquan_CaiTien/mysql/thanhtamtraquan.sql;
+sau đó dán cái này vào: SOURCE /home/thanhtamtraquanp/NFC/mysql/nfc.sql;
 là được )
 
 7_:
@@ -72,13 +72,12 @@ trong console thì dán: (ở venv)
 
 mysql -u thanhtamtraquanp -h thanhtamtraquanp.mysql.pythonanywhere-services.com -p
 
-"
+" (đợi hơi lâu)
 sau đó dán 
 SHOW DATABASES;
 
-USE `thanhtamtraquanp$thanhtamtraquan`;
+USE `thanhtamtraquanp$nfc`;
 SHOW TABLES;
-SELECT * FROM truycap_logs;
 exit;  
 
 8_: Cấu hình lại config
@@ -100,6 +99,10 @@ def get_connection():
     )
 
 "
+
+8.1 kiểm tra đường dẫn
+đầu tiên vào Web sau đó kéo xuống phần Code,
+ở trong phần source code phải dán đường dẫn: /home/thanhtamtraquanp/NFC/backend_py
 
 9_: cách để xóa database trên pythonanywhere
 Đầu tiền vào console rồi nhấn dấu x cái tên database đó

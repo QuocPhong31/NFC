@@ -1,3 +1,4 @@
+import cloudinary_config
 import cloudinary.uploader
 
 

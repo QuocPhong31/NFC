@@ -1,411 +1,644 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <base href="./"> -->
-    <!-- font awesome -->
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-      crossorigin="anonymous"
-    />
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!--    <link
-      href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;700&family=Pacifico&display=swap"
-      rel="stylesheet"
-    />  -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon mặc định -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.ico">
+  <link rel="icon" href="https://shop.thanhtamtraquan.com/favicon.ico" type="image/x-icon">
 
-    <!-- Apple Touch Icon (dành cho iOS) -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
 
-    <!-- Favicon dự phòng cho URL tuyệt đối -->
-    <link rel="icon" href="https://shop.thanhtamtraquan.com/favicon.ico" type="image/x-icon">
+  <title>Smart NFC Card — Danh thiếp số của bạn</title>
+  <meta name="description" content="Danh thiếp NFC thông minh — chạm, quét và chia sẻ thông tin liên hệ trong tích tắc.">
+</head>
+<body>
 
-    <!-- custom css -->
-    <link rel="stylesheet" href="./style.css" />    
-          
-    <title>Thanh Tâm Trà Quán - Trà Ô Long & Đặc Sản Triều Châu</title>
-    <meta name="description" content="Thanh Tâm Trà Quán - Thưởng thức trà ô long, trà đặc sản Triều Châu. Mua hàng online, giao hàng toàn quốc." />
-    <meta name="keywords" content="trà oolong, trà thanh tâm, trà đặc sản, mua trà online, trà Triều Châu">
-    <meta name="author" content="Thanh Tâm Trà Quán">
-    <meta name="robots" content="index, follow">
-  </head>
-  <body>
+  <div id="landingPage">
 
-    <div id="site-header"></div>
+    <header class="landing-header">
 
-    <!-- BANNER -->
-    <section class="header banner-section" id="home">
-      <div class="banner">
-        <!-- <h3 class="banner-subtitle">Thanh Tâm Trà Quán 🍵</h3> -->
-        <h1 class="banner-title"></h1>
-        <a href="#about" id="explore-btn" class="banner-btn">Cùng khám phá</a>
-      </div>
-    </section>
-    
-<!-- end of header -->
-
-<!-- Story section -->
-<section class="story" id="story">
-  <!-- Story Page 1 -->
-  <div id="page1" class="story-content active">
-    <h2 class="section-title">Câu chuyện của Thanh Tâm Trà Quán</h2>
-    <p>Giữa những bộn bề của cuộc sống, Thanh Tâm Trà Quán là nơi bạn có thể tìm về với sự tĩnh lặng. 
-      Mỗi chén trà mang đến một hương vị độc đáo, nhưng điểm chung là sự an yên trong từng hơi thở. 
-      Câu chuyện của quán bắt đầu từ những chén trà đơn giản, nhưng mỗi giọt lại chứa đựng bao tâm tư, 
-      cảm xúc của người pha trà và người thưởng trà.</p>
-
-    <p>Khi nhấp một ngụm trà, bạn sẽ nhận thấy vị đắng thoáng qua, nhưng ngay sau đó,
-       vị ngọt nhẹ nhàng lan tỏa, giống như cuộc sống, luôn có những khoảnh khắc khó khăn, 
-       nhưng nếu ta biết dừng lại và cảm nhận, sự an lạc sẽ đến từ chính bên trong.</p>
-
-    <p>Thanh Tâm Trà Quán không chỉ là nơi uống trà, mà còn là nơi lắng nghe 
-      và chia sẻ câu chuyện cuộc sống.</p>
-    <a href="#" id="continue-btn" class="banner-btn">Khám phá tiếp</a>
-  </div>
-
-  <!-- Story Page 2 -->
-  <div id="page2" class="story-content">
-    <h2 class="section-title">Tiếp tục câu chuyện</h2>
-    <p>Trong hành trình tìm hiểu về trà, bạn sẽ khám phá thêm nhiều điều thú vị về quy trình chế biến,
-       các loại trà khác nhau và cách chúng tạo ra trải nghiệm thưởng thức tuyệt vời. Mỗi câu chuyện
-       của các loại trà đều gắn liền với lịch sử và văn hóa của vùng đất nơi chúng được trồng.</p>
-    <p>Hãy cùng chúng tôi tiếp tục khám phá thế giới trà và tìm hiểu sâu hơn về những bí mật thú vị
-       mà mỗi chén trà mang lại.</p>
-    <a href="#" id="back-btn" class="banner-btn">Quay lại</a>
-  </div>
-</section>
+      <!-- LOGO -->
+      <a class="brand" href="#home" aria-label="NFC Card">
+        <img class="brand-logo" src="./images/logo1.png" alt="NFC Card">
+      </a>
 
 
+      <!-- DESKTOP MENU -->
+      <nav class="landing-nav" aria-label="Điều hướng">
+        <a href="#features">Danh thiếp thông minh</a>
+        <a href="#pricing">Mẫu &amp; bảng giá</a>
+        <a href="#benefits">Lợi ích</a>
+        <a href="#reviews">Đánh giá</a>
+        <a href="#contact">Hỗ trợ</a>
+      </nav>
 
-    <!-- content divider -->
-    <div class="content-divider"></div>
-    <!-- end of ontent divider -->
 
-    <!-- skills section -->
-    <section class="skills clearfix">
-      <!-- single skill -->
-      <article class="skill">
-        <span class="skill-icon">
-          <i class="fas fa-mug-hot"></i>
-        </span>
-        <h3 class="skill-title">Triều Châu</h3>
-        <p class="skill-text">
-          được biết đến với văn hóa trà đạo lâu đời mà còn là nơi 
-          sản xuất các sản phẩm gốm sứ và ấm trà cao cấp
-        </p>
-      </article>
-      <!-- end of single skill -->
-      <!-- single skill -->
-      <article class="skill">
-        <span class="skill-icon">
-          <i class="fas fa-glass-cheers"></i>
-        </span>
-        <h3 class="skill-title">Thư giãn</h3>
-        <p class="skill-text">
-          Một tách trà ấm, không gian yên tĩnh, và hương thơm nhẹ nhàng sẽ giúp
-         bạn quên đi mọi lo toan của cuộc sống, mang đến cảm giác an nhiên và bình yên
-        </p>
-      </article>
-      <!-- end of single skill -->
-      <!-- single skill -->
-      <article class="skill">
-        <span class="skill-icon">
-          <i class="fas fa-bomb"></i>
-        </span>
-        <h3 class="skill-title">Năng lượng</h3>
-        <p class="skill-text">
-          Năng lượng không chỉ đến từ dinh dưỡng mà còn từ sự kết nối giữa cơ thể và tinh thần. 
-          Trà không chỉ tiếp thêm sinh lực mà còn mang lại sự tập trung và tinh thần thoải mái.
-        </p>
-      </article>
-      <!-- end of single skill -->
-      <!-- single skill -->
-      <article class="skill">
-        <span class="skill-icon">
-          <i class="fas fa-mortar-pestle"></i>
-        </span>
-        <h3 class="skill-title">Công thức gia truyền</h3>
-        <p class="skill-text">
-         Mang đậm dấu ấn văn hóa và truyền thống. 
-         Những công thức này thường gắn bó với những khoảnh khắc sum vầy,
-          mang lại hương vị đặc biệt và cảm giác ấm cúng mỗi khi thưởng thức.
-        </p>
-      </article>
-      <!-- end of single skill -->
-    </section>
-    <!-- end of skills section -->
-
-<!-- about section -->
-<section class="about" id="about">
-  <div class="section-center clearfix">
-    <!-- first column -->
-    <article class="about-img">
-      <div class="about-pic-container">
-        <img src="./images/about-bcg.jpg" alt="tea" class="about-pic" loading="lazy"/>
-      </div>
-    </article>
-    <!-- second column -->
-    <article class="about-info">
-      <!-- section title -->
-       <!-- Phần nội dung của trang A -->
-      <div id="pageA" class="page active">
-      <div>
-        <h3 class="banner-subtitle" style="color: #46fc6d;">Trạm Trà</h3>
-        <h2 class="section-title">Nơi Hương Vị Hội Tụ</h2>
-      </div>
-      <!-- end of section title -->
-
-        <p class="about-text">
-          Thanh Tâm Trà Quán đã trải nghiệm thực tế tại núi Phượng Hoàng, 
-          Triều Châu nhằm tuyển lựa các khu vực trồng và chế biến trà ô long đơn tùng chất lượng tốt 
-          nhất phục vụ khách hàng yêu thích thức uống giản dị nhưng hàm chứa nhiều công dụng tốt cho sức khỏe.
-        </p>
-        <a onclick="showPage('pageB')" class="main-btn">Xem tiếp</a>
+      <!-- DESKTOP CTA -->
+      <div class="header-actions">
+        <a class="header-cta" href="#pricing">Tạo thẻ</a>
       </div>
 
-      <!-- Phần nội dung của trang B -->
-      <div id="pageB" class="page" style="display: none;">
+
+      <!-- MOBILE HAMBURGER -->
+      <button
+        class="mobile-menu-btn"
+        type="button"
+        aria-label="Mở menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </header>
+
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+
+      <a href="#features">Danh thiếp thông minh</a>
+      <a href="#pricing">Mẫu &amp; bảng giá</a>
+      <a href="#benefits">Lợi ích</a>
+      <a href="#reviews">Đánh giá</a>
+      <a href="#contact">Hỗ trợ</a>
+
+      <a class="mobile-menu-cta" href="#pricing">
+        Tạo thẻ
+      </a>
+
+    </div>
+
+    <main>
+
+      <!-- 1. HERO / CHẠM - QUÉT -->
+      <section class="hero section-shell" id="home">
+        <div class="hero-copy">
+          <span class="eyebrow">DANH THIẾP NFC THÔNG MINH</span>
+          <h1>Chạm một lần.<br><span>Kết nối ngay.</span></h1>
+          <p>
+            Một danh thiếp số gọn gàng, hiện đại và luôn cập nhật.
+            Chỉ cần chạm thẻ hoặc quét QR để mở hồ sơ của bạn trên điện thoại.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-btn" href="#pricing">Tạo profile của tôi</a>
+            <a class="secondary-btn" href="#pricing">Xem mẫu &amp; bảng giá</a>
+          </div>
+
+          <div class="hero-points">
+            <span>✓ Không cần cài app</span>
+            <span>✓ Chia sẻ bằng NFC &amp; QR</span>
+            <span>✓ Cập nhật thông tin bất cứ lúc nào</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-glow"></div>
+          <div class="phone-mockup">
+            <div class="phone-top"></div>
+            <div class="phone-screen">
+              <div class="mock-cover">
+                <span class="mock-logo">N</span>
+              </div>
+              <div class="mock-avatar">QP</div>
+              <h3>Quốc Phong</h3>
+              <p class="mock-role">Key Account Manager</p>
+              <div class="mock-items">
+                <div><b>✉</b><span>email@example.com</span></div>
+                <div><b>☎</b><span>+84 9xx xxx xxx</span></div>
+                <div><b>f</b><span>Facebook</span></div>
+                <div><b>in</b><span>LinkedIn</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="nfc-chip">
+            <div class="chip-symbol">)))</div>
+            <strong>SMART NFC</strong>
+            <span>Chạm để kết nối</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. NHẬN DIỆN -->
+      <section class="feature feature-blue section-shell" id="features">
+        <div class="feature-copy">
+          <span class="eyebrow">01 — NHẬN DIỆN</span>
+          <h2>Mỗi thẻ là một phần của thương hiệu.</h2>
+          <p>
+            Từ màu sắc, hình ảnh đến cách trình bày thông tin đều được thiết kế
+            để hồ sơ của bạn trông nhất quán và chuyên nghiệp trong mọi cuộc gặp.
+          </p>
+        </div>
+
+        <div class="card-stage">
+          <div class="business-card card-back">
+            <div class="card-brand-dot"></div>
+            <span>SMART NFC</span>
+          </div>
+          <div class="business-card card-front">
+            <div class="card-cover">
+              <span class="card-mark">N</span>
+            </div>
+            <div class="card-avatar">QP</div>
+            <h3>Quốc Phong</h3>
+            <p>Key Account Manager</p>
+            <div class="card-line"></div>
+            <small>Chạm hoặc quét QR để kết nối</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. KẾT NỐI -->
+      <section class="feature feature-pink section-shell" id="experience">
+        <div class="feature-visual connection-visual">
+          <div class="connection-phone">
+            <div class="connection-screen">
+              <div class="screen-cover"></div>
+              <div class="screen-avatar">N</div>
+              <strong>NFC Profile</strong>
+              <span>Thông tin liên hệ của bạn</span>
+              <div class="screen-row"></div>
+              <div class="screen-row short"></div>
+              <div class="screen-row"></div>
+            </div>
+          </div>
+          <span class="float-icon icon-linkedin">in</span>
+          <span class="float-icon icon-facebook">f</span>
+          <span class="float-icon icon-mail">✉</span>
+          <span class="float-icon icon-zalo">Z</span>
+        </div>
+
+        <div class="feature-copy">
+          <span class="eyebrow">02 — KẾT NỐI</span>
+          <h2>Kết nối trong tích tắc.</h2>
+          <p>
+            Khách hàng chỉ cần chạm thẻ hoặc quét QR. Hồ sơ mở trực tiếp trên
+            trình duyệt, giúp họ lưu thông tin liên hệ và tiếp tục kết nối ngay.
+          </p>
+
+          <div class="mini-list">
+            <div><b>NFC</b><span>Chạm điện thoại để mở profile</span></div>
+            <div><b>QR</b><span>Quét mã khi không có NFC</span></div>
+            <div><b>LINK</b><span>Gửi profile trực tiếp qua mạng xã hội</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. CẬP NHẬT -->
+      <section class="feature feature-green section-shell">
+        <div class="feature-copy">
+          <span class="eyebrow">03 — CẬP NHẬT</span>
+          <h2>Cập nhật tức thì, luôn nhất quán.</h2>
+          <p>
+            Đổi số điện thoại, email, chức vụ hay ảnh đại diện?
+            Bạn chỉ cần cập nhật profile. Không cần in lại danh thiếp.
+          </p>
+
+          <div class="dashboard-mini">
+            <div class="dash-sidebar">
+              <span class="dash-logo">N</span>
+              <i></i><i></i><i></i><i></i>
+            </div>
+            <div class="dash-main">
+              <div class="dash-top"><b>My Profile</b><span>● Online</span></div>
+              <div class="dash-profile">
+                <div class="dash-avatar">QP</div>
+                <div><b>Quốc Phong</b><small>Key Account Manager</small></div>
+                <button>Đã cập nhật</button>
+              </div>
+              <div class="dash-lines"><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="update-card">
+          <span class="update-badge">LIVE</span>
+          <div class="update-icon">↻</div>
+          <h3>Một profile<br>cho mọi cuộc gặp.</h3>
+          <p>Thông tin được cập nhật online và hiển thị ngay trên profile.</p>
+        </div>
+      </section>
+
+      <!-- 5. MỌI DỊP -->
+      <section class="feature feature-purple section-shell">
+        <div class="occasion-copy">
+          <span class="eyebrow">04 — MỌI DỊP</span>
+          <h2>Sẵn sàng cho mọi cuộc gặp.</h2>
+          <p>
+            Đi gặp khách hàng, sự kiện, networking hay gửi thông tin từ xa —
+            profile của bạn luôn sẵn sàng để chia sẻ.
+          </p>
+        </div>
+
+        <div class="profile-stack">
+          <div class="stack-card stack-one">
+            <span>Smart NFC</span><b>Business</b>
+          </div>
+          <div class="stack-card stack-two">
+            <span>Smart NFC</span><b>Creator</b>
+          </div>
+          <div class="stack-card stack-three">
+            <span>Smart NFC</span><b>Personal</b>
+            <small>Chạm • Quét • Kết nối</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. MẪU & BẢNG GIÁ -->
+      <section class="pricing-section" id="pricing">
+        <div class="pricing-shell">
+          <div class="pricing-heading">
+            <span class="eyebrow">MẪU &amp; BẢNG GIÁ</span>
+            <h2>Chọn chiếc thẻ phù hợp với bạn.</h2>
+            <p>
+              Từ chiếc thẻ cơ bản đến thiết kế cá nhân hóa. Di chuột hoặc chạm
+              vào từng thẻ để xem mặt trước và mặt sau.
+            </p>
+          </div>
+
+          <div class="pricing-grid">
+
+            <article class="price-card clickable-plan" data-plan="basic">
+              <div class="price-top">
+                <div class="old-price">299.000 đ</div>
+                <div class="current-price">149.000 đ</div>
+              </div>
+              <button class="card-flip" type="button" aria-label="Xoay thẻ Basic">
+                <span class="card-flip-inner">
+                  <span class="card-face card-front-face">
+                    <span class="card-image-wrap basic-card-image">
+                      <img src="./images/basic-front.png" alt="Mẫu thẻ Basic mặt trước">
+                    </span>
+                  </span>
+                  <span class="card-face card-back-face">
+                    <img src="./images/basic-back.png" alt="Mẫu thẻ Basic mặt sau">
+                  </span>
+                </span>
+              </button>
+              <div class="price-info">
+                <h3>Basic</h3>
+                <p class="price-tagline">Thẻ NFC cơ bản</p>
+                <p>Profile số tích hợp sẵn, phù hợp để bắt đầu kết nối bằng một lần chạm.</p>
+                <a href="./create-card.html?plan=basic" class="price-btn">Chọn Basic</a>
+              </div>
+            </article>
+
+            <article class="price-card featured clickable-plan" data-plan="plus">
+              <span class="popular-badge">ĐƯỢC CHỌN NHIỀU</span>
+              <div class="price-top">
+                <div class="old-price">330.000 đ</div>
+                <div class="current-price">199.000 đ</div>
+              </div>
+              <button class="card-flip" type="button" aria-label="Xoay thẻ Plus">
+                <span class="card-flip-inner">
+                  <span class="card-face card-front-face">
+                    <span class="card-image-wrap plus-card-image">
+                      <img src="./images/plus-front.png" alt="Mẫu thẻ Basic mặt trước">
+                    </span>
+                  </span>
+                  <span class="card-face card-back-face">
+                    <img src="./images/plus-back.png" alt="Mẫu thẻ Basic mặt trước">
+                  </span>
+                </span>
+              </button>
+              <div class="price-info">
+                <h3>Plus</h3>
+                <p class="price-tagline">Cá nhân hóa</p>
+                <p>Thêm thông tin cá nhân, màu sắc và phong cách riêng cho chiếc thẻ.</p>
+                <a href="./create-card.html?plan=plus" class="price-btn">Chọn Plus</a>
+              </div>
+            </article>
+
+            <article class="price-card clickable-plan" data-plan="pro">
+              <div class="price-top">
+                <div class="old-price">499.000 đ</div>
+                <div class="current-price">430.000 đ</div>
+              </div>
+              <button class="card-flip" type="button" aria-label="Xoay thẻ Pro">
+                <span class="card-flip-inner">
+                  <span class="card-face card-front-face">
+                    <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1765613903/smart-nfc-card/images/beypgnvfggp8njsiz4u6.png" alt="Mẫu thẻ Pro mặt trước">
+                  </span>
+                  <span class="card-face card-back-face">
+                    <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1765613906/smart-nfc-card/images/ghe3jnvdxtyuwns3ego6.png" alt="Mẫu thẻ Pro mặt sau">
+                  </span>
+                </span>
+              </button>
+              <div class="price-info">
+                <h3>Pro</h3>
+                <p class="price-tagline">Thiết kế nổi bật</p>
+                <p>Concept và template đẹp mắt cho cá nhân, creator hoặc đội nhóm.</p>
+                <a href="./create-card.html?plan=pro" class="price-btn">Chọn Pro</a>
+              </div>
+            </article>
+
+            <article class="price-card clickable-plan" data-plan="premium">
+              <div class="price-top">
+                <div class="old-price">579.000 đ</div>
+                <div class="current-price">490.000 đ</div>
+              </div>
+              <button class="card-flip" type="button" aria-label="Xoay thẻ Premium">
+                <span class="card-flip-inner">
+                  <span class="card-face card-front-face">
+                    <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1765614033/smart-nfc-card/images/dwgxzubu9tkiwuutba2v.jpg" alt="Mẫu thẻ Premium mặt trước">
+                  </span>
+                  <span class="card-face card-back-face">
+                    <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1765614040/smart-nfc-card/images/g0db3yyhkjb6i1qntzjl.jpg" alt="Mẫu thẻ Premium mặt sau">
+                  </span>
+                </span>
+              </button>
+              <div class="price-info">
+                <h3>Premium</h3>
+                <p class="price-tagline">Theo nhận diện thương hiệu</p>
+                <p>Thiết kế mặt thẻ theo hình ảnh, màu sắc và layout thương hiệu của bạn.</p>
+                <a href="./create-card.html?plan=premium" class="price-btn">Chọn Premium</a>
+              </div>
+            </article>
+
+          </div>
+
+          <p class="pricing-note">* Giá minh họa — bạn có thể thay đổi bảng giá theo sản phẩm thực tế của NFC Card.</p>
+        </div>
+      </section>
+
+      <!-- 7. LỢI ÍCH / 3D INTERACTIVE -->
+      <section class="benefits-section section-shell" id="benefits">
+        <div class="benefits-heading">
+          <span class="eyebrow">LỢI ÍCH</span>
+          <h2>Danh thiếp thông minh,<br>nhiều hơn một chiếc thẻ.</h2>
+        </div>
+
+        <div class="benefits-layout">
+          <div class="benefits-card-column">
+            <div class="tilt-card-wrap" id="tiltCard">
+              <div class="tilt-glow"></div>
+              <div class="benefit-product-card">
+                <img src="./images/basic-front.png" alt="Mẫu thẻ Basic mặt trước">
+                <div class="card-shine"></div>
+              </div>
+            </div>
+            <a href="#pricing" class="primary-btn benefits-cta">Tạo thẻ của tôi</a>
+          </div>
+
+          <div class="benefits-grid">
+            <article>
+              <span class="benefit-number">01</span>
+              <h3>Chia sẻ tức thì</h3>
+              <p>Chạm NFC hoặc quét QR để mở profile và chia sẻ thông tin liên hệ ngay lập tức.</p>
+            </article>
+            <article>
+              <span class="benefit-number">02</span>
+              <h3>Không cần in lại</h3>
+              <p>Đổi số điện thoại, email, chức vụ hay ảnh đại diện mà không cần làm lại chiếc thẻ.</p>
+            </article>
+            <article>
+              <span class="benefit-number">03</span>
+              <h3>Ghi nhớ lâu, kết nối dễ dàng</h3>
+              <p>Một chiếc thẻ có phong cách riêng đi cùng profile rõ ràng giúp cuộc gặp dễ nhớ hơn.</p>
+            </article>
+            <article>
+              <span class="benefit-number">04</span>
+              <h3>Thân thiện với môi trường</h3>
+              <p>Một chiếc thẻ dùng lâu dài, giảm nhu cầu in lại danh thiếp mỗi khi thông tin thay đổi.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. ĐÁNH GIÁ -->
+      <section class="reviews section-shell" id="reviews">
+        <div class="reviews-head">
+          <div>
+            <span class="eyebrow">KHÁCH HÀNG</span>
+            <h2>Được thiết kế để dễ nhớ.</h2>
+          </div>
+          <div class="rating">
+            <strong>4.9</strong><span> / 5</span>
+            <div>★★★★★</div>
+          </div>
+        </div>
+
+        <div class="review-grid">
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <h3>Gọn và chuyên nghiệp</h3>
+            <p>“Chỉ cần đưa thẻ ra là khách có thể mở profile. Không còn phải tìm số điện thoại trong lúc đang nói chuyện.”</p>
+            <span>— Minh, Sales</span>
+          </article>
+
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <h3>Dễ cập nhật</h3>
+            <p>“Đổi thông tin một lần trên profile là xong. Danh thiếp vật lý không còn là vấn đề mỗi khi đổi số.”</p>
+            <span>— Lan, Business Owner</span>
+          </article>
+
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <h3>Rất tiện khi networking</h3>
+            <p>“QR và NFC cùng có trên profile nên gặp ai cũng có cách chia sẻ phù hợp.”</p>
+            <span>— Đức, Consultant</span>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="landing-footer" id="contact">
+      <div class="footer-brand">
+        <div class="footer-mark">N</div>
         <div>
-          <h3 class="banner-subtitle"style="color: #46fc6d; font-size: 45px;">Khám phá câu chuyện của chúng tôi</h3>
-          <h2 class="section-title"></h2>
-        </div>
-        <!-- End of Section Title -->
-        <p class="about-text">
-          Núi Phượng Hoàng là một trong những vùng trồng trà Ô Long nổi tiếng nhất ở Triều Châu,Trung Quốc. Chúng tôi
-          đã bắt đầu hành trình đến khu vực thường được gọi là "Trà Phượng Hoàng" hoặc "Phoenix Tea" để mang đến cho bạn  
-          những loại trà ngon nhất với hương vị đặc biệt và chất lượng cao, nhờ vào sự kết hợp của đất đai, khí hậu, và kỹ thuật 
-          chế biến truyền thống ở núi Phượng Hoàng. Niềm đam mê trà đã giúp chúng tôi tìm ra những cách pha trộn và 
-          hương vị độc đáo mang lại cảm giác thoải mái và phấn khích cho người uống.
-        </p>
-        <p class="about-text">
-          Chúng tôi tin vào hương vị của trà trong việc gắn kết mọi người lại với nhau, 
-          xoa dịu tâm hồn và tiếp thêm sinh lực cho tâm trí. 
-          Hãy cùng chúng tôi khám phá những truyền thống phong phú và 
-          những đổi mới hiện đại trong thế giới trà.
-        </p>
-        <button onclick="showPage('pageA')" class="main-btn">Trở lại</button>
-      </div>
-    </article>
-  </div>
-</section>
-    
-    <!-- end of about section -->
-
-    <!-- products -->
-    <section class="products" id="products">
-      <div class="products-layout">
-        <!-- product info -->
-        <article class="products-info">
-          <!-- section title -->
-          <div>
-            <h3 class="banner-subtitle" style="color: #46fc6d; text-align: center;" >Sản Phẩm Trà</h3>
-            <h2 class="section-title text-white"></h2>
-          </div>
-          <!-- end of section title -->
-          <p class="product-text" style="font-size: 20px;">
-            Mỗi ngụm trà không chỉ giúp thanh lọc cơ thể
-            mà còn mang lại cảm giác thư thái, giảm căng thẳng sau mỗi ngày làm việc.
-          </p>
-        </article>
-    
-        <!-- product inventory -->
-        <article class="products-inventory">
-          <!-- container sẽ được JS populate -->
-          <div id="products-container" class="products-grid"></div>
-
-    
-        <!-- Nút "Xem thêm" -->
-        <div class="view-more-btn" style="text-align: center;">
-          <button id="view-more" class="view-all-btn" onclick="showMoreProducts()">Xem thêm</button>
+          <img class="brand-logo" src="./images/logo2.png" alt="Tapora">
         </div>
       </div>
-    </section>
-    
-    
-    <!-- teapots -->
-    <section class="productsTeapot">
-      <div class="section-center clearfix">
 
-        <!-- TEXT bên trái -->
-        <article class="products-info">
-          <div>
-            <h3 class="banner-subtitle" style="color:#46fc6d; text-align:center;">
-              Ấm Trà
-            </h3>
-          </div>
-          <p class="product-text" style="font-size:20px;">
-            Bộ sưu tập ấm trà độc đáo, mang nét văn hóa trà đạo Triều Châu.
-          </p>
-        </article>
-
-        <!-- GRID sản phẩm bên phải -->
-        <article class="products-inventory clearfix">
-          <div id="teapots-container" class="products-grid clearfix"></div>
-
-          <div class="view-more-btn" style="text-align: center;" >
-            <button id="view-more-teapots"
-                    class="view-all-btn"
-                    onclick="showMoreTeapots()">
-              Xem thêm
-            </button>
-          </div>
-        </article>
-
+      <div class="footer-columns">
+        <div>
+          <strong>Sản phẩm</strong>
+          <a href="#features">Tính năng</a>
+          <a href="#experience">Trải nghiệm</a>
+        </div>
+        <div>
+          <strong>Hỗ trợ</strong>
+          <a href="mailto:contact@example.com">Email</a>
+          <a href="https://zalo.me/0395759357" target="_blank" rel="noopener noreferrer">Zalo</a>
+        </div>
+        <div>
+          <strong>Thông tin</strong>
+          <a href="#home">Trang chủ</a>
+          <a href="#reviews">Đánh giá</a>
+        </div>
       </div>
-    </section>
 
-
-<!-- Section for Tea Brewing Technique -->
-<section class="tea-brewing" style="background: linear-gradient(135deg, #4caf50, #256928, #137918); padding: 50px 0; color: white;">
-  <div class="section-center clearfix">
-    <!-- Video container -->
-    <div class="video-container" style="float: left; width: 50%;">
-      <iframe width="100%" height="315" src="https://www.youtube.com/embed/_kpfNgTPwNE?vq=hd720&rel=0"
-        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-
-    </div>
-    <!-- Description -->
-    <div class="video-description" style="float: right; width: 50%;">
-      <h3 style="margin-bottom: 20px; text-align: center; color: #e9e655;">Nghệ Thuật Pha Trà Đều Vị Bằng Bình Công Bằng</h3>
-      <p>Pha trà bằng cách đổ ra bình công bằng là một kỹ thuật pha trà truyền thống được sử dụng để đảm bảo rằng mỗi tách trà có hương vị và nhiệt độ nhất quán. Đây là một phần của nghi lễ pha trà ở một số nền văn hóa, đặc biệt là trong trà đạo Trung Quốc.</p>
-    </div>
+      <div class="footer-bottom">
+        <span>© 2026 NFC Card. All rights reserved.</span>
+        <span>Chạm • Quét • Kết nối</span>
+      </div>
+    </footer>
   </div>
-</section>
+
+  <!-- Nút Zalo duy nhất nổi ở góc phải dưới -->
+  <a href="https://zalo.me/0395759357" target="_blank" class="icon zalo" title="Chat Zalo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/512px-Icon_of_Zalo.svg.png" alt="Zalo">
+  </a>
+
+  <!-- Interaction cho landing page -->
+  <script>
+    document.querySelectorAll(".card-flip").forEach((button) => {
+      button.addEventListener("click", () => {
+        button.classList.toggle("is-flipped");
+      });
+    });
+
+    const tiltCard = document.getElementById("tiltCard");
+
+    if (tiltCard) {
+      tiltCard.addEventListener("pointermove", (event) => {
+        const rect = tiltCard.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+        tiltCard.style.setProperty("--rx", `${(-y * 10).toFixed(2)}deg`);
+        tiltCard.style.setProperty("--ry", `${(x * 12).toFixed(2)}deg`);
+      });
+
+      tiltCard.addEventListener("pointerleave", () => {
+        tiltCard.style.setProperty("--rx", "0deg");
+        tiltCard.style.setProperty("--ry", "0deg");
+      });
+    }
+
+    const mobileMenuBtn =
+      document.querySelector(".mobile-menu-btn");
+
+    const mobileMenu =
+      document.querySelector("#mobileMenu");
+
+    if (mobileMenuBtn && mobileMenu) {
+
+      mobileMenuBtn.addEventListener("click", () => {
+
+        const isOpen =
+          mobileMenu.classList.toggle("is-open");
+
+        mobileMenuBtn.classList.toggle(
+          "is-open",
+          isOpen
+        );
+
+        mobileMenuBtn.setAttribute(
+          "aria-expanded",
+          isOpen ? "true" : "false"
+        );
+
+      });
 
 
-<!-- contact -->
-<section class="contact">
-  <div id="contact" class="section-center clearfix">
-    <!-- Hình ảnh dịch sang bên trái -->
-    <div class="contact-image" style="float: left; margin-right: 40px; margin-bottom: 20px;">
-      <img src="images/ava.jpg" alt="Contact Image" style="width: 430px; height: auto; object-fit: cover;" loading="lazy">
-    </div>
-     <!-- contact info -->
-     <article class="contact-info" style="float: right; text-align: left;">
-      <!-- ADDRESS -->
-      <div class="contact-item" style="margin-bottom: 50px;">
-        <h3 class="contact-title">
-          <span class="contact-icon">
-            <i class="fas fa-location-arrow"></i> Địa chỉ
-          </span>
-        </h3>
-        <div id="contact-address"></div>
-      </div>
+      /* Đóng menu khi click link */
+      mobileMenu
+        .querySelectorAll("a")
+        .forEach((link) => {
 
-      <!-- EMAIL -->
-      <div class="contact-item" style="margin-bottom: 50px;">
-        <h3 class="contact-title">
-          <span class="contact-icon">
-            <i class="fas fa-envelope"></i> Email
-          </span>
-        </h3>
-        <div id="contact-email"></div>
-      </div>
+          link.addEventListener("click", () => {
 
-      <!-- PHONE -->
-      <div class="contact-item" style="margin-bottom: 50px;">
-        <h3 class="contact-title">
-          <span class="contact-icon">
-            <i class="fas fa-phone-alt"></i> PHONE / ZALO
-          </span>
-        </h3>
-        <div id="contact-phone"></div>
-      </div>
-      <!-- end of contact item -->
+            mobileMenu.classList.remove("is-open");
 
-    </article>
-  </div>
-</section>
+            mobileMenuBtn.classList.remove("is-open");
 
-<!-- end of contact -->
+            mobileMenuBtn.setAttribute(
+              "aria-expanded",
+              "false"
+            );
 
+          });
 
-    <!-- footer -->
-<footer class="footer">
-  <div class="section-center">
-    <div class="social-icons">
-      <!-- social icon: Facebook -->
-      <a href="https://www.facebook.com/thanhtamtraquan1996?mibextid=LQQJ4d" class="social-icon" target="_blank">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <!-- end of social icon -->
-      
-      <!-- social icon: Instagram -->
-      <a href="https://www.instagram.com/_bkhtrna_?igsh=azFucjFpMHZuZ2Ji&fbclid=IwY2xjawFJJY1leHRuA2FlbQIxMAABHdFxKqdFEiCI9IA25eQsyJw1YEIifVMdeOboz1uXNM6Wm5id-kEaUhzMWw_aem_MAN9C1u0cDI4vdPdpy26qQ" class="social-icon" target="_blank">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <!-- end of social icon -->      
-      
-      <!-- social icon: TikTok -->
-      <a href="https://www.tiktok.com" class="social-icon" target="_blank">
-        <i class="fab fa-tiktok"></i>
-      </a>
-      <!-- end of social icon -->
-      
-      <!-- social icon: YouTube -->
-      <a href="https://www.youtube.com/@thanhtamtraquan" class="social-icon" target="_blank">
-        <i class="fab fa-youtube"></i>
-      </a>
-      <!-- end of social icon -->
-    </div>
-    
-    
-    <p class="footer-text">
-      &copy; 2024 Thanh Tâm Trà Quán 🍵
-    </p-footer-text>
-  </div>
-</footer>
-<!-- end of footer -->
-
-     <script src="./app.js"></script>
-     <script>
-      fetch("header.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("site-header").innerHTML = html;
-
-          // 🔥 CẬP NHẬT BADGE NGAY SAU KHI HEADER LOAD
-          if (typeof updateCartBadge === "function") {
-            updateCartBadge(getCart());
-          }
         });
-    </script>    
-      <!-- <script>   </script> -->
-      <div class="floating-icons">  
-        <!-- Messenger -->
-        <a href="https://m.me/thanhtamtraquan1996" target="_blank" class="icon messenger" title="Chat Messenger">
-            <img src="https://file.hstatic.net/200000525917/file/messenger-fb_8fcc524fbaad4b1195a150dc5e0575d7.png" alt="Messenger">
-        </a>
-    
-        <!-- Zalo -->
-        <a href="https://zalo.me/0395759357" target="_blank" class="icon zalo" title="Chat Zalo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/512px-Icon_of_Zalo.svg.png" alt="Zalo">
-        </a>
-    </div>
-    
-  </body>
-</html>
 
+    }
+
+    /* ============================================================
+      REVIEW CAROUSEL
+      ============================================================ */
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const reviewGrid = document.querySelector(".review-grid");
+
+        if (!reviewGrid) return;
+
+        // Lấy 3 card gốc
+        const originalCards = [
+            ...reviewGrid.querySelectorAll(".review-card")
+        ];
+
+        if (originalCards.length === 0) return;
+
+        // Nhân đôi các card
+        originalCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            reviewGrid.appendChild(clone);
+        });
+
+        function updateReviewAnimation() {
+
+            const cards = reviewGrid.querySelectorAll(".review-card");
+
+            if (cards.length < originalCards.length * 2) return;
+
+            // Card đầu tiên của nhóm thứ 2
+            const secondGroupFirstCard =
+                cards[originalCards.length];
+
+            // Khoảng cách cần di chuyển
+            const shift =
+                secondGroupFirstCard.offsetLeft;
+
+            reviewGrid.style.setProperty(
+                "--review-shift",
+                `${shift}px`
+            );
+        }
+
+        updateReviewAnimation();
+
+        window.addEventListener(
+            "resize",
+            updateReviewAnimation
+        );
+    });
+
+    document.querySelectorAll(".clickable-plan").forEach(card => {
+
+      card.addEventListener("click", function(event) {
+
+          // Không chuyển trang nếu đang bấm nút xoay thẻ
+          if (event.target.closest(".card-flip")) return;
+
+          // Không chạy 2 lần nếu đang bấm nút Chọn
+          if (event.target.closest(".price-btn")) return;
+
+          const plan = this.dataset.plan;
+
+          window.location.href =
+              "./create-card.html?plan=" + plan;
+      });
+
+  });
+  </script>
+
+  <!-- Giữ app.js: khi URL là #/p/<slug>, app.js sẽ render NFC profile -->
+  <script src="./app.js"></script>
+</body>
+</html>

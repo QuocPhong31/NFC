@@ -6,6 +6,10 @@ from admin import admin_bp
 from user import user_bp
 from card import card_bp
 import os
+from dotenv import load_dotenv
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 app = Flask(__name__)
 app.secret_key = "nfc_secret_key"
@@ -17,7 +21,7 @@ CORS(
     resources={
         r"/api/*": {
             "origins": [
-                "https://nfc.thanhtamtraquan.com",
+                "https://nfc.tapoka.biz",
                 "https://quocphong31.github.io",
                 "https://shop.thanhtamtraquan.com",
                 "http://127.0.0.1:5500",

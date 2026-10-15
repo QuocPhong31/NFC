@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="./images/favicon.ico">
+<link rel="stylesheet" href="./create-card.css">
+<title>Thiết kế thẻ — NFC Card</title>
+</head>
+
+<body>
+<div class="page">
+
+<aside class="preview">
+  <a class="brand" href="./index.html"><b>N</b>NFC Card</a>
+
+  <div class="preview-inner">
+    <small>XEM TRƯỚC</small>
+
+    <div class="cards">
+      <div class="card" id="frontCard">
+        <img id="front" src="./images/basic-front.png" alt="Mặt trước thẻ">
+        <div id="live" class="live">
+          <strong id="liveLogo">NFC</strong>
+          <b id="liveName">Trần Quốc Phong</b>
+          <span id="liveJob">Key Account Manager</span>
+        </div>
+      </div>
+
+      <div class="card back" id="backCard">
+        <img id="back" src="./images/basic-back.png" alt="Mặt sau thẻ">
+        <div id="backLive" class="back-live">
+          <div class="back-qr">NFC</div>
+          <strong>NFC Card</strong>
+        </div>
+      </div>
+    </div>
+
+    <button id="flip" class="link-btn" type="button">Xem mặt sau ↻</button>
+  </div>
+
+  <a class="back-home" href="./index.html#pricing">← Quay lại bảng giá</a>
+</aside>
+
+<main class="form">
+
+<header>
+  <div>
+    <i>TẠO THẺ NFC</i>
+    <h1>Thiết kế thẻ</h1>
+  </div>
+  <em id="badge">Basic</em>
+</header>
+
+<section>
+  <h2>Chọn thẻ của bạn</h2>
+
+  <div class="products">
+    <button data-plan="basic" type="button">
+      <span>
+        <b>Basic</b>
+        <small>Thẻ NFC cơ bản</small>
+      </span>
+      <strong>149.000 đ</strong>
+    </button>
+
+    <button data-plan="plus" type="button">
+      <span>
+        <b>Plus</b>
+        <small>Cá nhân hoá thông tin trên thẻ</small>
+      </span>
+      <strong>199.000 đ</strong>
+    </button>
+
+    <button data-plan="pro" type="button">
+      <span>
+        <b>Pro</b>
+        <small>Đồng bộ hình ảnh đẹp, chuẩn gu</small>
+      </span>
+      <strong>430.000 đ</strong>
+    </button>
+
+    <button data-plan="premium" type="button">
+      <span>
+        <b>Premium</b>
+        <small>Custom mặt thẻ, chuẩn gu thương hiệu</small>
+      </span>
+      <strong>490.000 đ</strong>
+    </button>
+  </div>
+</section>
+
+<!-- BASIC -->
+<section id="basic" class="custom">
+  <h2>Thông tin trên thẻ</h2>
+
+  <div class="note">
+    <b>Basic là thẻ mặc định</b>
+    <span>Thiết kế cố định, không có các tùy chỉnh nâng cao.</span>
+  </div>
+</section>
+
+<!-- PLUS -->
+<section id="plus" class="custom hidden">
+  <h2>Thông tin trên thẻ</h2>
+
+  <div class="grid">
+    <label>
+      Tên trên thẻ
+      <input id="plusName" value="Trần Quốc Phong" type="text">
+    </label>
+
+    <label>
+      Chức danh
+      <input id="plusJob" value="Key Account Manager" type="text">
+    </label>
+  </div>
+
+  <label>Logo</label>
+  <label class="upload">
+    ＋
+    <b>Thả hình ảnh của bạn hoặc <em>tải lên</em></b>
+    <small>PNG, JPG, JPEG</small>
+    <input type="file" id="plusLogo" accept="image/*">
+  </label>
+
+  <label>Bạn có muốn xoá logo NFC Card không?</label>
+  <div class="choices">
+    <button class="active" type="button">Không</button>
+    <button type="button">Có <small>+10.000 đ</small></button>
+  </div>
+</section>
+
+<!-- PRO -->
+<section id="pro" class="custom hidden">
+  <h2>Chọn concept & thiết kế</h2>
+
+  <div class="concept-category-tabs" role="tablist" aria-label="Nhóm concept thẻ">
+    <button class="concept-category active" type="button" data-category="nguhanh">Ngũ hành</button>
+    <button class="concept-category" type="button" data-category="doanhnhan">Doanh nhân</button>
+  </div>
+
+  <div class="concepts">
+    <!-- NGŨ HÀNH -->
+    <button class="concept active" type="button" data-category="nguhanh" data-name="KIM">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611726/smart-nfc-card/images/isd9eq5cmexcqx69nbjr.png" alt="KIM">
+      <b>KIM</b>
+    </button>
+    <button class="concept" type="button" data-category="nguhanh" data-name="THỦY">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611678/smart-nfc-card/images/je9envyqamowxuyginhn.png" alt="THỦY">
+      <b>THỦY</b>
+    </button>
+    <button class="concept" type="button" data-category="nguhanh" data-name="MỘC">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611659/smart-nfc-card/images/oniupweqpwtthbzt6a8j.png" alt="MỘC">
+      <b>MỘC</b>
+    </button>
+    <button class="concept" type="button" data-category="nguhanh" data-name="HỎA">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611642/smart-nfc-card/images/ghaa3mbuag8gvcbt9epq.png" alt="HỎA">
+      <b>HỎA</b>
+    </button>
+    <button class="concept" type="button" data-category="nguhanh" data-name="THỔ">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611600/smart-nfc-card/images/tkii5scifyhgukv8vbpo.png" alt="THỔ">
+      <b>THỔ</b>
+    </button>
+
+    <!-- DOANH NHÂN -->
+    <button class="concept" type="button" data-category="doanhnhan" data-name="DN - 02">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611289/smart-nfc-card/images/zkdqpzrejfz9n0nmfj3u.jpg" alt="DN - 02">
+      <b>DN - 02</b>
+    </button>
+    <button class="concept" type="button" data-category="doanhnhan" data-name="DN - 03">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611085/smart-nfc-card/images/ir48mr313zcap2anypiv.jpg" alt="DN - 03">
+      <b>DN - 03</b>
+    </button>
+    <button class="concept" type="button" data-category="doanhnhan" data-name="DN - 04">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611043/smart-nfc-card/images/qkckapvocffowksumpix.jpg" alt="DN - 04">
+      <b>DN - 04</b>
+    </button>
+    <button class="concept" type="button" data-category="doanhnhan" data-name="DN - 06">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610947/smart-nfc-card/images/intheed4dbdbceh1ytjs.jpg" alt="DN - 06">
+      <b>DN - 06</b>
+    </button>
+    <button class="concept" type="button" data-category="doanhnhan" data-name="DN - 07">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610912/smart-nfc-card/images/kvbfy2iiqciexwp4ajq0.jpg" alt="DN - 07">
+      <b>DN - 07</b>
+    </button>
+    <button class="concept" type="button" data-category="doanhnhan" data-name="DN - 08">
+      <img src="https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610888/smart-nfc-card/images/spf99yk3hergdgdmes0b.jpg" alt="DN - 08">
+      <b>DN - 08</b>
+    </button>
+  </div>
+
+  <hr>
+
+  <div class="grid">
+    <label>
+      Tên trên thẻ
+      <input id="proName" value="Trần Quốc Phong" type="text">
+    </label>
+
+    <label>
+      Chức danh
+      <input id="proJob" value="Key Account Manager" type="text">
+    </label>
+  </div>
+
+  <label>Logo</label>
+  <label class="upload">
+    ＋
+    <b>Thả logo hoặc <em>tải lên</em></b>
+    <small>PNG, JPG, JPEG</small>
+    <input type="file" id="proLogo" accept="image/*">
+  </label>
+
+  <label>Bạn có muốn xoá logo NFC Card không?</label>
+  <div class="choices">
+    <button class="active" type="button">Không</button>
+    <button type="button">Có <small>+10.000 đ</small></button>
+  </div>
+</section>
+
+<!-- PREMIUM -->
+<section id="premium" class="custom hidden">
+  <h2>Thiết kế custom</h2>
+
+  <div class="note">
+    <b>Thiết kế theo yêu cầu</b>
+    <span>Upload file ảnh mặt thẻ để thành phẩm giữ đúng layout, font và màu theo thiết kế của bạn.</span>
+  </div>
+
+  <div class="grid">
+    <label>
+      Tên trên thẻ
+      <input id="premiumName" value="Trần Quốc Phong" type="text">
+    </label>
+
+    <label>
+      Chức danh
+      <input id="premiumJob" value="Key Account Manager" type="text">
+    </label>
+  </div>
+
+  <label>Mặt trước thẻ</label>
+  <label class="upload large">
+    ＋
+    <b>Thả thiết kế mặt trước hoặc <em>tải lên</em></b>
+    <small>PNG, JPG, JPEG</small>
+    <input type="file" id="premiumFront" accept="image/*">
+  </label>
+
+  <label>Mặt sau thẻ</label>
+  <label class="upload large">
+    ＋
+    <b>Thả thiết kế mặt sau hoặc <em>tải lên</em></b>
+    <small>PNG, JPG, JPEG</small>
+    <input type="file" id="premiumBack" accept="image/*">
+  </label>
+
+  <label>Logo</label>
+  <label class="upload">
+    ＋
+    <b>Thả logo hoặc <em>tải lên</em></b>
+    <small>PNG, JPG, JPEG</small>
+    <input type="file" id="premiumLogo" accept="image/*">
+  </label>
+</section>
+
+<div class="summary">
+  <span>
+    Gói đã chọn
+    <b id="sumName">Basic</b>
+  </span>
+  <strong id="sumPrice">149.000 đ</strong>
+</div>
+
+<button class="checkout" id="checkout" type="button">
+  Tiếp tục đặt thẻ →
+</button>
+
+</main>
+</div>
+
+<script>
+const data = {
+  basic: {
+    name: "Basic",
+    price: "149.000 đ",
+    front: "./images/basic-front.png",
+    back: "./images/basic-back.png",
+    backColor: "#111111"
+  },
+
+  plus: {
+    name: "Plus",
+    price: "199.000 đ",
+    front: "./images/plus-front.png",
+    back: "./images/plus-back.png",
+    backColor: "#111111"
+  },
+
+  pro: {
+    name: "Pro",
+    price: "430.000 đ",
+
+    concepts: {
+      KIM: {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611726/smart-nfc-card/images/isd9eq5cmexcqx69nbjr.png",
+        backColor: "#b9b9b9"
+      },
+      THỦY: {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611678/smart-nfc-card/images/je9envyqamowxuyginhn.png",
+        backColor: "#8fcfdc"
+      },
+      MỘC: {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611659/smart-nfc-card/images/oniupweqpwtthbzt6a8j.png",
+        backColor: "#4f8f78"
+      },
+      HỎA: {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611642/smart-nfc-card/images/ghaa3mbuag8gvcbt9epq.png",
+        backColor: "#cf4447"
+      },
+      THỔ: {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611600/smart-nfc-card/images/tkii5scifyhgukv8vbpo.png",
+        backColor: "#e5a91b"
+      },
+      "DN - 02": {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611289/smart-nfc-card/images/zkdqpzrejfz9n0nmfj3u.jpg",
+        backColor: "#111111"
+      },
+      "DN - 03": {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611085/smart-nfc-card/images/ir48mr313zcap2anypiv.jpg",
+        backColor: "#111111"
+      },
+      "DN - 04": {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611043/smart-nfc-card/images/qkckapvocffowksumpix.jpg",
+        backColor: "#111111"
+      },
+      "DN - 05": {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611020/smart-nfc-card/images/itpmx2ekxaghaqaen1qr.jpg",
+        backColor: "#111111"
+      },
+      "DN - 06": {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610947/smart-nfc-card/images/intheed4dbdbceh1ytjs.jpg",
+        backColor: "#111111"
+      },
+      "DN - 07": {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610912/smart-nfc-card/images/kvbfy2iiqciexwp4ajq0.jpg",
+        backColor: "#111111"
+      },
+      "DN - 08": {
+        front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610888/smart-nfc-card/images/spf99yk3hergdgdmes0b.jpg",
+        backColor: "#111111"
+      }
+    }
+  },
+
+  premium: {
+    name: "Premium",
+    price: "490.000 đ",
+    front: "",
+    back: "",
+    backColor: "#111111"
+  }
+};
+
+let plan = new URLSearchParams(location.search).get("plan") || "basic";
+
+if (!data[plan]) {
+  plan = "basic";
+}
+
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+let currentConcept = "MỘC";
+let currentConceptCategory = "nguhanh";
+let premiumFrontUrl = "";
+let premiumBackUrl = "";
+let premiumLogoUrl = "";
+
+function updateLiveText() {
+  let name = "Trần Quốc Phong";
+  let job = "Key Account Manager";
+
+  if (plan === "plus") {
+    name = $("#plusName").value;
+    job = $("#plusJob").value;
+  }
+
+  if (plan === "pro") {
+    name = $("#proName").value;
+    job = $("#proJob").value;
+  }
+
+  if (plan === "premium") {
+    name = $("#premiumName").value;
+    job = $("#premiumJob").value;
+  }
+
+  $("#liveName").textContent = name || "Tên của bạn";
+  $("#liveJob").textContent = job || "Chức danh";
+}
+
+function updateBackPreview() {
+  const backCard = $("#backCard");
+  const backImage = $("#back");
+
+  backCard.style.backgroundColor = "#111";
+
+  if (plan === "pro") {
+    const concept = data.pro.concepts[currentConcept];
+
+    /*
+      Không dùng ảnh back cố định của Pro nữa.
+      Mặt sau sẽ lấy màu theo concept để không xảy ra
+      tình trạng mặt trước MỘC xanh nhưng mặt sau cam.
+    */
+    backImage.style.display = "none";
+    backCard.style.backgroundColor = concept.backColor;
+    $("#backLive").style.display = "flex";
+    return;
+  }
+
+  if (plan === "premium") {
+    if (premiumBackUrl) {
+      backImage.src = premiumBackUrl;
+      backImage.style.display = "block";
+      $("#backLive").style.display = "none";
+    } else {
+      backImage.style.display = "none";
+      backCard.style.backgroundColor = "#111";
+      $("#backLive").style.display = "flex";
+    }
+    return;
+  }
+
+  backImage.style.display = "block";
+  $("#backLive").style.display = "none";
+}
+
+function updateFrontPreview() {
+  const front = $("#front");
+
+  if (plan === "pro") {
+    front.src = data.pro.concepts[currentConcept].front;
+    front.style.display = "block";
+    $("#live").classList.add("on");
+    return;
+  }
+
+  if (plan === "premium") {
+    if (premiumFrontUrl) {
+      front.src = premiumFrontUrl;
+      front.style.display = "block";
+    } else {
+      front.style.display = "none";
+      $("#frontCard").style.backgroundColor = "#e5a91b";
+    }
+
+    $("#live").classList.add("on");
+    return;
+  }
+
+  const x = data[plan];
+
+  front.src = x.front;
+  front.style.display = "block";
+  $("#frontCard").style.backgroundColor = "#111";
+
+  $("#live").classList.toggle(
+    "on",
+    plan === "plus"
+  );
+}
+
+function select(p) {
+  plan = p;
+
+  $("#frontCard").classList.remove("hiddenCard");
+  $("#backCard").classList.remove("show");
+
+  const x = data[p];
+
+  $("#badge").textContent = x.name;
+  $("#sumName").textContent = x.name;
+  $("#sumPrice").textContent = x.price;
+
+  $$("[data-plan]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.plan === p);
+  });
+
+  $$(".custom").forEach((section) => {
+    section.classList.add("hidden");
+  });
+
+  $("#" + p).classList.remove("hidden");
+
+  if (p === "pro") {
+    currentConcept = currentConcept || "MỘC";
+  }
+
+  updateFrontPreview();
+  updateBackPreview();
+  updateLiveText();
+
+  history.replaceState({}, "", location.pathname + "?plan=" + p);
+}
+
+$$("[data-plan]").forEach((button) => {
+  button.addEventListener("click", () => {
+    select(button.dataset.plan);
+  });
+});
+
+$$(".choices").forEach((group) => {
+  group.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", () => {
+      group.querySelectorAll("button").forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+    });
+  });
+});
+
+function renderConceptCategory(category, preferredConcept = null) {
+  currentConceptCategory = category;
+
+  $$(".concept-category").forEach((button) => {
+    button.classList.toggle("active", button.dataset.category === category);
+  });
+
+  const visibleConcepts = $$(".concept").filter(
+    (button) => button.dataset.category === category
+  );
+
+  $$(".concept").forEach((button) => {
+    const visible = button.dataset.category === category;
+    button.classList.toggle("hidden", !visible);
+  });
+
+  let selected = visibleConcepts.find(
+    (button) => button.dataset.name === preferredConcept
+  );
+
+  if (!selected) {
+    selected = visibleConcepts[0];
+  }
+
+  if (selected) {
+    currentConcept = selected.dataset.name;
+    $$(".concept").forEach((item) => item.classList.remove("active"));
+    selected.classList.add("active");
+  }
+
+  updateFrontPreview();
+  updateBackPreview();
+  updateLiveText();
+}
+
+$$(".concept-category").forEach((button) => {
+  button.addEventListener("click", () => {
+    renderConceptCategory(button.dataset.category);
+    $("#frontCard").classList.remove("hiddenCard");
+    $("#backCard").classList.remove("show");
+    $("#flip").textContent = "Xem mặt sau ↻";
+  });
+});
+
+$$(".concept").forEach((button) => {
+  button.addEventListener("click", () => {
+    $$(".concept").forEach((item) => item.classList.remove("active"));
+    button.classList.add("active");
+
+    currentConcept = button.dataset.name;
+    currentConceptCategory = button.dataset.category;
+
+    updateFrontPreview();
+    updateBackPreview();
+    updateLiveText();
+
+    $("#frontCard").classList.remove("hiddenCard");
+    $("#backCard").classList.remove("show");
+    $("#flip").textContent = "Xem mặt sau ↻";
+  });
+});
+
+function bindInput(id) {
+  const input = $("#" + id);
+
+  if (!input) {
+    return;
+  }
+
+  input.addEventListener("input", () => {
+    updateLiveText();
+  });
+}
+
+bindInput("plusName");
+bindInput("plusJob");
+bindInput("proName");
+bindInput("proJob");
+bindInput("premiumName");
+bindInput("premiumJob");
+
+$("#premiumFront").addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  premiumFrontUrl = URL.createObjectURL(file);
+  updateFrontPreview();
+
+  $("#frontCard").classList.remove("hiddenCard");
+  $("#backCard").classList.remove("show");
+  $("#flip").textContent = "Xem mặt sau ↻";
+});
+
+$("#premiumBack").addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  premiumBackUrl = URL.createObjectURL(file);
+  updateBackPreview();
+});
+
+$("#plusLogo").addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  const url = URL.createObjectURL(file);
+  $("#liveLogo").textContent = "";
+  $("#liveLogo").style.backgroundImage = "url('" + url + "')";
+  $("#liveLogo").classList.add("logo-preview");
+});
+
+$("#proLogo").addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  const url = URL.createObjectURL(file);
+  $("#liveLogo").textContent = "";
+  $("#liveLogo").style.backgroundImage = "url('" + url + "')";
+  $("#liveLogo").classList.add("logo-preview");
+});
+
+$("#premiumLogo").addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  premiumLogoUrl = URL.createObjectURL(file);
+
+  $("#liveLogo").textContent = "";
+  $("#liveLogo").style.backgroundImage = "url('" + premiumLogoUrl + "')";
+  $("#liveLogo").classList.add("logo-preview");
+});
+
+$("#flip").addEventListener("click", () => {
+  const showingBack = $("#backCard").classList.contains("show");
+
+  if (showingBack) {
+    $("#frontCard").classList.remove("hiddenCard");
+    $("#backCard").classList.remove("show");
+    $("#flip").textContent = "Xem mặt sau ↻";
+  } else {
+    $("#frontCard").classList.add("hiddenCard");
+    $("#backCard").classList.add("show");
+    $("#flip").textContent = "Xem mặt trước ↻";
+  }
+});
+
+$("#checkout").addEventListener("click", () => {
+  localStorage.setItem(
+    "nfcCardDraft",
+    JSON.stringify({
+      plan,
+      concept: plan === "pro" ? currentConcept : null,
+      name:
+        plan === "plus"
+          ? $("#plusName").value
+          : plan === "pro"
+            ? $("#proName").value
+            : plan === "premium"
+              ? $("#premiumName").value
+              : "",
+      job:
+        plan === "plus"
+          ? $("#plusJob").value
+          : plan === "pro"
+            ? $("#proJob").value
+            : plan === "premium"
+              ? $("#premiumJob").value
+              : ""
+    })
+  );
+
+  alert("Đã lưu cấu hình " + data[plan].name + ".");
+});
+
+renderConceptCategory("nguhanh", "MỘC");
+select(plan);
+</script>
+
+</body>
+</html>
