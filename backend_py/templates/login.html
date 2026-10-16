@@ -17,7 +17,11 @@
     <div class="card-login">
 
       <div class="login-head">
-        <div class="login-icon">🧋</div>
+        <div class="login-icon">
+          <img
+              src="{{ url_for('static', filename='images/logo1.png') }}"
+              alt="Tapoka">
+        </div>
         <div>
           <h3 class="login-title">Đăng nhập nhân viên / quản trị</h3>
           <small class="login-sub">Dành cho staff & admin</small>
@@ -53,11 +57,11 @@
           <button class="btn-primary-custom" type="submit">Đăng nhập</button>
         </div>
 
-        <div class="note">Được xây dựng và phát triển bởi TQPhong</div>
+        <div class="note">Được xây dựng và phát triển bởi Trần Quốc Phong</div>
       </form>
 
       <div style="text-align:center;margin-top:12px;color:var(--muted);font-size:13px">
-        © {{ current_year or 2025 }} — Trà Quán
+        © {{ current_year or 2026 }} — Tapoka
       </div>
 
     </div>

@@ -536,19 +536,31 @@ async function loadCards() {
                     <div class="nfc-card-meta">
 
                         <strong>
-                            ${escapeHtml(
-                                card.tenThe ||
-                                "Untitled"
-                            )}
+                            ${escapeHtml(card.tenThe || "Untitled")}
                         </strong>
 
+                        <div class="nfc-public-link-row">
+                            <a
+                                class="nfc-public-link"
+                                href="https://nfc.tapoka.biz/#/p/${encodeURIComponent(card.slug || "")}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Mở profile"
+                            >
+                                ${escapeHtml(
+                                    `https://nfc.tapoka.biz/#/p/${card.slug || ""}`
+                                )}
+                            </a>
 
-                        <span>
-                            ${escapeHtml(
-                                card.slug ||
-                                ""
-                            )}
-                        </span>
+                            <button
+                                type="button"
+                                class="nfc-copy-link-button"
+                                data-public-url="https://nfc.tapoka.biz/#/p/${encodeURIComponent(card.slug || "")}"
+                                onclick="copyPublicUrl(this)"
+                            >
+                                Copy link
+                            </button>
+                        </div>
 
                     </div>
 
@@ -847,6 +859,42 @@ function escapeHtml(value) {
 
 }
 
+async function copyPublicUrl(button) {
+    const url = button.dataset.publicUrl;
+
+    try {
+        await navigator.clipboard.writeText(url);
+
+        const originalText = button.textContent;
+        button.textContent = "Đã copy!";
+
+        setTimeout(() => {
+            button.textContent = originalText;
+        }, 1500);
+
+    } catch (error) {
+        // Phương án dự phòng nếu trình duyệt không hỗ trợ Clipboard API
+        const input = document.createElement("textarea");
+        input.value = url;
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+
+        document.body.appendChild(input);
+        input.select();
+
+        const copied = document.execCommand("copy");
+        input.remove();
+
+        if (copied) {
+            button.textContent = "Đã copy!";
+            setTimeout(() => {
+                button.textContent = "Copy link";
+            }, 1500);
+        } else {
+            alert("Không thể copy tự động. Link của bạn là:\n" + url);
+        }
+    }
+}
 
 document.addEventListener(
     "DOMContentLoaded",
