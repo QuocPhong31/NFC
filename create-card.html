@@ -5,38 +5,157 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="./images/favicon.ico">
 <link rel="stylesheet" href="./create-card.css">
+<style>
+
+/* FIX LOGO: cố định logo ở đầu cột preview, không cho kế thừa kích thước ảnh thẻ */
+.preview > .brand {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  align-self: flex-start !important;
+  position: relative !important;
+  inset: auto !important;
+  z-index: 20 !important;
+  flex: 0 0 42px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  margin: 0 0 18px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  line-height: 0 !important;
+  transform: none !important;
+}
+
+.preview > .brand > img.brand-logo {
+  display: block !important;
+  width: 300px !important;
+  height: 110px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  flex: 0 0 auto !important;
+}
+
+@media (max-width: 600px) {
+  .preview > .brand > img.brand-logo {
+    width: 160px !important;
+    height: 38px !important;
+    max-height: 38px !important;
+  }
+
+  .preview > .brand {
+    flex-basis: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+  }
+}
+
+</style>
 <title>Thiết kế thẻ — NFC Card</title>
+<style>
+/* Hiển thị mặt trước ở trên, mặt sau ở dưới */
+.cards {
+  width: min(100%, 520px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  margin: 0 auto;
+}
+
+.card-face {
+  min-width: 0;
+  width: 100%;
+}
+
+.face-label {
+  display: block;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  color: #927c60;
+}
+
+.card {
+  width: 100%;
+  cursor: default;
+}
+
+.back,
+.back.show,
+.hiddenCard {
+  display: block !important;
+}
+
+#flip {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .cards {
+    width: min(100%, 520px);
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards {
+    width: min(100%, 520px);
+    gap: 14px;
+  }
+
+  .face-label {
+    font-size: 9px;
+    letter-spacing: .06em;
+  }
+
+  .card {
+    border-radius: 9px;
+  }
+}
+</style>
 </head>
 
 <body>
 <div class="page">
 
 <aside class="preview">
-  <a class="brand" href="./index.html"><b>N</b>NFC Card</a>
+  <a class="brand" href="./index.html" aria-label="NFC Card">
+    <img class="brand-logo" src="./images/logo1.png" alt="NFC Card">
+  </a>
 
   <div class="preview-inner">
-    <small>XEM TRƯỚC</small>
 
     <div class="cards">
-      <div class="card" id="frontCard">
-        <img id="front" src="./images/basic-front.png" alt="Mặt trước thẻ">
-        <div id="live" class="live">
-          <strong id="liveLogo">NFC</strong>
-          <b id="liveName">Trần Quốc Phong</b>
-          <span id="liveJob">Key Account Manager</span>
+      <div class="card-face">
+        <small class="face-label">MẶT TRƯỚC</small>
+        <div class="card" id="frontCard">
+          <img id="front" src="./images/basic-front.png" alt="Mặt trước thẻ">
+          <div id="live" class="live">
+            <strong id="liveLogo">NFC</strong>
+            <b id="liveName">Trần Quốc Phong</b>
+            <span id="liveJob">Key Account Manager</span>
+          </div>
         </div>
       </div>
 
-      <div class="card back" id="backCard">
-        <img id="back" src="./images/basic-back.png" alt="Mặt sau thẻ">
-        <div id="backLive" class="back-live">
-          <div class="back-qr">NFC</div>
-          <strong>NFC Card</strong>
+      <div class="card-face">
+        <small class="face-label">MẶT SAU</small>
+        <div class="card back" id="backCard">
+          <img id="back" src="./images/basic-back.png" alt="Mặt sau thẻ">
+          <div id="backLive" class="back-live">
+            <div class="back-qr">NFC</div>
+            <strong>NFC Card</strong>
+          </div>
         </div>
       </div>
     </div>
-
-    <button id="flip" class="link-btn" type="button">Xem mặt sau ↻</button>
   </div>
 
   <a class="back-home" href="./index.html#pricing">← Quay lại bảng giá</a>
@@ -116,19 +235,6 @@
     </label>
   </div>
 
-  <label>Logo</label>
-  <label class="upload">
-    ＋
-    <b>Thả hình ảnh của bạn hoặc <em>tải lên</em></b>
-    <small>PNG, JPG, JPEG</small>
-    <input type="file" id="plusLogo" accept="image/*">
-  </label>
-
-  <label>Bạn có muốn xoá logo NFC Card không?</label>
-  <div class="choices">
-    <button class="active" type="button">Không</button>
-    <button type="button">Có <small>+10.000 đ</small></button>
-  </div>
 </section>
 
 <!-- PRO -->
@@ -204,19 +310,6 @@
     </label>
   </div>
 
-  <label>Logo</label>
-  <label class="upload">
-    ＋
-    <b>Thả logo hoặc <em>tải lên</em></b>
-    <small>PNG, JPG, JPEG</small>
-    <input type="file" id="proLogo" accept="image/*">
-  </label>
-
-  <label>Bạn có muốn xoá logo NFC Card không?</label>
-  <div class="choices">
-    <button class="active" type="button">Không</button>
-    <button type="button">Có <small>+10.000 đ</small></button>
-  </div>
 </section>
 
 <!-- PREMIUM -->
@@ -256,13 +349,6 @@
     <input type="file" id="premiumBack" accept="image/*">
   </label>
 
-  <label>Logo</label>
-  <label class="upload">
-    ＋
-    <b>Thả logo hoặc <em>tải lên</em></b>
-    <small>PNG, JPG, JPEG</small>
-    <input type="file" id="premiumLogo" accept="image/*">
-  </label>
 </section>
 
 <div class="summary">
@@ -273,9 +359,103 @@
   <strong id="sumPrice">149.000 đ</strong>
 </div>
 
-<button class="checkout" id="checkout" type="button">
-  Tiếp tục đặt thẻ →
-</button>
+<section class="contact-cta" aria-label="Liên hệ tư vấn đặt thẻ">
+  <div class="contact-cta-copy">
+    <h2>Bạn muốn đặt thẻ?</h2>
+    <p>Liên hệ với chúng tôi qua Zalo để được tư vấn mẫu thẻ, thiết kế và cá nhân hóa theo nhu cầu của bạn.</p>
+  </div>
+  <a class="contact-zalo" href="https://zalo.me/0395759357" target="_blank" rel="noopener noreferrer">
+    <img src="./images/Icon_of_Zalo.svg.webp" alt="" />
+    <span>Liên hệ qua Zalo để được tư vấn</span>
+  </a>
+</section>
+
+<style>
+  .contact-cta {
+    margin-top: 24px;
+    padding: 22px;
+    border: 1px solid #f0d2ad;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #fffaf3, #fff);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .contact-cta-copy {
+    flex: 1 1 230px;
+  }
+  .contact-cta-copy h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+  }
+  .contact-cta-copy p {
+    margin: 0;
+    color: #626262;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  .contact-zalo {
+    flex: 0 1 auto;
+    min-height: 48px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: #087ee8;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-align: center !important;
+    text-justify: auto !important;
+    line-height: 1.25;
+    transition: transform .2s ease, background .2s ease;
+  }
+
+  /* Ép riêng các span để CSS toàn trang không làm chữ bị giãn hoặc đổi font */
+  .contact-zalo span {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: normal !important;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    text-align: center !important;
+    text-justify: auto !important;
+    line-height: 1.25;
+  }
+
+  .contact-zalo span:first-of-type {
+    display: inline-block;
+    white-space: normal;
+  }
+
+  .contact-zalo span[aria-hidden="true"] {
+    flex: 0 0 auto;
+  }
+  .contact-zalo:hover {
+    background: #066dcc;
+    transform: translateY(-1px);
+  }
+  .contact-zalo img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+  @media (max-width: 600px) {
+    .contact-cta { padding: 18px; }
+    .contact-zalo { width: 100%; flex-basis: 100%; }
+  }
+</style>
 
 </main>
 </div>
@@ -303,53 +483,53 @@ const data = {
     price: "430.000 đ",
 
     concepts: {
-      KIM: {
+      "KIM": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611726/smart-nfc-card/images/isd9eq5cmexcqx69nbjr.png",
-        backColor: "#b9b9b9"
+        backColor: "#f5e7ad", backGradient: "linear-gradient(135deg, #fff8d9 0%, #e9d18b 48%, #fff4c5 100%)"
       },
-      THỦY: {
+      "THỦY": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611678/smart-nfc-card/images/je9envyqamowxuyginhn.png",
-        backColor: "#8fcfdc"
+        backColor: "#8fcfdc", backGradient: "linear-gradient(135deg, #c5f1f5 0%, #6fc1d6 48%, #d9f8fb 100%)"
       },
-      MỘC: {
+      "MỘC": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611659/smart-nfc-card/images/oniupweqpwtthbzt6a8j.png",
-        backColor: "#4f8f78"
+        backColor: "#4f8f78", backGradient: "linear-gradient(135deg, #b4d9b9 0%, #3c8b69 48%, #174c3d 100%)"
       },
-      HỎA: {
+      "HỎA": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611642/smart-nfc-card/images/ghaa3mbuag8gvcbt9epq.png",
-        backColor: "#cf4447"
+        backColor: "#cf4447", backGradient: "linear-gradient(135deg, #ffb24e 0%, #e64b37 50%, #8f1f2c 100%)"
       },
-      THỔ: {
+      "THỔ": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611600/smart-nfc-card/images/tkii5scifyhgukv8vbpo.png",
-        backColor: "#e5a91b"
+        backColor: "#e5a91b", backGradient: "linear-gradient(135deg, #f8d76b 0%, #d99b18 50%, #9d6411 100%)"
       },
       "DN - 02": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611289/smart-nfc-card/images/zkdqpzrejfz9n0nmfj3u.jpg",
-        backColor: "#111111"
+        backColor: "#fff0a5", backGradient: "linear-gradient(135deg, #fffbd7 0%, #ffe77b 50%, #fff9d8 100%)"
       },
       "DN - 03": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611085/smart-nfc-card/images/ir48mr313zcap2anypiv.jpg",
-        backColor: "#111111"
+        backColor: "#d88a12", backGradient: "linear-gradient(135deg, #ffca3d 0%, #d98710 50%, #9e4e09 100%)"
       },
       "DN - 04": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611043/smart-nfc-card/images/qkckapvocffowksumpix.jpg",
-        backColor: "#111111"
+        backColor: "#253b59", backGradient: "linear-gradient(135deg, #253b59 0%, #e82f70 52%, #fb3e78 100%)"
       },
       "DN - 05": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767611020/smart-nfc-card/images/itpmx2ekxaghaqaen1qr.jpg",
-        backColor: "#111111"
+        backColor: "#111827", backGradient: "linear-gradient(135deg, #172033 0%, #39445a 50%, #111827 100%)"
       },
       "DN - 06": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610947/smart-nfc-card/images/intheed4dbdbceh1ytjs.jpg",
-        backColor: "#111111"
+        backColor: "#07515a", backGradient: "linear-gradient(135deg, #0b6670 0%, #07515a 55%, #123c45 100%)"
       },
       "DN - 07": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610912/smart-nfc-card/images/kvbfy2iiqciexwp4ajq0.jpg",
-        backColor: "#111111"
+        backColor: "#111111", backGradient: "linear-gradient(135deg, #050505 0%, #1d1d1d 50%, #000000 100%)"
       },
       "DN - 08": {
         front: "https://res.cloudinary.com/learningonlineviet/image/upload/q_auto,f_auto/v1767610888/smart-nfc-card/images/spf99yk3hergdgdmes0b.jpg",
-        backColor: "#111111"
+        backColor: "#233d52", backGradient: "linear-gradient(135deg, #e8d7b7 0%, #233d52 30%, #111827 100%)"
       }
     }
   },
@@ -376,7 +556,6 @@ let currentConcept = "MỘC";
 let currentConceptCategory = "nguhanh";
 let premiumFrontUrl = "";
 let premiumBackUrl = "";
-let premiumLogoUrl = "";
 
 function updateLiveText() {
   let name = "Trần Quốc Phong";
@@ -406,18 +585,19 @@ function updateBackPreview() {
   const backImage = $("#back");
 
   backCard.style.backgroundColor = "#111";
+  backCard.style.backgroundImage = "none";
 
   if (plan === "pro") {
     const concept = data.pro.concepts[currentConcept];
 
-    /*
-      Không dùng ảnh back cố định của Pro nữa.
-      Mặt sau sẽ lấy màu theo concept để không xảy ra
-      tình trạng mặt trước MỘC xanh nhưng mặt sau cam.
-    */
+    // Mỗi concept Pro dùng nền riêng. Không hiển thị ảnh mặt sau dùng chung,
+    // vì ảnh đó che màu concept và khiến mọi mẫu trông giống nhau.
     backImage.style.display = "none";
     backCard.style.backgroundColor = concept.backColor;
-    $("#backLive").style.display = "flex";
+    backCard.style.backgroundImage = concept.backGradient || "none";
+    backCard.style.backgroundSize = "cover";
+    backCard.style.backgroundPosition = "center";
+    $("#backLive").style.display = "none";
     return;
   }
 
@@ -429,11 +609,16 @@ function updateBackPreview() {
     } else {
       backImage.style.display = "none";
       backCard.style.backgroundColor = "#111";
-      $("#backLive").style.display = "flex";
+      // Premium: khi chưa tải ảnh mặt sau lên, để mặt thẻ trống thay vì logo mặc định.
+      $("#backLive").style.display = "none";
     }
     return;
   }
 
+  // Basic và Plus phải hiển thị đúng ảnh mặt sau của gói đang chọn.
+  // Nếu không cập nhật src tại đây, khi chuyển từ Basic sang Plus
+  // trình duyệt vẫn giữ ảnh basic-back.png nên mặt sau Plus bị sai.
+  backImage.src = data[plan].back;
   backImage.style.display = "block";
   $("#backLive").style.display = "none";
 }
@@ -537,7 +722,11 @@ function renderConceptCategory(category, preferredConcept = null) {
 
   $$(".concept").forEach((button) => {
     const visible = button.dataset.category === category;
+
+    // Ẩn/hiện trực tiếp bằng inline style để không bị CSS bên ngoài
+    // ghi đè class .hidden khi trang vừa tải lần đầu.
     button.classList.toggle("hidden", !visible);
+    button.style.setProperty("display", visible ? "flex" : "none", "important");
   });
 
   let selected = visibleConcepts.find(
@@ -631,46 +820,6 @@ $("#premiumBack").addEventListener("change", (event) => {
   updateBackPreview();
 });
 
-$("#plusLogo").addEventListener("change", (event) => {
-  const file = event.target.files[0];
-
-  if (!file) {
-    return;
-  }
-
-  const url = URL.createObjectURL(file);
-  $("#liveLogo").textContent = "";
-  $("#liveLogo").style.backgroundImage = "url('" + url + "')";
-  $("#liveLogo").classList.add("logo-preview");
-});
-
-$("#proLogo").addEventListener("change", (event) => {
-  const file = event.target.files[0];
-
-  if (!file) {
-    return;
-  }
-
-  const url = URL.createObjectURL(file);
-  $("#liveLogo").textContent = "";
-  $("#liveLogo").style.backgroundImage = "url('" + url + "')";
-  $("#liveLogo").classList.add("logo-preview");
-});
-
-$("#premiumLogo").addEventListener("change", (event) => {
-  const file = event.target.files[0];
-
-  if (!file) {
-    return;
-  }
-
-  premiumLogoUrl = URL.createObjectURL(file);
-
-  $("#liveLogo").textContent = "";
-  $("#liveLogo").style.backgroundImage = "url('" + premiumLogoUrl + "')";
-  $("#liveLogo").classList.add("logo-preview");
-});
-
 $("#flip").addEventListener("click", () => {
   const showingBack = $("#backCard").classList.contains("show");
 
@@ -685,33 +834,6 @@ $("#flip").addEventListener("click", () => {
   }
 });
 
-$("#checkout").addEventListener("click", () => {
-  localStorage.setItem(
-    "nfcCardDraft",
-    JSON.stringify({
-      plan,
-      concept: plan === "pro" ? currentConcept : null,
-      name:
-        plan === "plus"
-          ? $("#plusName").value
-          : plan === "pro"
-            ? $("#proName").value
-            : plan === "premium"
-              ? $("#premiumName").value
-              : "",
-      job:
-        plan === "plus"
-          ? $("#plusJob").value
-          : plan === "pro"
-            ? $("#proJob").value
-            : plan === "premium"
-              ? $("#premiumJob").value
-              : ""
-    })
-  );
-
-  alert("Đã lưu cấu hình " + data[plan].name + ".");
-});
 
 renderConceptCategory("nguhanh", "MỘC");
 select(plan);
