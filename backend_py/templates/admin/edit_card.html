@@ -2192,9 +2192,8 @@ async function saveCard() {
 
         alert("Đã lưu thay đổi!");
 
-
-        // Reload để lấy ảnh mới từ Cloudinary
-        window.location.reload();
+        // Sau khi người dùng nhấn OK, quay về trang tổng quan
+        window.location.href = "/admin/";
 
 
     } catch (error) {
