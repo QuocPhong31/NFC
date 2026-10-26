@@ -250,22 +250,20 @@ function normalizeUrl(value) {
 // ============================================================
 
 function getItemHref(item) {
+    const platform = String(item.platform || "").toLowerCase().trim();
+    const value = String(item.value || "").trim();
 
-    const platform =
-        String(item.platform || "").toLowerCase();
+    if (!value) return "#";
 
-    const value =
-        String(item.value || "").trim();
+    // Giữ nguyên URL đầy đủ nếu người dùng đã nhập URL
+    const isFullUrl = /^https?:\/\//i.test(value);
 
-    if (!value) {
-        return "#";
+    if (isFullUrl) {
+        return value;
     }
 
     // EMAIL
-    if (
-        platform === "email" ||
-        item.item_type === "email"
-    ) {
+    if (platform === "email" || item.item_type === "email") {
         return `mailto:${value}`;
     }
 
@@ -275,17 +273,79 @@ function getItemHref(item) {
         platform === "mobile" ||
         item.item_type === "phone"
     ) {
-
-        const phone =
-            value.replace(/[^\d+]/g, "");
-
-        return `tel:${phone}`;
+        const phone = value.replace(/[^\d+]/g, "");
+        return phone ? `tel:${phone}` : "#";
     }
 
-    // URL
+    // ZALO: nhập số điện thoại hoặc URL Zalo
+    if (platform === "zalo") {
+        const phone = value.replace(/\D/g, "");
+
+        if (/^0\d{9}$/.test(phone) || /^84\d{9}$/.test(phone)) {
+            return `https://zalo.me/${phone}`;
+        }
+
+        // Không tự tạo link nếu dữ liệu không giống số điện thoại
+        return "#";
+    }
+
+    // WHATSAPP: nhập số điện thoại hoặc URL WhatsApp
+    if (platform === "whatsapp") {
+        let phone = value.replace(/\D/g, "");
+
+        // Chuyển số Việt Nam dạng 0xxxxxxxxx thành 84xxxxxxxxx
+        if (/^0\d{9}$/.test(phone)) {
+            phone = "84" + phone.substring(1);
+        }
+
+        if (/^84\d{9}$/.test(phone) || /^\d{8,15}$/.test(phone)) {
+            return `https://wa.me/${phone}`;
+        }
+
+        return "#";
+    }
+
+    // TELEGRAM: nhập username hoặc URL Telegram
+    if (platform === "telegram") {
+        const username = value.replace(/^@/, "");
+
+        if (/^[a-zA-Z0-9_]{5,32}$/.test(username)) {
+            return `https://t.me/${encodeURIComponent(username)}`;
+        }
+
+        return "#";
+    }
+
+    // DISCORD: nhập URL mời hoặc mã invite
+    if (platform === "discord") {
+        if (
+            /^discord\.gg\//i.test(value) ||
+            /^discord\.com\/invite\//i.test(value)
+        ) {
+            return `https://${value}`;
+        }
+
+        if (/^[a-zA-Z0-9-]+$/.test(value)) {
+            return `https://discord.gg/${encodeURIComponent(value)}`;
+        }
+
+        return "#";
+    }
+
+    // SKYPE: nhập URL hoặc tên tài khoản Skype
+    if (platform === "skype") {
+        const username = value.replace(/^@/, "");
+
+        if (/^[a-zA-Z0-9._-]+$/.test(username)) {
+            return `skype:${encodeURIComponent(username)}?chat`;
+        }
+
+        return "#";
+    }
+
+    // Các nền tảng khác: xử lý như URL thông thường
     return normalizeUrl(value);
 }
-
 
 // ============================================================
 // SHOULD OPEN NEW TAB
