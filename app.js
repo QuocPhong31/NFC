@@ -279,13 +279,17 @@ function getItemHref(item) {
 
     // ZALO: nhập số điện thoại hoặc URL Zalo
     if (platform === "zalo") {
+        // Chấp nhận URL Zalo không có giao thức
+        if (/^(www\.)?zalo\.me\//i.test(value)) {
+            return "https://" + value.replace(/^www\./i, "");
+        }
+
         const phone = value.replace(/\D/g, "");
 
         if (/^0\d{9}$/.test(phone) || /^84\d{9}$/.test(phone)) {
             return `https://zalo.me/${phone}`;
         }
 
-        // Không tự tạo link nếu dữ liệu không giống số điện thoại
         return "#";
     }
 
