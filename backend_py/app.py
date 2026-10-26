@@ -21,7 +21,7 @@ CORS(
     resources={
         r"/api/*": {
             "origins": [
-                "https://nfc.tapoka.biz",
+                "https://nfc.tapoka-vn.com",
                 "https://quocphong31.github.io",
                 "https://shop.thanhtamtraquan.com",
                 "http://127.0.0.1:5500",

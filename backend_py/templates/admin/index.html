@@ -542,20 +542,20 @@ async function loadCards() {
                         <div class="nfc-public-link-row">
                             <a
                                 class="nfc-public-link"
-                                href="https://nfc.tapoka.biz/#/p/${encodeURIComponent(card.slug || "")}"
+                                href="https://nfc.tapoka-vn.com/#/p/${encodeURIComponent(card.slug || "")}"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title="Mở profile"
                             >
                                 ${escapeHtml(
-                                    `https://nfc.tapoka.biz/#/p/${card.slug || ""}`
+                                    `https://nfc.tapoka-vn.com/#/p/${card.slug || ""}`
                                 )}
                             </a>
 
                             <button
                                 type="button"
                                 class="nfc-copy-link-button"
-                                data-public-url="https://nfc.tapoka.biz/#/p/${encodeURIComponent(card.slug || "")}"
+                                data-public-url="https://nfc.tapoka-vn.com/#/p/${encodeURIComponent(card.slug || "")}"
                                 onclick="copyPublicUrl(this)"
                             >
                                 Copy link
