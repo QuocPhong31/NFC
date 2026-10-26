@@ -4,12 +4,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <script>
+    // Phát hiện URL profile ngay trong <head> để trang chủ không bị lóe lên.
+    (function () {
+      if (window.location.hash.startsWith("#/p/")) {
+        document.documentElement.classList.add("nfc-profile-route");
+      }
+    })();
+  </script>
+  <style>
+    #nfcProfileLoader {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      background: #ffffff;
+      color: #1f2937;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    html.nfc-profile-route #landingPage {
+      display: none !important;
+    }
+
+    html.nfc-profile-route #nfcProfileLoader {
+      display: flex;
+    }
+
+    #nfcProfileLoader .nfc-loader-spinner {
+      width: 52px;
+      height: 52px;
+      box-sizing: border-box;
+      border: 5px solid #e5e7eb;
+      border-top-color: #ff8a00;
+      border-radius: 50%;
+      animation: nfcLoaderSpin 0.8s linear infinite;
+    }
+
+    #nfcProfileLoader p {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    @keyframes nfcLoaderSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #nfcProfileLoader .nfc-loader-spinner {
+        animation-duration: 1.8s;
+      }
+    }
+  </style>
+
+
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.ico">
-  <link rel="icon" href="https://nfc.tapoka.biz/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="https://nfc.tapoka-vn.com/favicon.ico" type="image/x-icon">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,10 +82,15 @@
     content="Khám phá thẻ danh thiếp NFC Tapora: chia sẻ thông tin liên hệ bằng một lần chạm hoặc quét QR, cá nhân hóa profile và kết nối chuyên nghiệp."
   />
 
-  <link rel="canonical" href="https://nfc.tapoka.biz/" />
+  <link rel="canonical" href="https://nfc.tapoka-vn.com/" />
   <meta name="robots" content="index, follow" />
 </head>
 <body>
+  <div id="nfcProfileLoader" role="status" aria-live="polite" aria-label="Đang tải profile">
+    <div class="nfc-loader-spinner" aria-hidden="true"></div>
+    <p>Đang tải profile...</p>
+  </div>
+
 
   <div id="landingPage">
 
@@ -500,7 +564,7 @@
   <!-- <a href="https://zalo.me/0395759357" target="_blank" class="icon zalo" title="Chat Zalo">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/512px-Icon_of_Zalo.svg.png" alt="Zalo">
   </a> -->
-  <a class="floating-zalo" href="https://zalo.me/0395759357" target="_blank" rel="noopener noreferrer" aria-label="Liên hệ Tapoka qua Zalo" title="Liên hệ qua Zalo">
+  <a class="floating-zalo" href="https://zalo.me/0865390682" target="_blank" rel="noopener noreferrer" aria-label="Liên hệ Tapoka qua Zalo" title="Liên hệ qua Zalo">
   <img src="./images/Icon_of_Zalo.svg.webp" alt="Zalo">
 </a>
 
