@@ -3535,3 +3535,152 @@ body.nfc-modal-open {
   .card-flip{height:215px}
   .landing-footer{padding-left:18px;padding-right:18px}
 }
+
+/* ============================================================
+   TAPORA FIX — PRICING BADGE + RESPONSIVE BENEFITS CARDS
+   Added as overrides to preserve the original stylesheet.
+   ============================================================ */
+
+/* 1. Move "ĐƯỢC CHỌN NHIỀU" to the top-right so it won't cover the old price. */
+.price-card {
+  min-width: 0;
+}
+
+.popular-badge {
+  top: 14px;
+  right: 14px;
+  left: auto;
+  transform: none;
+  max-width: calc(100% - 28px);
+  padding: 7px 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.price-card.featured .price-top {
+  padding-top: 38px;
+}
+
+/* 2. Keep the benefits section inside its container at 90–100% browser zoom. */
+.benefits-layout {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(24px, 4vw, 60px);
+  min-width: 0;
+}
+
+.benefits-card-column,
+.benefits-grid,
+.benefits-grid article {
+  min-width: 0;
+}
+
+.benefits-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+/* 3. Give each benefit a neat, Tapla-inspired pastel tile. */
+.benefits-grid article {
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--blue-bg);
+  min-height: 250px;
+  overflow-wrap: anywhere;
+}
+
+.benefits-grid article:nth-child(2) {
+  background: var(--pink-bg);
+}
+
+.benefits-grid article:nth-child(3) {
+  background: var(--green-bg);
+}
+
+.benefits-grid article:nth-child(4) {
+  background: var(--purple-bg);
+}
+
+.benefit-number {
+  margin-bottom: 20px;
+}
+
+.benefits-grid h3 {
+  font-size: clamp(19px, 1.7vw, 26px);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.benefits-grid p {
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+/* Medium screens: allow the image and tiles to stack without overflow. */
+@media (max-width: 1100px) {
+  .benefits-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .benefits-card-column {
+    width: 100%;
+  }
+
+  .benefits-grid {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile: one tile per row, with compact spacing. */
+@media (max-width: 700px) {
+  .popular-badge {
+    top: 12px;
+    right: 12px;
+    max-width: calc(100% - 24px);
+    font-size: 8px;
+  }
+
+  .price-card.featured .price-top {
+    padding-top: 38px;
+  }
+
+  .benefits-layout {
+    width: calc(100% - 32px);
+    gap: 32px;
+  }
+
+  .benefits-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .benefits-grid article {
+    min-height: 0;
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .benefits-grid h3 {
+    font-size: 22px;
+  }
+
+  .benefits-grid p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .benefits-grid article {
+    padding: 20px;
+  }
+
+  .popular-badge {
+    right: 10px;
+    font-size: 7px;
+    padding: 6px 8px;
+  }
+}

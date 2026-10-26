@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://nfc.tapoka.biz/sitemap.xml
+Sitemap: https://nfc.tapoka-vn.com/sitemap.xml
