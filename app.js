@@ -1220,113 +1220,34 @@ function escapeVCard(value) {
 // SAVE CONTACT
 // ============================================================
 
-async function saveContact(card) {
+function saveContact(card) {
+    // 1. Tạo nội dung danh bạ vCard từ dữ liệu hiện có
+    const vcard = createVCard(card);
 
-    const vcard =
-        createVCard(card);
-
-
-    const blob =
-        new Blob(
-            [vcard],
-            {
-                type: "text/vcard;charset=utf-8"
-            }
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    const fullName =
-        card.hoTen ||
-        card.tenThe ||
-        "contact";
-
-
-    const filename =
-        fullName
-            .replace(/[^\w\sÀ-ỹ-]/gi, "")
-            .replace(/\s+/g, "_") +
-        ".vcf";
-
-
-    /*
-     * Nếu điện thoại hỗ trợ Web Share API
-     * và cho phép share file vCard
-     */
-
-    if (
-        navigator.share &&
-        navigator.canShare
-    ) {
-
-        const file =
-            new File(
-                [blob],
-                filename,
-                {
-                    type:
-                        "text/vcard"
-                }
-            );
-
-
-        if (
-            navigator.canShare({
-                files: [file]
-            })
-        ) {
-
-            try {
-
-                await navigator.share({
-                    files: [file],
-                    title: fullName
-                });
-
-                URL.revokeObjectURL(url);
-
-                return;
-
-            } catch (error) {
-
-                console.log(
-                    "Share contact cancelled:",
-                    error
-                );
-
-            }
-
-        }
-
-    }
-
-
-    /*
-     * Fallback:
-     * tải file VCF
-     */
-
-    const link =
-        document.createElement("a");
-
-    link.href = url;
-
-    link.download = filename;
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    link.remove();
-
-    setTimeout(
-        () => URL.revokeObjectURL(url),
-        1000
+    // 2. Tạo tệp vCard để iPhone xử lý
+    const blob = new Blob(
+        [vcard],
+        { type: "text/vcard;charset=utf-8" }
     );
 
+    const url = URL.createObjectURL(blob);
+
+    // 3. Mở tệp vCard, không ép trình duyệt tải xuống
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener";
+
+    // Quan trọng: KHÔNG đặt link.download
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    // 4. Giữ URL đủ lâu để Safari có thể mở tệp
+    setTimeout(() => {
+        URL.revokeObjectURL(url);
+    }, 60000);
 }
 
 
